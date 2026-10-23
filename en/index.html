@@ -367,9 +367,9 @@ a.ext:hover{opacity:.7}
  <div id="home">
   <section class="hero" id="top" aria-labelledby="titre">
     <div class="wrap">
-      <p class="who"><strong>Concordance</strong><span>Medical device compliance, by Hémistiches</span></p>
-      <h1 id="titre">Is your medical <span style="white-space:nowrap">device<span class="cesure" aria-hidden="true"></span></span> in concordance with the Regulation?</h1>
-      <p class="lede">Test your situation. About ten questions on your product, your certificates and your obligations, depending on your role in the supply chain, and an instant report: your points of attention, your deadlines, and the price of what comes next.</p>
+      <p class="who"><strong>Concordance</strong><span>MDR and IVDR compliance for medical devices, by Hémistiches</span></p>
+      <h1 id="titre">Is your medical <span style="white-space:nowrap">device<span class="cesure" aria-hidden="true"></span></span> in concordance with the EU Regulation?</h1>
+      <p class="lede">Test your situation under Regulation (EU)&nbsp;2017/745 (MDR) and, for in vitro diagnostics, Regulation (EU)&nbsp;2017/746 (IVDR). About ten questions on your product, your certificates and your obligations, depending on your role in the supply chain, and an instant report: your points of attention, your deadlines, and the price of what comes next.</p>
       <div class="actions">
         <a class="btn btn-light" href="#test">Take the test</a>
         <a class="link-quiet" href="#formules">See the services</a>
@@ -523,7 +523,7 @@ a.ext:hover{opacity:.7}
         <section>
           <h2>Nature of the content</h2>
           <p>The content of the site, including the test and its report, is provided for information only. It does not constitute legal advice or an opinion, and creates no relationship between the user and the firm. The report is generated automatically from the answers given, without verification or review of documents, and is valid as at the date it is generated. Prices exclude VAT. Every assignment is subject to a fee agreement and a prior conflict-of-interest check.</p>
-          <p>The deadlines mentioned result from Regulation (EU) 2017/745 (Article 120, as amended by Regulation (EU) 2023/607), Regulation (EU) 2017/746 (Article 110, as amended by Regulation (EU) 2024/1860) and Commission Decision (EU) 2025/2371 for EUDAMED. Statements about the reform rely on the proposal for a regulation COM(2025) 1023 of 16 December 2025, not adopted as at the date of update: they are forward-looking and do not reflect the law in force.</p>
+          <p>The deadlines mentioned result from Regulation (EU)&nbsp;2017/745 (Article 120, as amended by Regulation (EU) 2023/607), Regulation (EU)&nbsp;2017/746 (Article 110, as amended by Regulation (EU) 2024/1860) and Commission Decision (EU) 2025/2371 for EUDAMED. Statements about the reform rely on the proposal for a regulation COM(2025) 1023 of 16 December 2025, not adopted as at the date of update: they are forward-looking and do not reflect the law in force.</p>
           <p>The site and the firm's services are intended exclusively for businesses and professionals.</p>
           <p>The firm advises on French law and on European Union law as it applies in France. It does not give opinions on the national laws of other Member States or on non-EU laws; any differences noted with a status obtained outside the Union are presented as a factual comparison of requirements.</p>
           <p>The firm uses artificial intelligence tools for research and for preparing its work, always under the control of the lawyer, who remains solely responsible for the advice given.</p>
@@ -826,7 +826,7 @@ function compute(){
 
 var P = {
   urgent:["Situation under way","An inspection, reservations from a notified body, an incident or a dispute: the first exchanges set the positions. This is the point to deal with first."],
-  divA:["Class A non-sterile: no transitional period","These devices must have complied with Regulation (EU) 2017/746 since 26 May 2022, with no transitional period. The situation needs to be regularised."],
+  divA:["Class A non-sterile: no transitional period","These devices must have complied with Regulation (EU)&nbsp;2017/746 since 26 May 2022, with no transitional period. The situation needs to be regularised."],
   prorogKO:["Extended transition in doubt","The extension of the transitional period is not automatic. It requires an application lodged with a notified body and a written agreement signed within deadlines that have now passed for your product. If these conditions were not met, the extension does not apply: the basis on which your product is on the market must be checked without delay."],
   prorogInc:["Transition conditions to be checked","You do not know whether the required application and written agreement were completed in time. This is the first thing to check: it determines whether your product can remain on the market."],
   prorogTodo:["Steps to take with a notified body","The transitional period runs until 31 December 2029, provided an application is lodged with a notified body by 26 May 2027 and a written agreement signed by 26 September 2027. Notified bodies have lead times: these dates need preparing now."],
@@ -851,7 +851,7 @@ var P = {
   data:["Health data","Processing of health data linked to the product falls under the GDPR and, where applicable, the French certified health data hosting regime. Handling it together with the conformity assessment avoids doing the work twice."]
 };
 var AP = {
-  rc:["Financial coverage to be put in place","The Regulation requires manufacturers to have measures providing sufficient financial coverage for their liability, proportionate to the risk class, the type of device and the size of the enterprise (Article 10(16) of Regulation (EU) 2017/745; Article 10(15) of Regulation (EU) 2017/746). Without an identified policy, the obligation is not met."],
+  rc:["Financial coverage to be put in place","The Regulation requires manufacturers to have measures providing sufficient financial coverage for their liability, proportionate to the risk class, the type of device and the size of the enterprise (Article 10(16) of Regulation (EU)&nbsp;2017/745; Article 10(15) of Regulation (EU)&nbsp;2017/746). Without an identified policy, the obligation is not met."],
   rcd:["Liability insurance to be checked","The Regulation does not impose this coverage on you as it does on manufacturers. But anyone who imports a product into the Union is treated as the producer for product liability purposes (Article 1245-5 of the French Civil Code): a suitable policy is your natural protection."],
   rcgen:["General liability only","A general liability policy often excludes damage caused by health products, or caps it low. It rarely suffices to show coverage suited to your devices."],
   montant:["Amount of cover to be justified","Whether coverage is sufficient is assessed in light of the risk class, the type of device and the size of the enterprise. An amount never tested against these criteria is hard to justify to a notified body or an authority."],
@@ -1059,7 +1059,7 @@ function report(r){
     '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copy the address")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: "+r.level.short)+'&body='+encodeURIComponent("Hello,\n\nI would like to discuss my Concordance report.\n\n"+summary(r))+'">Write</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("This report is generated automatically from your answers alone, without verification or review of documents, and is valid as at the date it is generated. It is indicative information and is neither legal advice nor an opinion. Amounts exclude VAT; every assignment is subject to a fee agreement and a prior conflict-of-interest check.")+'</p>'+
-    '<p class="sources">'+esc("Sources: Regulation (EU) 2017/745, Article 120, as amended by Regulation (EU) 2023/607; Regulation (EU) 2017/746, Article 110, as amended by Regulation (EU) 2024/1860; Commission Decision (EU) 2025/2371 (EUDAMED). The proposal for a regulation COM(2025) 1023 of 16 December 2025, which simplifies both Regulations, has not been adopted to date: it is forward-looking, and the deadlines above apply unless and until it changes them.")+'</p>'+
+    '<p class="sources">'+esc("Sources: Regulation (EU)&nbsp;2017/745, Article 120, as amended by Regulation (EU) 2023/607; Regulation (EU)&nbsp;2017/746, Article 110, as amended by Regulation (EU) 2024/1860; Commission Decision (EU) 2025/2371 (EUDAMED). The proposal for a regulation COM(2025) 1023 of 16 December 2025, which simplifies both Regulations, has not been adopted to date: it is forward-looking, and the deadlines above apply unless and until it changes them.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Take the test again</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
   html = '<div class="print-only print-head"><span><b>Concordance</b>, by Hémistiches</span><span>'+esc("Report prepared on "+today)+'</span></div>'+html+
