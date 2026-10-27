@@ -354,6 +354,36 @@ details.more b{font-weight:600;color:var(--ink)}
   .ph-logo i{width:0;height:18px;border-left:1px solid #000}
   .ph-logo span{font-size:14pt;color:#000}
 }
+/* FAQ, au format de Cadence et Diapason */
+.faq-s{background:var(--card);padding-block:clamp(72px,9vw,120px)}
+.faq{margin-top:clamp(28px,3.5vw,48px);border-top:1px solid var(--ink);max-width:900px}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 32px 18px 0;position:relative;font-size:clamp(17px,1.4vw,20px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:16px;font-weight:300;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.faq details > div{padding:0 0 20px;font-size:16px;color:var(--ink-2);max-width:70ch}
+.faq details > div p + p{margin-top:10px}
+@media print{.faq-s{display:none!important}}
+/* En-tête : une entrée de plus (Questions) ; libellés sur une ligne */
+.nav a{white-space:nowrap}
+@media (max-width:1300px){.nav{gap:22px}}
+/* Menu replié jusqu'à 1 180 px (cinq entrées dans l'en-tête) */
+@media (max-width:1180px){
+  .nav{display:none}
+  .menu-btn{display:flex}
+  .drawer{position:fixed;inset:0;z-index:30;background:var(--black);color:var(--on-dark);padding:calc(env(safe-area-inset-top,0px) + 20px) max(var(--pad), env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 32px) max(var(--pad), env(safe-area-inset-left,0px));flex-direction:column}
+  .drawer.open{display:flex}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;height:44px;margin-bottom:48px}
+  .drawer-head img{height:22px;width:auto}
+  .drawer nav{display:flex;flex-direction:column}
+  .drawer nav a{font-size:30px;font-weight:300;padding:14px 0;border-bottom:1px solid var(--line-dark)}
+  .drawer .drawer-contact{margin-top:auto;display:flex;flex-direction:column;gap:6px;color:var(--on-dark-2);font-size:16px}
+}
+/* Pied de page : l'adresse électronique ne déborde pas entre 1 000 et 1 100 px */
+.coords,.coords > div{min-width:0}
+.coords a{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -366,6 +396,7 @@ details.more b{font-weight:600;color:var(--ink)}
     <nav class="nav" aria-label="Main navigation">
       <a href="#enjeux">What is at stake</a>
       <a href="#formules">Services</a>
+      <a href="#faq">Questions</a>
       <a href="#cadre">Our terms</a>
       <a class="cta" href="#test">Take the test</a>
     </nav>
@@ -388,6 +419,7 @@ details.more b{font-weight:600;color:var(--ink)}
     <a href="#test">Take the test</a>
     <a href="#enjeux">What is at stake</a>
     <a href="#formules">Services</a>
+    <a href="#faq">Questions</a>
     <a href="#cadre">Our terms</a>
     <a href="#contact">Get in touch</a>
   </nav>
@@ -552,6 +584,42 @@ details.more b{font-weight:600;color:var(--ink)}
     </div>
   </section>
 
+  <section class="faq-s" id="faq" aria-labelledby="t-faq">
+    <div class="wrap">
+      <h2 class="sec-h2" id="t-faq">Frequently asked questions</h2>
+      <div class="faq">
+        <details>
+          <summary>Do I need to start with the orientation consultation?</summary>
+          <div><p>No. It is useful if you do not know where to start; it is never required. If you know what you need, ask for that assignment directly. Where the consultation prepares an assignment engaged within thirty days, its <span data-p="c">€350</span> excl. VAT is deducted from the package, once, and the work done is carried over.</p></div>
+        </details>
+        <details>
+          <summary>How do I know whether my matter falls under the starting price or a quote?</summary>
+          <div><p>Each service describes the simple situation its starting price applies to. Software, artificial intelligence, a product range, a borderline product, a complex transition, combining the distributor and importer roles or several entities take you beyond it. The test already tells you. The quote is agreed before any work begins, and nothing extra is invoiced without your agreement.</p></div>
+        </details>
+        <details>
+          <summary>Is CE marking guaranteed?</summary>
+          <div><p>No. Neither CE marking nor a decision of an authority or a notified body can be guaranteed. The commitment covers the means, the method, the scope and the timing. I do not build the technical documentation or run the certification: I secure its legal framework.</p></div>
+        </details>
+        <details>
+          <summary>Can you act as our authorised representative in the Union?</summary>
+          <div><p>No. I do not act as authorised representative. I help you define what you expect from one, compare the offers you receive and review the mandate, without receiving any remuneration from a provider.</p></div>
+        </details>
+        <details>
+          <summary>How are subscription hours counted?</summary>
+          <div><p>All time specific to your file uses the month's volume: questions, preparation, specific research, meetings, personalised watch. You receive a statement of hours with each invoice. Unused hours are not carried over. Beyond the volume, an overrun only takes place with your agreement, at <span data-p="dep">€180</span> excl. VAT per hour. There is no emergency on-call service.</p></div>
+        </details>
+        <details>
+          <summary>Do you work on contracts governed by foreign law?</summary>
+          <div><p>Yes, with specific scoping. Depending on the question, I provide guidance, to be confirmed by counsel qualified in the law concerned, or I arrange their involvement; their fees are separate and agreed in advance.</p></div>
+        </details>
+        <details>
+          <summary>Does the reform of the Regulations change anything today?</summary>
+          <div><p>Not yet. The simplification proposal of 16 December 2025 has not been adopted. Until it is, the current rules and deadlines apply, and they are the ones the test and the report use.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="cadre-s" id="cadre" aria-labelledby="t-cadre">
     <div class="wrap">
       <p class="label">Our terms</p>
@@ -597,7 +665,7 @@ details.more b{font-weight:600;color:var(--ink)}
           <p>The content of the site, including the test and its report, is provided for information only. It does not constitute legal advice or an opinion, and creates no relationship between the user and the firm. The report is generated automatically from the answers given, without verification or review of documents, and is valid as at the date it is generated. Prices exclude VAT. Every assignment is subject to a fee agreement and a prior conflict-of-interest check.</p>
           <p>The deadlines mentioned result from Regulation (EU)&nbsp;2017/745 (Article 120, as amended by Regulation (EU) 2023/607), Regulation (EU)&nbsp;2017/746 (Article 110, as amended by Regulation (EU) 2024/1860) and Commission Decision (EU) 2025/2371 for EUDAMED. Statements about the reform rely on the proposal for a regulation COM(2025) 1023 of 16 December 2025, not adopted as at the date of update: they are forward-looking and do not reflect the law in force.</p>
           <p>The site and the firm's services are intended exclusively for businesses and professionals.</p>
-          <p>The firm advises on French law and on European Union law as it applies in France. It does not give opinions on the national laws of other Member States or on non-EU laws; any differences noted with a status obtained outside the Union are presented as a factual comparison of requirements.</p>
+          <p>The firm advises mainly on French law and on European Union law as it applies in France. Any input on a foreign law is provided for guidance only and must be confirmed by counsel qualified in that law, whose involvement can be arranged at separate fees.</p>
           <p>The firm uses artificial intelligence tools for research and for preparing its work, always under the control of the lawyer, who remains solely responsible for the advice given.</p>
         </section>
         <section>
