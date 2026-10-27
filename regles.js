@@ -18,6 +18,7 @@
       { cle: "regulier",  prix: 490, heures: 3, premierRetourJoursOuvres: 2 },
       { cle: "echeances", prix: 990, heures: 6, premierRetourJoursOuvres: 1 }
     ],
+    tauxDepassement: 180,                                            // abonnements : après estimation et accord préalable
     preavisMois: 1
   };
 
@@ -50,7 +51,8 @@
       eo: TARIFS.entree.organisation,
       eoc: complementOrganisation(true),
       s1: palier("regulier").prix,
-      s2: palier("echeances").prix
+      s2: palier("echeances").prix,
+      dep: TARIFS.tauxDepassement
     };
   }
 

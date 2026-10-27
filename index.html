@@ -340,6 +340,20 @@ details.more b{font-weight:600;color:var(--ink)}
 @media print{details.more > div{display:block}}
 .rules-h{font-size:clamp(20px,1.8vw,26px);font-weight:400;margin-top:clamp(48px,6vw,80px)}
 .rules-h + .rules{margin-top:18px}
+/* Rapport imprimé : logo Hémistiches | Concordance et coordonnées de l'avocat en tête et en fin (repris de Cadence et Diapason) */
+@media print{
+  .print-card{width:calc(100% - 2px);display:flex;justify-content:space-between;gap:18px;border:1.5px solid #000;padding:12px 16px;margin:0 0 18px;break-inside:avoid}
+  .print-card .who{font-size:9pt;color:#444;letter-spacing:.02em}
+  .print-card .nm{font-size:15pt;color:#000;margin-top:2px}
+  .print-card .rl{font-size:10pt;color:#222}
+  .print-card .co{font-size:10.5pt;color:#000;text-align:right;line-height:1.55}
+  .print-card .co a{color:#000;text-decoration:none}
+  .print-card.end{margin:22px 0 0}
+  .ph-logo{display:flex;align-items:center;gap:10px}
+  .ph-logo img{height:20px;width:auto;filter:invert(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ph-logo i{width:0;height:18px;border-left:1px solid #000}
+  .ph-logo span{font-size:14pt;color:#000}
+}
 </style>
 </head>
 <body>
@@ -515,7 +529,7 @@ details.more b{font-weight:600;color:var(--ink)}
         <li><b>Ce qui consomme les heures</b><span>Tout le temps propre à votre dossier : préparation, recherche spécifique, réunions, veille personnalisée. Un relevé des heures accompagne chaque facture.</span></li>
         <li><b>Questions courantes et travaux substantiels</b><span>Les questions courantes sont traitées dans l'abonnement, y compris un avis bref sur une clause ou un document court. Une opinion complète, un audit, la rédaction ou la revue approfondie d'un contrat font l'objet d'une proposition distincte, acceptée avant intervention.</span></li>
         <li><b>Premier retour</b><span>Il accuse réception, oriente et indique le délai de la réponse. Une question complexe peut demander davantage. Pas de permanence d'urgence.</span></li>
-        <li><b>Heures du mois</b><span>Les heures non utilisées ne se reportent pas. Un dépassement n'a lieu qu'après votre accord préalable, au tarif fixé dans la convention.</span></li>
+        <li><b>Heures du mois</b><span>Les heures non utilisées ne se reportent pas. Un dépassement n'a lieu qu'après votre accord préalable, à <span data-p="dep">180 €</span> HT de l'heure.</span></li>
         <li><b>Durée</b><span>Sans engagement de durée, avec un mois de préavis.</span></li>
       </ul>
       <p class="cadre">Tous les montants s'entendent hors taxes. Chaque mission fait l'objet d'une convention d'honoraires signée avant toute intervention, après un cadrage et une vérification des conflits d'intérêts. Elle fixe le périmètre et ses exclusions, le nombre de réunions et de tours de commentaires, et le prix ferme ; aucun supplément n'est facturé sans votre accord préalable. Un travail déjà réglé, consultation, diagnostic, stratégie ou qualification, est repris dans la mission suivante et n'est pas facturé deux fois. Les dossiers complexes et les situations en cours (contrôle d'une autorité, réserves d'un organisme notifié, incident, différend) font l'objet d'un devis. La TVA au taux de 20 % s'ajoute pour les clients établis en France ; pour un client professionnel établi dans un autre État membre de l'Union, elle est autoliquidée par le preneur.</p>
@@ -1088,6 +1102,10 @@ function gauge(lvl){
   return h+'</div>';
 }
 
+/* Rapport imprimé : coordonnées de l'avocat en tête et en fin */
+var LOGO = (document.querySelector(".brand img")||{}).src || "";
+function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat au barreau de Paris")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
+
 function report(r){
   var O = offer(r.main, r), html = "";
   html += '<div class="report-head"><p class="label">Votre concordance</p><h3>'+esc(r.level.label)+'</h3>'+
@@ -1119,14 +1137,14 @@ function report(r){
   html += '<div class="rsec no-print"><h4>Conserver ce rapport</h4><div class="keep"><p class="compare">'+esc("Enregistrez-le en PDF, ou envoyez-le dans votre propre messagerie. Il n'est conservé ni sur ce site ni par le cabinet.")+'</p>'+
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Enregistrer en PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("Mon rapport Concordance")+'&body='+encodeURIComponent(summary(r))+'">'+esc("M'envoyer le rapport")+'</a></div></div></div>';
 
-  html += '<div class="rsec"><h4>Échanger sur votre rapport</h4><p class="compare">'+esc("Un premier échange de vingt minutes, gratuit et sans engagement, pour voir si votre situation appelle une consultation. Écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
+  html += '<div class="rsec"><h4>Échanger sur votre rapport</h4><p class="compare">'+esc("Pour une consultation ou une mission, écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
     '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copier l'adresse")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : "+r.level.short)+'&body='+encodeURIComponent("Bonjour,\n\nJe souhaite échanger sur mon rapport Concordance.\n\n"+summary(r))+'">Écrire</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("Ce rapport est généré automatiquement à partir de vos seules réponses, sans vérification ni examen de pièces, et arrêté à la date de sa génération. Il constitue une information indicative et ne vaut ni consultation juridique ni avis. Les montants s'entendent hors taxes ; toute mission fait l'objet d'une convention d'honoraires et d'une vérification préalable des conflits d'intérêts.")+'</p>'+
     '<p class="sources">'+esc("Sources : règlement (UE)\u00A02017/745, article 120, dans sa rédaction issue du règlement (UE) 2023/607 ; règlement (UE)\u00A02017/746, article 110, dans sa rédaction issue du règlement (UE) 2024/1860 ; décision (UE) 2025/2371 de la Commission (EUDAMED). La proposition de règlement COM(2025) 1023 du 16 décembre 2025, qui simplifie les deux règlements, n'est pas adoptée à ce jour : elle relève de l'anticipation, et les échéances ci-dessus s'appliquent tant qu'elle ne les modifie pas.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Refaire le test</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span><b>Concordance</b>, par Hémistiches</span><span>'+esc("Rapport établi le "+today)+'</span></div>'+html+
+  html = '<div class="print-only print-head"><span class="ph-logo"><img src="'+LOGO+'" alt="Hémistiches."><i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Rapport établi le "+today)+'</span></div>'+carte('', "Votre interlocuteur")+html+carte(' end', "Pour échanger sur ce rapport")+
     '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat au barreau de Paris · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Pré-analyse indicative, sous réserve de l'échange préalable et de la signature d'une convention d'honoraires.")+'</div>';
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };

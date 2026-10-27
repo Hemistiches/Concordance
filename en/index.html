@@ -340,6 +340,20 @@ details.more b{font-weight:600;color:var(--ink)}
 @media print{details.more > div{display:block}}
 .rules-h{font-size:clamp(20px,1.8vw,26px);font-weight:400;margin-top:clamp(48px,6vw,80px)}
 .rules-h + .rules{margin-top:18px}
+/* Rapport imprimé : logo Hémistiches | Concordance et coordonnées de l'avocat en tête et en fin (repris de Cadence et Diapason) */
+@media print{
+  .print-card{width:calc(100% - 2px);display:flex;justify-content:space-between;gap:18px;border:1.5px solid #000;padding:12px 16px;margin:0 0 18px;break-inside:avoid}
+  .print-card .who{font-size:9pt;color:#444;letter-spacing:.02em}
+  .print-card .nm{font-size:15pt;color:#000;margin-top:2px}
+  .print-card .rl{font-size:10pt;color:#222}
+  .print-card .co{font-size:10.5pt;color:#000;text-align:right;line-height:1.55}
+  .print-card .co a{color:#000;text-decoration:none}
+  .print-card.end{margin:22px 0 0}
+  .ph-logo{display:flex;align-items:center;gap:10px}
+  .ph-logo img{height:20px;width:auto;filter:invert(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ph-logo i{width:0;height:18px;border-left:1px solid #000}
+  .ph-logo span{font-size:14pt;color:#000}
+}
 </style>
 </head>
 <body>
@@ -515,7 +529,7 @@ details.more b{font-weight:600;color:var(--ink)}
         <li><b>What uses the hours</b><span>All time specific to your file: preparation, specific research, meetings, personalised watch. A statement of hours comes with each invoice.</span></li>
         <li><b>Day-to-day questions and substantial work</b><span>Day-to-day questions are handled within the subscription, including brief advice on a clause or a short document. A full opinion, an audit, drafting or an in-depth contract review is the subject of a separate proposal, accepted before work begins.</span></li>
         <li><b>First response</b><span>It acknowledges, gives direction and states when the answer will follow. A complex question may take longer. No emergency on-call service.</span></li>
-        <li><b>Monthly hours</b><span>Unused hours are not carried over. Any overrun only takes place with your prior agreement, at the rate set in the fee agreement.</span></li>
+        <li><b>Monthly hours</b><span>Unused hours are not carried over. Any overrun only takes place with your prior agreement, at <span data-p="dep">€180</span> excl. VAT per hour.</span></li>
         <li><b>Term</b><span>No minimum term, one month's notice.</span></li>
       </ul>
       <p class="cadre">All amounts are exclusive of VAT. Each assignment is set out in a fee agreement signed before any work begins, after scoping and a conflict-of-interest check. It sets the scope and its exclusions, the number of meetings and rounds of comments, and the firm price; nothing extra is invoiced without your prior agreement. Work already paid for, a consultation, diagnostic, strategy or qualification, is carried into the next assignment and is not invoiced twice. Complex matters and ongoing situations (an inspection by an authority, reservations from a notified body, an incident, a dispute) are quoted. French VAT at 20% is added for clients established in France; for a business client established in another EU Member State, VAT is reverse-charged to the customer.</p>
@@ -1088,6 +1102,10 @@ function gauge(lvl){
   return h+'</div>';
 }
 
+/* Printed report: lawyer's contact details at the top and the end */
+var LOGO = (document.querySelector(".brand img")||{}).src || "";
+function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat, Paris Bar")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris, France")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
+
 function report(r){
   var O = offer(r.main, r), html = "";
   html += '<div class="report-head"><p class="label">Your concordance</p><h3>'+esc(r.level.label)+'</h3>'+
@@ -1119,14 +1137,14 @@ function report(r){
   html += '<div class="rsec no-print"><h4>Keep this report</h4><div class="keep"><p class="compare">'+esc("Save it as a PDF, or send it to your own mailbox. It is kept neither on this site nor by the firm.")+'</p>'+
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Save as PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("My Concordance report")+'&body='+encodeURIComponent(summary(r))+'">'+esc("Email me the report")+'</a></div></div></div>';
 
-  html += '<div class="rsec"><h4>Discuss your report</h4><p class="compare">'+esc("A first twenty-minute conversation, free and without commitment, to see whether your situation calls for a consultation. Write to me stating your level of concordance:")+'</p>'+
+  html += '<div class="rsec"><h4>Discuss your report</h4><p class="compare">'+esc("For a consultation or an assignment, write to me stating your level of concordance:")+'</p>'+
     '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copy the address")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: "+r.level.short)+'&body='+encodeURIComponent("Hello,\n\nI would like to discuss my Concordance report.\n\n"+summary(r))+'">Write</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("This report is generated automatically from your answers alone, without verification or review of documents, and is valid as at the date it is generated. It is indicative information and is neither legal advice nor an opinion. Amounts exclude VAT; every assignment is subject to a fee agreement and a prior conflict-of-interest check.")+'</p>'+
     '<p class="sources">'+esc("Sources: Regulation (EU)\u00A02017/745, Article 120, as amended by Regulation (EU) 2023/607; Regulation (EU)\u00A02017/746, Article 110, as amended by Regulation (EU) 2024/1860; Commission Decision (EU) 2025/2371 (EUDAMED). The proposal for a regulation COM(2025) 1023 of 16 December 2025, which simplifies both Regulations, has not been adopted to date: it is forward-looking, and the deadlines above apply unless and until it changes them.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Take the test again</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span><b>Concordance</b>, by Hémistiches</span><span>'+esc("Report prepared on "+today)+'</span></div>'+html+
+  html = '<div class="print-only print-head"><span class="ph-logo"><img src="'+LOGO+'" alt="Hémistiches."><i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Report prepared on "+today)+'</span></div>'+carte('', "Your contact")+html+carte(' end', "To discuss this report")+
     '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat at the Paris Bar · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris, France · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Indicative preliminary analysis, subject to a prior conversation and the signature of a fee agreement.")+'</div>';
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };
