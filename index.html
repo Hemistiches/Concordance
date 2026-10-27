@@ -354,6 +354,36 @@ details.more b{font-weight:600;color:var(--ink)}
   .ph-logo i{width:0;height:18px;border-left:1px solid #000}
   .ph-logo span{font-size:14pt;color:#000}
 }
+/* FAQ, au format de Cadence et Diapason */
+.faq-s{background:var(--card);padding-block:clamp(72px,9vw,120px)}
+.faq{margin-top:clamp(28px,3.5vw,48px);border-top:1px solid var(--ink);max-width:900px}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 32px 18px 0;position:relative;font-size:clamp(17px,1.4vw,20px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:16px;font-weight:300;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.faq details > div{padding:0 0 20px;font-size:16px;color:var(--ink-2);max-width:70ch}
+.faq details > div p + p{margin-top:10px}
+@media print{.faq-s{display:none!important}}
+/* En-tête : une entrée de plus (Questions) ; libellés sur une ligne */
+.nav a{white-space:nowrap}
+@media (max-width:1300px){.nav{gap:22px}}
+/* Menu replié jusqu'à 1 180 px (cinq entrées dans l'en-tête) */
+@media (max-width:1180px){
+  .nav{display:none}
+  .menu-btn{display:flex}
+  .drawer{position:fixed;inset:0;z-index:30;background:var(--black);color:var(--on-dark);padding:calc(env(safe-area-inset-top,0px) + 20px) max(var(--pad), env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 32px) max(var(--pad), env(safe-area-inset-left,0px));flex-direction:column}
+  .drawer.open{display:flex}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;height:44px;margin-bottom:48px}
+  .drawer-head img{height:22px;width:auto}
+  .drawer nav{display:flex;flex-direction:column}
+  .drawer nav a{font-size:30px;font-weight:300;padding:14px 0;border-bottom:1px solid var(--line-dark)}
+  .drawer .drawer-contact{margin-top:auto;display:flex;flex-direction:column;gap:6px;color:var(--on-dark-2);font-size:16px}
+}
+/* Pied de page : l'adresse électronique ne déborde pas entre 1 000 et 1 100 px */
+.coords,.coords > div{min-width:0}
+.coords a{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -366,6 +396,7 @@ details.more b{font-weight:600;color:var(--ink)}
     <nav class="nav" aria-label="Navigation principale">
       <a href="#enjeux">Les enjeux</a>
       <a href="#formules">Formules</a>
+      <a href="#faq">Questions</a>
       <a href="#cadre">Le cadre</a>
       <a class="cta" href="#test">Faire le test</a>
     </nav>
@@ -388,6 +419,7 @@ details.more b{font-weight:600;color:var(--ink)}
     <a href="#test">Faire le test</a>
     <a href="#enjeux">Les enjeux</a>
     <a href="#formules">Formules</a>
+    <a href="#faq">Questions</a>
     <a href="#cadre">Le cadre</a>
     <a href="#contact">Échanger</a>
   </nav>
@@ -549,6 +581,42 @@ details.more b{font-weight:600;color:var(--ink)}
           <li><strong>Réglementation</strong>master de réglementation des produits de santé</li>
         </ul>
       </figure>
+    </div>
+  </section>
+
+  <section class="faq-s" id="faq" aria-labelledby="t-faq">
+    <div class="wrap">
+      <h2 class="sec-h2" id="t-faq">Questions fréquentes</h2>
+      <div class="faq">
+        <details>
+          <summary>Dois-je commencer par la consultation d'orientation ?</summary>
+          <div><p>Non. Elle est utile si vous ne savez pas par où commencer ; elle n'est jamais exigée. Si vous connaissez votre besoin, demandez directement la mission. Lorsque la consultation prépare une mission engagée dans les trente jours, ses <span data-p="c">350 €</span> HT sont déduits du forfait, une seule fois, et le travail réalisé est repris.</p></div>
+        </details>
+        <details>
+          <summary>Comment savoir si mon dossier relève du prix d'entrée ou d'un devis ?</summary>
+          <div><p>Chaque formule décrit la situation simple à laquelle s'applique son prix d'entrée. Un logiciel, une intelligence artificielle, une gamme, un produit à la frontière, une transition complexe, le cumul des rôles de distributeur et d'importateur ou plusieurs entités font sortir de ce cas. Le test vous l'indique déjà. Le devis est arrêté avant toute intervention, et aucun supplément n'est facturé sans votre accord.</p></div>
+        </details>
+        <details>
+          <summary>Le marquage CE est-il garanti ?</summary>
+          <div><p>Non. Ni le marquage CE ni une décision d'une autorité ou d'un organisme notifié ne se garantissent. L'engagement porte sur les moyens, la méthode, le périmètre et les délais. Je ne constitue pas le dossier technique et ne conduis pas la certification : j'en sécurise le cadre juridique.</p></div>
+        </details>
+        <details>
+          <summary>Pouvez-vous être notre mandataire dans l'Union ?</summary>
+          <div><p>Non. Je n'exerce pas la fonction de mandataire. Je vous aide à définir ce que vous attendez de lui, à comparer les offres que vous recevez et à revoir son mandat, sans percevoir aucune rémunération d'un prestataire.</p></div>
+        </details>
+        <details>
+          <summary>Comment les heures d'abonnement sont-elles comptées ?</summary>
+          <div><p>Tout le temps propre à votre dossier consomme le volume du mois : questions, préparation, recherche spécifique, réunions, veille personnalisée. Vous recevez un relevé des heures avec chaque facture. Les heures non utilisées ne se reportent pas. Au-delà du volume, un dépassement n'est réalisé qu'avec votre accord, à <span data-p="dep">180 €</span> HT de l'heure. Il n'y a pas de permanence d'urgence.</p></div>
+        </details>
+        <details>
+          <summary>Intervenez-vous sur un contrat soumis à un droit étranger ?</summary>
+          <div><p>Je conseille en droit français et en droit de l'Union européenne tel qu'il est applicable en France. Un contrat soumis à un droit étranger demande un cadrage particulier et, le cas échéant, l'intervention d'un conseil local, dont les honoraires sont distincts.</p></div>
+        </details>
+        <details>
+          <summary>La réforme des règlements change-t-elle quelque chose aujourd'hui ?</summary>
+          <div><p>Pas encore. La proposition de simplification du 16 décembre 2025 n'est pas adoptée. Tant qu'elle ne l'est pas, les règles et les échéances actuelles s'appliquent, et ce sont elles que le test et le rapport retiennent.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
