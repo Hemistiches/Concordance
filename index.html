@@ -320,6 +320,40 @@ a.ext:hover{opacity:.7}
 .test-s{background:var(--card);padding-top:clamp(56px,7vw,96px)}
 .fonction-s{background:var(--paper)}
 .cesure-s{padding-bottom:clamp(56px,7vw,96px)}
+/* Grille du 27 octobre 2026 : détail de chaque formule, règles des abonnements (composants repris de Diapason) */
+.formules-s .three article .amount + .from{margin-top:6px;font-size:14px;line-height:1.45}
+details.more{border-top:1px solid var(--rule);margin-top:auto}
+details.more summary{cursor:pointer;list-style:none;padding:12px 28px 12px 0;position:relative;font-size:15px;color:var(--ink)}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";position:absolute;right:2px;top:9px;font-weight:300;font-size:20px;line-height:1}
+details.more[open] summary::after{content:"–"}
+details.more summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+details.more > div{padding:0 0 6px}
+details.more > div p{font-size:15px;color:var(--ink-2);max-width:none}
+details.more > div p + p{margin-top:8px}
+details.more b{font-weight:600;color:var(--ink)}
+.rules{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(24px,3vw,48px)}
+.rules li{padding:18px 0;border-bottom:1px solid var(--rule);min-width:0}
+.rules b{display:block;font-weight:400;font-size:clamp(17px,1.4vw,19px)}
+.rules > li > span{display:block;font-size:15px;color:var(--ink-2);margin-top:4px}
+@media (max-width:720px){.rules{grid-template-columns:minmax(0,1fr)}}
+@media print{details.more > div{display:block}}
+.rules-h{font-size:clamp(20px,1.8vw,26px);font-weight:400;margin-top:clamp(48px,6vw,80px)}
+.rules-h + .rules{margin-top:18px}
+/* Rapport imprimé : logo Hémistiches | Concordance et coordonnées de l'avocat en tête et en fin (repris de Cadence et Diapason) */
+@media print{
+  .print-card{width:calc(100% - 2px);display:flex;justify-content:space-between;gap:18px;border:1.5px solid #000;padding:12px 16px;margin:0 0 18px;break-inside:avoid}
+  .print-card .who{font-size:9pt;color:#444;letter-spacing:.02em}
+  .print-card .nm{font-size:15pt;color:#000;margin-top:2px}
+  .print-card .rl{font-size:10pt;color:#222}
+  .print-card .co{font-size:10.5pt;color:#000;text-align:right;line-height:1.55}
+  .print-card .co a{color:#000;text-decoration:none}
+  .print-card.end{margin:22px 0 0}
+  .ph-logo{display:flex;align-items:center;gap:10px}
+  .ph-logo img{height:20px;width:auto;filter:invert(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ph-logo i{width:0;height:18px;border-left:1px solid #000}
+  .ph-logo span{font-size:14pt;color:#000}
+}
 </style>
 </head>
 <body>
@@ -418,49 +452,87 @@ a.ext:hover{opacity:.7}
   <section class="formules-s" id="formules" aria-labelledby="t-form">
     <div class="wrap">
       <h2 class="sec-h2" id="t-form">Formules</h2>
-      <p class="intro">Des forfaits bornés, à périmètre écrit. Le test vous indique par où commencer ; voici le point de départ de chaque formule.</p>
+      <p class="intro">Six formules, chacune à périmètre écrit. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
       <div class="three">
-        <article>
-          <h3>Consultation flash</h3>
-          <div><p class="from">Prix</p><p class="amount">490 € <small>HT</small></p></div>
-          <p>Une heure pour lire votre rapport avec vous, poser votre situation réelle et savoir quoi faire ensuite.</p>
-          <ul><li>Visio de soixante minutes, sous dix jours</li><li>Note d'orientation écrite</li><li>Déductible du forfait souscrit ensuite</li></ul>
+        <article id="offre-consultation">
+          <h3>Consultation d'orientation</h3>
+          <div><p class="from">Prix</p><p class="amount"><span data-p="c">350 €</span> <small>HT</small></p></div>
+          <p>Comprendre votre situation, fixer les priorités et décider de la suite.</p>
+          <ul><li>Lecture de votre rapport Concordance et de deux ou trois pièces courtes</li><li>Visio de quarante-cinq minutes</li><li>Synthèse des priorités et des prochaines étapes, par courriel</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p>Les pièces sont lues dans une limite convenue à l'avance. La consultation ne comprend pas la revue approfondie d'un contrat, l'analyse complète d'un dossier technique, une recherche complexe ni une opinion motivée sur une qualification ou une classe : ces travaux relèvent des formules ci-dessous.</p>
+            <p>Facultative. Lorsqu'elle prépare directement une mission engagée dans les trente jours, ses <span data-p="c">350 €</span> HT sont déduits du forfait, une seule fois, et le travail réalisé est repris dans la mission.</p>
+          </div></details>
         </article>
-        <article>
+        <article id="offre-qualification">
           <h3>Qualification et stratégie réglementaire</h3>
-          <div><p class="from">À partir de</p><p class="amount">3 000 € <small>HT par produit</small></p></div>
-          <p>Ce qu'est juridiquement votre produit, sa classe, sa route de conformité et ce que permettent vos certificats.</p>
-          <ul><li>3 000 € HT pour un produit simple : destination claire, une seule configuration</li><li>De 4 500 à 7 500 € HT pour un logiciel ou une IA, un produit à la frontière, une gamme ou une transition à vérifier</li><li>Écrit signé et feuille de route datée, en deux à trois semaines</li></ul>
+          <div><p class="from">À partir de</p><p class="amount"><span data-p="q">2 000 €</span> <small>HT par produit</small></p></div>
+          <p>Déterminer le statut de votre produit et les étapes réglementaires à engager.</p>
+          <ul><li>Qualification et classe du produit</li><li>Procédure d'évaluation de la conformité applicable et feuille de route</li><li>Note juridique motivée et restitution de quarante-cinq minutes</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Le prix d'entrée suppose</b> un produit, une destination revendiquée claire, une configuration, des documents disponibles et exploitables, et pas de difficulté majeure de qualification ou de classification.</p>
+            <p><b>Compris :</b> l'examen des pièces essentielles (destination revendiquée, notice, étiquetage, allégations, certificats), l'analyse de la qualification et de la classe, l'identification de la procédure d'évaluation de la conformité, une note juridique motivée, proportionnée au sujet, qui documente vos décisions et vos échanges avec vos partenaires, une feuille de route, la restitution et un tour de commentaires consolidés dans le périmètre initial.</p>
+            <p><b>Sur devis, selon la difficulté réelle :</b> logiciel, intelligence artificielle, produit à la frontière, transition complexe, gamme ou configurations multiples. <b>Non compris :</b> la constitution du dossier technique, l'évaluation clinique, les essais et la conduite de la certification.</p>
+          </div></details>
         </article>
-        <article>
-          <h3>Mise en règle distributeur ou importateur</h3>
-          <div><p class="from">À partir de</p><p class="amount">2 900 € <small>HT</small></p></div>
-          <p>Vos obligations propres, selon votre rôle réel dans la chaîne : vérifications, registres, clauses fournisseurs, EUDAMED.</p>
-          <ul><li>2 900 € HT pour un seul rôle, sans intervention sur le produit</li><li>Jusqu'à 4 900 € HT pour les deux rôles, ou un produit réétiqueté ou reconditionné</li><li>Deux semaines, deux visios</li></ul>
+        <article id="offre-distribution">
+          <h3>Distributeur ou importateur</h3>
+          <div><p class="from">Diagnostic</p><p class="amount"><span data-p="dd">1 200 €</span> <small>HT</small></p><p class="from">Mise en règle simple à partir de <span data-p="dm">2 500 €</span> HT au total, diagnostic compris</p></div>
+          <p>Connaître et remplir vos obligations propres, selon le rôle que vous exercez réellement.</p>
+          <ul><li>Diagnostic documentaire : votre rôle réel et vos principaux écarts</li><li>Actions hiérarchisées et restitution de quarante-cinq minutes</li><li>Mise en règle : matrice des obligations, modèles de registres, clauses types pour vos fournisseurs</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Diagnostic.</b> Pour une entité, un rôle et une famille homogène de produits : questionnaire préalable, examen d'un ensemble limité de documents, analyse du rôle réellement exercé (articles 13, 14 et 16 du règlement), principaux écarts documentaires et points de vigilance, liste hiérarchisée des actions, restitution. C'est un diagnostic documentaire limité, ni un audit exhaustif de vos pratiques ni une vérification sur site.</p>
+            <p><b>Mise en règle simple.</b> En plus, selon ce qui est convenu : matrice synthétique des obligations, liste des vérifications avant mise à disposition, modèles adaptés des registres essentiels (réclamations, non-conformités, rappels), clauses réglementaires types pour vos fournisseurs et, pour l'importateur, cadrage des démarches EUDAMED ; deux réunions au total et un tour de commentaires consolidés. Si le diagnostic est déjà réglé, seul le complément est facturé, soit <span data-p="dmc">1 300 €</span> HT au prix d'entrée.</p>
+            <p>Des clauses types ne sont pas la revue de vos contrats, qui relève de la formule Contrats ; le cadrage EUDAMED est un conseil, pas la réalisation des démarches. La rédaction complète d'un système de management de la qualité n'est pas comprise. <b>Sur devis :</b> cumul des rôles, plusieurs entités, produits hétérogènes, réétiquetage ou reconditionnement, statut à établir.</p>
+          </div></details>
         </article>
       </div>
       <div class="three">
-        <article>
+        <article id="offre-contrats">
           <h3>Contrats de la chaîne</h3>
-          <div><p class="from">À partir de</p><p class="amount">6 000 € <small>HT</small></p></div>
-          <p>Distribution, sous-traitance, mandat : des contrats qui reflètent la répartition des obligations prévue par le règlement.</p>
-          <ul><li>6 000 € HT pour trois contrats existants revus</li><li>Jusqu'à 12 000 € HT pour deux contrats rédigés</li><li>Un cycle de négociation inclus</li></ul>
+          <div><p class="from">Revue ciblée d'un contrat, à partir de</p><p class="amount"><span data-p="cc">1 200 €</span> <small>HT</small></p><p class="from">Revue approfondie avec un retour de négociation à partir de <span data-p="ca">2 000 €</span> HT</p></div>
+          <p>Vérifier qu'un contrat de distribution, de sous-traitance ou de mandat reflète la répartition des obligations prévue par le règlement.</p>
+          <ul><li>Un seul contrat peut être examiné</li><li>Annotations ou propositions de modifications, et restitution</li><li>Plusieurs contrats liés ou rédaction : proposition globale sur devis</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Revue ciblée.</b> Pour un contrat existant relativement court, soumis au droit français, avec un périmètre d'analyse défini à l'avance : examen des clauses relatives aux obligations réglementaires et aux risques prioritaires convenus (selon le contrat, responsabilités, qualité, vigilance, traçabilité, rappels), annotations ou propositions de modifications, restitution de trente minutes et une clarification ponctuelle ensuite. Ce n'est pas une revue juridique exhaustive du contrat, et la négociation n'est pas comprise.</p>
+            <p><b>Revue approfondie.</b> Examen d'ensemble du contrat dans le champ convenu, version amendée, restitution, puis un retour de négociation : l'examen d'un retour consolidé de la contrepartie, reçu en une fois, et la préparation d'une version révisée. Les échanges directs avec la contrepartie, les réunions de négociation et les versions suivantes sont chiffrés avant d'être engagés.</p>
+            <p>La longueur, les annexes, la complexité et les matières qui demandent un spécialiste sont cadrées avant l'intervention. Plusieurs contrats liés font l'objet d'une proposition globale, qui tient compte du travail commun. Un contrat soumis à un droit étranger demande un cadrage particulier et, le cas échéant, un conseil local.</p>
+          </div></details>
         </article>
-        <article>
-          <h3>Accès au marché de l'Union</h3>
-          <div><p class="from">À partir de</p><p class="amount">9 000 € <small>HT</small></p></div>
-          <p>Pour un fabricant établi hors de l'Union : le schéma des rôles, le choix du mandataire et la revue de son mandat, la stratégie d'entrée.</p>
-          <ul><li>9 000 € HT pour un produit simple</li><li>Jusqu'à 15 000 € HT pour une gamme, un logiciel ou un diagnostic in vitro</li><li>Cinq semaines, livrables en anglais</li></ul>
+        <article id="offre-entree">
+          <h3>Entrée sur le marché de l'Union</h3>
+          <div><p class="from">Stratégie d'entrée, à partir de</p><p class="amount"><span data-p="es">3 000 €</span> <small>HT</small></p><p class="from">Organisation juridique de l'entrée à partir de <span data-p="eo">6 000 €</span> HT au total, stratégie comprise</p></div>
+          <p>Pour un fabricant établi hors de l'Union : savoir comment entrer sur le marché, avec quels opérateurs et dans quel ordre.</p>
+          <ul><li>Qualification, opérateurs nécessaires et leurs rôles</li><li>Feuille de route et calendrier indicatif, en anglais</li><li>Organisation : cahier des charges et revue du mandat du mandataire</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Stratégie d'entrée.</b> Pour un produit simple, une configuration et un dossier disponible : analyse de la qualification et de la classe dans le périmètre convenu, examen des éléments réglementaires disponibles, opérateurs nécessaires et leurs rôles, principales questions restant à résoudre, feuille de route avec étapes et dépendances, calendrier indicatif, note en anglais, une réunion de cadrage et une restitution.</p>
+            <p><b>Organisation juridique de l'entrée.</b> En plus : cahier des charges du mandataire, comparaison de deux ou trois offres que vous avez reçues, revue d'un mandat avec un retour consolidé, clarification des responsabilités des opérateurs dans le schéma retenu, calendrier de mise en œuvre, trois réunions au total, livrables en anglais. Une stratégie ou une qualification déjà réglée est reprise : seul le complément est facturé, soit <span data-p="eoc">3 000 €</span> HT au prix d'entrée.</p>
+            <p><b>Non compris :</b> la recherche de mandataires ou d'autres prestataires, l'audit approfondi de leurs capacités, les négociations multiples, la rédaction des autres contrats, la vérification exhaustive du dossier technique, la certification et la coordination opérationnelle. Je n'exerce pas la fonction de mandataire. <b>Sur devis :</b> produits complexes et gammes.</p>
+          </div></details>
         </article>
-        <article>
-          <h3>Veille et suivi réglementaire</h3>
-          <div><p class="from">À partir de</p><p class="amount">490 € <small>HT par mois</small></p></div>
-          <p>Tenir la concordance dans la durée, avec un temps d'avocat réservé chaque mois et une note de veille sur ce qui change pour vous.</p>
-          <ul><li>Veille et ligne directe : deux heures par mois pour 490 € HT, quatre heures pour 990 € HT</li><li>Suivi des échéances : trois heures et un point trimestriel pour 750 € HT, huit heures et un point mensuel pour 2 000 € HT</li><li>Sans engagement de durée, préavis d'un mois</li></ul>
+        <article id="offre-suivi">
+          <h3>Suivi réglementaire</h3>
+          <div><p class="from">Conseil régulier, trois heures par mois</p><p class="amount"><span data-p="s1">490 €</span> <small>HT par mois</small></p><p class="from">Conseil et échéances : six heures pour <span data-p="s2">990 €</span> HT par mois</p></div>
+          <p>Un avocat joignable chaque mois pour vos questions réglementaires courantes.</p>
+          <ul><li>Questions écrites ou téléphoniques, premier retour sous deux jours ouvrés</li><li>Veille propre à votre produit, dans le temps disponible</li><li>Conseil et échéances : calendrier tenu, point trimestriel, premier retour sous un jour ouvré</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Conseil régulier.</b> Dans le temps disponible : questions courantes, analyses et orientations ponctuelles, réunions, veille propre à votre dossier et information ciblée sur les évolutions qui vous concernent.</p>
+            <p><b>Conseil et échéances.</b> En plus : la tenue du calendrier des échéances connues sur le périmètre convenu, un point trimestriel et le suivi des actions prioritaires.</p>
+            <p>Les règles communes aux deux formules sont détaillées ci-dessous.</p>
+          </div></details>
         </article>
       </div>
-      <div class="comp"><h3>Ce que comprennent les formules</h3><ul class="dates"><li><b>Consultation flash</b><p>La lecture préalable de votre rapport et de deux ou trois pièces que vous transmettez, une visio de soixante minutes sous dix jours, une note d'orientation d'une page : vigilances, priorités, étapes suivantes. 490 € HT, déductibles du forfait souscrit ensuite. N'en font pas partie l'analyse approfondie de documents et un avis écrit engageant une position juridique.</p></li><li><b>Qualification et stratégie réglementaire</b><p>La lecture de vos pièces (destination revendiquée, notice, étiquetage, allégations commerciales, certificats), la qualification du produit, sa classe selon les règles de l'annexe VIII du règlement, la route de conformité et, le cas échéant, les conditions de la période de transition. Un écrit signé, opposable à un investisseur ou à un organisme notifié : une note de cinq à huit pages pour un produit simple (3 000 € HT), une opinion de huit à quinze pages au-delà (4 500 à 7 500 € HT), avec une feuille de route datée et un tour de commentaires. N'en font pas partie la rédaction du dossier technique, l'évaluation clinique et les échanges avec l'organisme notifié.</p></li><li><b>Mise en règle distributeur ou importateur</b><p>Votre rôle réel dans la chaîne, y compris au regard de l'article 16 ; une note sur vos obligations propres (articles 13 et 14) ; la liste des vérifications avant mise à disposition ; des modèles de registre des réclamations, des non-conformités et des rappels ; des clauses types pour vos fournisseurs ; l'accompagnement de l'enregistrement dans EUDAMED pour l'importateur. 2 900 € HT pour un seul rôle sans intervention sur le produit, jusqu'à 4 900 € HT pour les deux rôles ou un produit réétiqueté ou reconditionné. N'en font pas partie la revue de vos contrats existants et l'assistance lors d'un contrôle.</p></li><li><b>Contrats de la chaîne</b><p>L'analyse de vos contrats de distribution, de sous-traitance ou de mandat au regard de la répartition des obligations prévue par le règlement, des propositions de clauses (responsabilité, qualité, vigilance, traçabilité, rappels) et un cycle de négociation avec la contrepartie. 6 000 € HT pour la revue de trois contrats existants, jusqu'à 12 000 € HT pour la rédaction de deux contrats. Au-delà du cycle inclus : au temps passé, convenu par écrit. N'en font pas partie les contrats soumis à un droit étranger.</p></li><li><b>Accès au marché de l'Union</b><p>Le schéma des rôles (fabricant, mandataire, importateur, distributeurs), la qualification et la classe du produit au regard du droit de l'Union, le cahier des charges du mandataire et la comparaison des offres reçues, la revue du mandat écrit, un calendrier d'entrée, trois visios et des livrables en anglais. 9 000 € HT pour un produit simple, jusqu'à 15 000 € HT pour une gamme, un logiciel ou une intelligence artificielle, ou un diagnostic in vitro. Je n'exerce pas la fonction de mandataire ; les écarts avec un statut obtenu hors de l'Union sont présentés comme une comparaison factuelle des exigences, pas comme un avis de droit étranger.</p></li><li><b>Veille et ligne directe</b><p>Une note de veille mensuelle sur ce qui change pour votre produit et votre rôle (textes, guides MDCG, positions des autorités, avancement de la réforme), et vos questions par écrit ou par téléphone, avec une réponse sous deux jours ouvrés. Deux heures par mois pour 490 € HT, quatre heures pour 990 € HT.</p></li><li><b>Suivi des échéances</b><p>En plus : votre calendrier réglementaire tenu à jour (fin de transition, certificats, renouvellements, EUDAMED), une alerte avant chaque échéance avec ce qui doit être engagé à cette date, une réponse sous un jour ouvré et une revue annuelle du périmètre. Trois heures et un point trimestriel pour 750 € HT, huit heures et un point mensuel pour 2 000 € HT.</p></li><li><b>Règles communes aux abonnements</b><p>La note de veille ne s'impute pas sur le temps inclus ; les points en visio, si. Le temps inclus couvre les questions et les orientations ; les livrables (opinion écrite, note, contrat) relèvent d'un forfait. Les heures non consommées ne se reportent pas d'un mois sur l'autre. Sans engagement de durée, préavis d'un mois.</p></li></ul></div>
-      <p class="cadre">En cas d'accord, la formule retenue fait l'objet d'une convention d'honoraires signée avant toute intervention. Elle fixe le périmètre et ses exclusions, le nombre de réunions et de tours de commentaires, et le prix ferme dans la fourchette annoncée. Elle est précédée d'une vérification des conflits d'intérêts. Les missions qui ne se bornent pas à l'avance (contrôle d'une autorité, position à défendre auprès d'un organisme notifié, opération de croissance) font l'objet d'un devis. Les montants s'entendent hors taxes : la TVA au taux de 20 % s'y ajoute pour les clients établis en France ; pour un client professionnel établi dans un autre État membre de l'Union, elle est autoliquidée par le preneur.</p>
+
+      <h3 class="rules-h">Règles communes aux deux abonnements de suivi</h3>
+      <ul class="rules">
+        <li><b>Un périmètre défini</b><span>Une entité, des produits et des rôles convenus. Un cadrage initial payant n'est prévu que si une véritable reprise le justifie ; aucun audit d'entrée systématique.</span></li>
+        <li><b>Ce qui consomme les heures</b><span>Tout le temps propre à votre dossier : préparation, recherche spécifique, réunions, veille personnalisée. Un relevé des heures accompagne chaque facture.</span></li>
+        <li><b>Questions courantes et travaux substantiels</b><span>Les questions courantes sont traitées dans l'abonnement, y compris un avis bref sur une clause ou un document court. Une opinion complète, un audit, la rédaction ou la revue approfondie d'un contrat font l'objet d'une proposition distincte, acceptée avant intervention.</span></li>
+        <li><b>Premier retour</b><span>Il accuse réception, oriente et indique le délai de la réponse. Une question complexe peut demander davantage. Pas de permanence d'urgence.</span></li>
+        <li><b>Heures du mois</b><span>Les heures non utilisées ne se reportent pas. Un dépassement n'a lieu qu'après votre accord préalable, à <span data-p="dep">180 €</span> HT de l'heure.</span></li>
+        <li><b>Durée</b><span>Sans engagement de durée, avec un mois de préavis.</span></li>
+      </ul>
+      <p class="cadre">Tous les montants s'entendent hors taxes. Chaque mission fait l'objet d'une convention d'honoraires signée avant toute intervention, après un cadrage et une vérification des conflits d'intérêts. Elle fixe le périmètre et ses exclusions, le nombre de réunions et de tours de commentaires, et le prix ferme ; aucun supplément n'est facturé sans votre accord préalable. Un travail déjà réglé, consultation, diagnostic, stratégie ou qualification, est repris dans la mission suivante et n'est pas facturé deux fois. Les dossiers complexes et les situations en cours (contrôle d'une autorité, réserves d'un organisme notifié, incident, différend) font l'objet d'un devis. La TVA au taux de 20 % s'ajoute pour les clients établis en France ; pour un client professionnel établi dans un autre État membre de l'Union, elle est autoliquidée par le preneur.</p>
     </div>
   </section>
 
@@ -501,7 +573,7 @@ a.ext:hover{opacity:.7}
     <div class="wrap">
       <button class="backlink" type="button" data-view="home">Retour au site</button>
       <h1 style="margin-top:28px">Mentions légales et confidentialité</h1>
-      <p class="label" style="margin-top:12px">Dernière mise à jour : 23 octobre 2026</p>
+      <p class="label" style="margin-top:12px">Dernière mise à jour : 27 octobre 2026</p>
       <div class="doc">
         <section>
           <h2>Éditeur du site</h2>
@@ -585,16 +657,22 @@ a.ext:hover{opacity:.7}
   <input name="bot-field"><input name="email"><input name="opposition"><input name="concordance"><input name="orientation"><input name="priorites"><input name="role"><input name="produit"><input name="classe"><input name="horodatage"><input name="version_information">
 </form>
 
+<script src="/regles.js"></script>
 <script>
 (function(){
 "use strict";
 var MODULE_ASSURANCE = true; /* volet facultatif « couverture financière » : false pour le retirer */
-var VERSION = "concordance-2026-10-23";
+var VERSION = "concordance-2026-10-27";
 var CONTACT = "francois.cesure@hemistiches.com";
 var LOCALE = "fr-FR";
 
 /* ---------- Typographie française : espaces fines et insécables ---------- */
 var NB = "\u00A0", FN = "\u202F";
+function eur(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " €"; }
+/* Prix : toujours lus dans regles.js (source unique, commune aux deux pages) */
+var V = window.CONCORDANCE_REGLES ? window.CONCORDANCE_REGLES.valeurs() : {};
+function px(s){ return String(s).replace(/\{(\w+)\}/g, function(m, k){ return V[k]!=null ? eur(V[k]) : m; }); }
+document.querySelectorAll("[data-p]").forEach(function(el){ var k = el.getAttribute("data-p"); if(V[k]!=null) el.textContent = eur(V[k]); });
 function fr(s){ return String(s).replace(/'/g,"’").replace(/ ([?;!»])/g, FN+"$1").replace(/ :/g, NB+":").replace(/« /g, "«"+FN).replace(/(\d) (€|%)/g, "$1"+NB+"$2").replace(/(\d) (\d{3})/g, "$1"+NB+"$2"); }
 function frDom(root){
   var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
@@ -815,18 +893,18 @@ function compute(){
   if(f.classe || f.frontiere || f.prorogKO || f.prorogInc || f.prorogTodo || f.modif || f.divA || f.avant || f.encours) cand.push("qualif");
   if(f.contrats || ak.indexOf("acontrats")>-1) cand.push("contrats");
   cand = cand.filter(function(x,i){ return cand.indexOf(x)===i; });
-  if(!cand.length) cand.push(lvl===0 ? "suivi" : "flash");
+  if(!cand.length) cand.push(lvl===0 ? "suivi" : "consultation");
   var main = cand[0], second = (lvl>=2 && cand[1]) ? cand[1] : null;
 
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
-  var acomplex = v.type==="div" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
-  var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || v.statut==="legacy" || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.prorogTodo || !!f.divA;
+  var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
+  var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
   return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
 }
 
 var P = {
   urgent:["Situation en cours","Contrôle, réserves d'un organisme notifié, incident ou différend : les premiers échanges fixent les positions. C'est le point à traiter en premier."],
-  divA:["Classe A non stérile : aucune période de transition","Ces dispositifs doivent être conformes au règlement (UE)&nbsp;2017/746 depuis le 26 mai 2022, sans période de transition. La situation est à régulariser."],
+  divA:["Classe A non stérile : aucune période de transition","Ces dispositifs doivent être conformes au règlement (UE)\u00A02017/746 depuis le 26 mai 2022, sans période de transition. La situation est à régulariser."],
   prorogKO:["Prolongation de la transition incertaine","La prolongation de la période de transition n'est pas automatique. Elle suppose une demande déposée auprès d'un organisme notifié et un accord écrit signé dans des délais aujourd'hui écoulés pour votre produit. Si ces conditions n'ont pas été réunies, elle ne s'applique pas : la base de votre mise sur le marché est à vérifier sans attendre."],
   prorogInc:["Conditions de la transition à vérifier","Vous ne savez pas si la demande et l'accord écrit exigés ont été réalisés dans les délais. C'est la première vérification à faire : elle conditionne le droit de maintenir votre produit sur le marché."],
   prorogTodo:["Démarche à engager auprès d'un organisme notifié","La période de transition court jusqu'au 31 décembre 2029, à condition de déposer une demande auprès d'un organisme notifié au plus tard le 26 mai 2027 et de signer un accord écrit au plus tard le 26 septembre 2027. Les organismes notifiés ont des délais : ces dates se préparent maintenant."],
@@ -851,7 +929,7 @@ var P = {
   data:["Données de santé","Les traitements de données de santé liés au produit relèvent du RGPD et, selon les cas, de l'hébergement certifié de données de santé. Les traiter avec l'évaluation de conformité évite de faire deux fois le travail."]
 };
 var AP = {
-  rc:["Couverture financière à mettre en place","Le règlement impose au fabricant des mesures de couverture financière suffisante de sa responsabilité, proportionnées à la classe de risque, au type de dispositif et à la taille de l'entreprise (article 10, paragraphe 16, du règlement (UE)&nbsp;2017/745 ; article 10, paragraphe 15, du règlement (UE)&nbsp;2017/746). Sans police identifiée, l'obligation n'est pas remplie."],
+  rc:["Couverture financière à mettre en place","Le règlement impose au fabricant des mesures de couverture financière suffisante de sa responsabilité, proportionnées à la classe de risque, au type de dispositif et à la taille de l'entreprise (article 10, paragraphe 16, du règlement (UE)\u00A02017/745 ; article 10, paragraphe 15, du règlement (UE)\u00A02017/746). Sans police identifiée, l'obligation n'est pas remplie."],
   rcd:["Assurance de responsabilité à vérifier","Le règlement ne vous impose pas cette couverture comme au fabricant. Mais celui qui importe un produit dans l'Union est assimilé au producteur pour la responsabilité du fait des produits défectueux (article 1245-5 du code civil) : une police adaptée est votre protection naturelle."],
   rcgen:["Responsabilité civile générale seulement","Une police de responsabilité civile générale exclut souvent les dommages causés par des produits de santé, ou les plafonne bas. Elle suffit rarement à démontrer une couverture adaptée à vos dispositifs."],
   montant:["Montant de garantie à justifier","La suffisance de la couverture s'apprécie au regard de la classe de risque, du type de dispositif et de la taille de l'entreprise. Un montant qui n'a jamais été confronté à ces critères est difficile à justifier devant un organisme notifié ou une autorité."],
@@ -955,7 +1033,7 @@ function other(){
   box.innerHTML =
     '<p class="label">Votre situation</p>'+
     '<h3 class="qtitle">'+esc("Votre situation appelle un échange direct")+'</h3>'+
-    '<p class="qhint">'+esc("Le test est conçu pour les fabricants, les distributeurs et les importateurs. Pour un mandataire, un sous-traitant, un prestataire ou un investisseur, une consultation d'une heure suffit souvent à cadrer la question : 490 € HT, déductible du forfait souscrit ensuite.")+'</p>'+
+    '<p class="qhint">'+esc("Le test est conçu pour les fabricants, les distributeurs et les importateurs. Pour un mandataire, un sous-traitant, un prestataire ou un investisseur, une consultation d'orientation de quarante-cinq minutes suffit souvent à cadrer la question : "+eur(V.c)+" HT.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start;gap:24px"><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : échange")+'">Écrire au cabinet</a><button type="button" class="linkbtn" id="back0">Revenir au test</button></div>';
   document.getElementById("back0").onclick = function(){ go(0); };
   toBox();
@@ -1002,19 +1080,19 @@ function gate(){
 }
 
 var OFFERS = {
-  situation:["Une situation en cours : un premier échange sans attendre","Contrôle, réserves d'un organisme notifié, incident ou différend : un échange d'une heure pour poser les faits, les délais et la stratégie, puis une assistance sur devis.","Consultation flash : 490 € HT, puis devis pour l'assistance."],
-  distrib:["Mise en règle distributeur ou importateur","Vos obligations propres au titre des articles 13, 14 et 16 du règlement, selon votre rôle réel dans la chaîne : note de conformité, liste des vérifications avant mise à disposition, registres, clauses fournisseurs et enregistrement EUDAMED.","2 900 € HT, en deux semaines."],
-  qualif:["Qualification et stratégie réglementaire","Ce qu'est juridiquement votre produit, sa classe, sa route de conformité et ce que permettent vos certificats : un écrit signé, opposable à un investisseur ou à un organisme notifié, et une feuille de route datée.","3 000 € HT pour un produit simple, en deux semaines."],
-  contrats:["Contrats de la chaîne","Vos contrats de distribution, de sous-traitance et de mandat mis en accord avec la répartition des obligations prévue par le règlement : responsabilité, vigilance, traçabilité, rappels.","6 000 € HT pour trois contrats existants revus, jusqu'à 12 000 € HT pour deux contrats rédigés, en quatre semaines."],
-  acces:["Accès au marché de l'Union","Pour un fabricant établi hors de l'Union : le schéma des rôles (mandataire, importateur, distributeur), le choix du mandataire et la revue de son mandat, la stratégie d'entrée. Livrables en anglais.","9 000 € HT pour un produit simple, en cinq semaines."],
-  suivi:["Veille et suivi réglementaire","Votre concordance tient. Pour la tenir dans la durée : une note de veille mensuelle sur ce qui change pour votre produit, un avocat joignable, et un temps d'avocat réservé chaque mois.","490 € HT par mois pour deux heures, jusqu'à 2 000 € HT pour huit heures et le suivi de vos échéances. Sans engagement de durée."],
-  flash:["Consultation flash","Une heure pour vérifier ce rapport sur votre situation réelle et savoir quoi faire ensuite, avec une note d'orientation écrite.","490 € HT, déductible du forfait souscrit ensuite."]
+  situation:["Une situation en cours : un premier échange sans attendre","Contrôle, réserves d'un organisme notifié, incident ou différend : une consultation d'orientation de quarante-cinq minutes pour poser les faits, les délais et la stratégie, puis une assistance sur devis.","Consultation d'orientation : {c} HT, puis devis pour l'assistance."],
+  distrib:["Distributeur ou importateur","Vos obligations propres au titre des articles 13, 14 et 16 du règlement, selon le rôle que vous exercez réellement : un diagnostic documentaire de vos écarts, puis, si vous le souhaitez, la mise en règle (matrice des obligations, vérifications avant mise à disposition, modèles de registres, clauses types pour vos fournisseurs et, pour l'importateur, cadrage des démarches EUDAMED).","Diagnostic : {dd} HT. Mise en règle simple : à partir de {dm} HT au total, diagnostic compris."],
+  qualif:["Qualification et stratégie réglementaire","Le statut de votre produit, sa classe, la procédure d'évaluation de la conformité applicable et les étapes à engager : une note juridique motivée, qui documente vos décisions et vos échanges avec vos partenaires, et une feuille de route.","À partir de {q} HT pour un produit simple : une destination revendiquée claire, une configuration, des documents exploitables."],
+  contrats:["Contrats de la chaîne","Vos contrats de distribution, de sous-traitance ou de mandat, vérifiés au regard de la répartition des obligations prévue par le règlement : responsabilités, qualité, vigilance, traçabilité, rappels. Un seul contrat peut être examiné.","Revue ciblée d'un contrat : à partir de {cc} HT. Revue approfondie avec un retour de négociation : à partir de {ca} HT. Plusieurs contrats liés : proposition globale sur devis."],
+  acces:["Entrée sur le marché de l'Union","Pour un fabricant établi hors de l'Union : la qualification du produit, les opérateurs nécessaires et leurs rôles, une feuille de route et un calendrier indicatif, en anglais ; puis, si vous le souhaitez, l'organisation juridique de l'entrée (cahier des charges et revue du mandat du mandataire).","Stratégie d'entrée : à partir de {es} HT. Organisation juridique de l'entrée : à partir de {eo} HT au total, stratégie comprise."],
+  suivi:["Suivi réglementaire","Votre concordance tient. Pour la tenir dans la durée : un avocat joignable pour vos questions courantes, et une veille propre à votre produit, dans le temps réservé chaque mois.","Conseil régulier : {s1} HT par mois pour trois heures. Conseil et échéances : {s2} HT par mois pour six heures, avec le calendrier de vos échéances. Sans engagement de durée."],
+  consultation:["Consultation d'orientation","Quarante-cinq minutes pour lire ce rapport avec vous, sur votre situation réelle, et décider de la suite ; une synthèse des priorités par courriel.","{c} HT, déduits du forfait engagé dans les trente jours lorsqu'elle le prépare directement."]
 };
 
-var QUALIF_COMPLEX = "De 4 500 à 7 500 € HT par produit, en trois semaines : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, produit à la frontière, classe à établir ou transition à vérifier).";
-var DIST_COMPLEX = "Jusqu'à 4 900 € HT, en deux semaines : vous cumulez les deux rôles, ou intervenez sur le produit (réétiquetage, reconditionnement).";
-var ACCES_COMPLEX = "Jusqu'à 15 000 € HT, en cinq semaines : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, diagnostic in vitro, classe à établir).";
-function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; return o; }
+var QUALIF_COMPLEX = "Sur devis, selon la difficulté réelle : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, produit à la frontière, classe à établir ou transition à vérifier). Le prix d'entrée de {q} HT vaut pour un produit simple.";
+var DIST_COMPLEX = "Sur devis : vous cumulez les deux rôles, intervenez sur le produit (réétiquetage, reconditionnement) ou votre statut est à établir. Le diagnostic à {dd} HT vaut pour un seul rôle et une famille homogène de produits.";
+var ACCES_COMPLEX = "Sur devis, selon la difficulté réelle : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, produit à la frontière ou classe à établir). Le prix d'entrée de la stratégie, {es} HT, vaut pour un produit simple.";
+function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; return o.map(px); }
 
 function gauge(lvl){
   var h = '<div class="gauge" role="img" aria-label="'+esc("Niveau : "+LEVELS[lvl].short)+'">';
@@ -1023,6 +1101,10 @@ function gauge(lvl){
   LEVELS.forEach(function(L,i){ h += '<span class="'+(i===lvl?'cur':'')+'">'+esc(L.short)+'</span>'; });
   return h+'</div>';
 }
+
+/* Rapport imprimé : coordonnées de l'avocat en tête et en fin */
+var LOGO = (document.querySelector(".brand img")||{}).src || "";
+function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat au barreau de Paris")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
 
 function report(r){
   var O = offer(r.main, r), html = "";
@@ -1045,8 +1127,8 @@ function report(r){
   }
   html += '<div class="rsec"><h4>Ce que je vous recommande</h4><div class="offer-reco"><h5>'+esc(O[0])+'</h5><p>'+esc(O[1])+'</p><p class="p">'+esc(O[2])+'</p></div>';
   if(r.second){ var S = offer(r.second, r); html += '<div class="offer-reco"><h5>'+esc("Ensuite : "+S[0])+'</h5><p>'+esc(S[1])+'</p><p class="p">'+esc(S[2])+'</p></div>'; }
-  html += '<p class="compl">'+esc("En cas d'accord, une convention d'honoraires signée fixe le périmètre et ses exclusions, le nombre de réunions et le prix ferme dans la fourchette annoncée. Elle est précédée d'une vérification des conflits d'intérêts.")+'</p>';
-  if(r.main!=="flash" && r.main!=="situation") html += '<p class="compl">'+esc("Pour commencer, la consultation flash (490 € HT) permet de vérifier ce rapport sur votre situation réelle ; elle est déductible du forfait souscrit ensuite.")+'</p>';
+  html += '<p class="compl">'+esc("En cas d'accord, une convention d'honoraires signée fixe le périmètre et ses exclusions, le nombre de réunions et le prix ferme, confirmé après cadrage ; aucun supplément sans votre accord préalable. Elle est précédée d'une vérification des conflits d'intérêts.")+'</p>';
+  if(r.main!=="consultation" && r.main!=="situation") html += '<p class="compl">'+esc(px("Si vous préférez d'abord vérifier ce rapport sur votre situation réelle, la consultation d'orientation ({c} HT) le permet. Elle n'est pas obligatoire, et elle est déduite du forfait engagé dans les trente jours lorsqu'elle le prépare directement."))+'</p>';
   if(r.f.data) html += '<p class="compl">'+esc("Votre produit traite des données de santé : Diapason, l'offre de conformité RGPD d'Hémistiches, couvre ces traitements et la fonction de délégué à la protection des données.")+' <a class="linkbtn" href="https://diapason.hemistiches.com" target="_blank" rel="noopener">Diapason</a></p>';
   html += '</div>';
 
@@ -1055,14 +1137,14 @@ function report(r){
   html += '<div class="rsec no-print"><h4>Conserver ce rapport</h4><div class="keep"><p class="compare">'+esc("Enregistrez-le en PDF, ou envoyez-le dans votre propre messagerie. Il n'est conservé ni sur ce site ni par le cabinet.")+'</p>'+
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Enregistrer en PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("Mon rapport Concordance")+'&body='+encodeURIComponent(summary(r))+'">'+esc("M'envoyer le rapport")+'</a></div></div></div>';
 
-  html += '<div class="rsec"><h4>Échanger sur votre rapport</h4><p class="compare">'+esc("Un premier échange de vingt minutes, gratuit et sans engagement, pour voir si votre situation appelle une consultation. Écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
+  html += '<div class="rsec"><h4>Échanger sur votre rapport</h4><p class="compare">'+esc("Pour une consultation ou une mission, écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
     '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copier l'adresse")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : "+r.level.short)+'&body='+encodeURIComponent("Bonjour,\n\nJe souhaite échanger sur mon rapport Concordance.\n\n"+summary(r))+'">Écrire</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("Ce rapport est généré automatiquement à partir de vos seules réponses, sans vérification ni examen de pièces, et arrêté à la date de sa génération. Il constitue une information indicative et ne vaut ni consultation juridique ni avis. Les montants s'entendent hors taxes ; toute mission fait l'objet d'une convention d'honoraires et d'une vérification préalable des conflits d'intérêts.")+'</p>'+
-    '<p class="sources">'+esc("Sources : règlement (UE)&nbsp;2017/745, article 120, dans sa rédaction issue du règlement (UE) 2023/607 ; règlement (UE)&nbsp;2017/746, article 110, dans sa rédaction issue du règlement (UE) 2024/1860 ; décision (UE) 2025/2371 de la Commission (EUDAMED). La proposition de règlement COM(2025) 1023 du 16 décembre 2025, qui simplifie les deux règlements, n'est pas adoptée à ce jour : elle relève de l'anticipation, et les échéances ci-dessus s'appliquent tant qu'elle ne les modifie pas.")+'</p>'+
+    '<p class="sources">'+esc("Sources : règlement (UE)\u00A02017/745, article 120, dans sa rédaction issue du règlement (UE) 2023/607 ; règlement (UE)\u00A02017/746, article 110, dans sa rédaction issue du règlement (UE) 2024/1860 ; décision (UE) 2025/2371 de la Commission (EUDAMED). La proposition de règlement COM(2025) 1023 du 16 décembre 2025, qui simplifie les deux règlements, n'est pas adoptée à ce jour : elle relève de l'anticipation, et les échéances ci-dessus s'appliquent tant qu'elle ne les modifie pas.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Refaire le test</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span><b>Concordance</b>, par Hémistiches</span><span>'+esc("Rapport établi le "+today)+'</span></div>'+html+
+  html = '<div class="print-only print-head"><span class="ph-logo"><img src="'+LOGO+'" alt="Hémistiches."><i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Rapport établi le "+today)+'</span></div>'+carte('', "Votre interlocuteur")+html+carte(' end', "Pour échanger sur ce rapport")+
     '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat au barreau de Paris · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Pré-analyse indicative, sous réserve de l'échange préalable et de la signature d'une convention d'honoraires.")+'</div>';
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };

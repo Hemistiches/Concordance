@@ -320,6 +320,40 @@ a.ext:hover{opacity:.7}
 .test-s{background:var(--card);padding-top:clamp(56px,7vw,96px)}
 .fonction-s{background:var(--paper)}
 .cesure-s{padding-bottom:clamp(56px,7vw,96px)}
+/* Grille du 27 octobre 2026 : détail de chaque formule, règles des abonnements (composants repris de Diapason) */
+.formules-s .three article .amount + .from{margin-top:6px;font-size:14px;line-height:1.45}
+details.more{border-top:1px solid var(--rule);margin-top:auto}
+details.more summary{cursor:pointer;list-style:none;padding:12px 28px 12px 0;position:relative;font-size:15px;color:var(--ink)}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";position:absolute;right:2px;top:9px;font-weight:300;font-size:20px;line-height:1}
+details.more[open] summary::after{content:"–"}
+details.more summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+details.more > div{padding:0 0 6px}
+details.more > div p{font-size:15px;color:var(--ink-2);max-width:none}
+details.more > div p + p{margin-top:8px}
+details.more b{font-weight:600;color:var(--ink)}
+.rules{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(24px,3vw,48px)}
+.rules li{padding:18px 0;border-bottom:1px solid var(--rule);min-width:0}
+.rules b{display:block;font-weight:400;font-size:clamp(17px,1.4vw,19px)}
+.rules > li > span{display:block;font-size:15px;color:var(--ink-2);margin-top:4px}
+@media (max-width:720px){.rules{grid-template-columns:minmax(0,1fr)}}
+@media print{details.more > div{display:block}}
+.rules-h{font-size:clamp(20px,1.8vw,26px);font-weight:400;margin-top:clamp(48px,6vw,80px)}
+.rules-h + .rules{margin-top:18px}
+/* Rapport imprimé : logo Hémistiches | Concordance et coordonnées de l'avocat en tête et en fin (repris de Cadence et Diapason) */
+@media print{
+  .print-card{width:calc(100% - 2px);display:flex;justify-content:space-between;gap:18px;border:1.5px solid #000;padding:12px 16px;margin:0 0 18px;break-inside:avoid}
+  .print-card .who{font-size:9pt;color:#444;letter-spacing:.02em}
+  .print-card .nm{font-size:15pt;color:#000;margin-top:2px}
+  .print-card .rl{font-size:10pt;color:#222}
+  .print-card .co{font-size:10.5pt;color:#000;text-align:right;line-height:1.55}
+  .print-card .co a{color:#000;text-decoration:none}
+  .print-card.end{margin:22px 0 0}
+  .ph-logo{display:flex;align-items:center;gap:10px}
+  .ph-logo img{height:20px;width:auto;filter:invert(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ph-logo i{width:0;height:18px;border-left:1px solid #000}
+  .ph-logo span{font-size:14pt;color:#000}
+}
 </style>
 </head>
 <body>
@@ -418,49 +452,87 @@ a.ext:hover{opacity:.7}
   <section class="formules-s" id="formules" aria-labelledby="t-form">
     <div class="wrap">
       <h2 class="sec-h2" id="t-form">Services</h2>
-      <p class="intro">Fixed-scope packages, with a written scope. The test tells you where to start; here is the starting point of each service.</p>
+      <p class="intro">Six services, each with a written scope. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
       <div class="three">
-        <article>
-          <h3>Flash consultation</h3>
-          <div><p class="from">Price</p><p class="amount">€490 <small>excl. VAT</small></p></div>
-          <p>One hour to go through your report with you, establish your actual situation and decide what to do next.</p>
-          <ul><li>Sixty-minute video call, within ten days</li><li>Written guidance note</li><li>Deductible from the package that follows</li></ul>
+        <article id="offre-consultation">
+          <h3>Orientation consultation</h3>
+          <div><p class="from">Price</p><p class="amount"><span data-p="c">€350</span> <small>excl. VAT</small></p></div>
+          <p>Understand your situation, set the priorities and decide on the next step.</p>
+          <ul><li>Reading of your Concordance report and of two or three short documents</li><li>Forty-five-minute video call</li><li>Summary of priorities and next steps, by email</li></ul>
+          <details class="more"><summary>Details</summary><div>
+            <p>Documents are read within a limit agreed in advance. The consultation does not include an in-depth contract review, a full analysis of a technical file, complex research or a reasoned opinion on qualification or classification: that work falls under the services below.</p>
+            <p>Optional. Where it directly prepares an assignment engaged within thirty days, its <span data-p="c">€350</span> excl. VAT is deducted from the package, once, and the work done is carried into the assignment.</p>
+          </div></details>
         </article>
-        <article>
+        <article id="offre-qualification">
           <h3>Qualification and regulatory strategy</h3>
-          <div><p class="from">From</p><p class="amount">€3,000 <small>excl. VAT per product</small></p></div>
-          <p>What your product legally is, its class, its conformity route and what your certificates allow.</p>
-          <ul><li>€3,000 excl. VAT for a simple product: clear intended purpose, a single configuration</li><li>€4,500 to €7,500 excl. VAT for software or AI, a borderline product, a product range or a transition to be checked</li><li>Signed written document and dated roadmap, in two to three weeks</li></ul>
+          <div><p class="from">From</p><p class="amount"><span data-p="q">€2,000</span> <small>excl. VAT per product</small></p></div>
+          <p>Determine the status of your product and the regulatory steps to take.</p>
+          <ul><li>Qualification and class of the product</li><li>Applicable conformity assessment procedure and roadmap</li><li>Reasoned legal note and forty-five-minute debrief</li></ul>
+          <details class="more"><summary>Details</summary><div>
+            <p><b>The starting price assumes</b> one product, a clear intended purpose, one configuration, available and usable documents, and no major qualification or classification difficulty.</p>
+            <p><b>Included:</b> review of the essential documents (intended purpose, instructions for use, labelling, claims, certificates), analysis of qualification and class, identification of the conformity assessment procedure, a reasoned legal note, proportionate to the question, documenting your decisions and your discussions with your partners, a roadmap, the debrief and one round of consolidated comments within the initial scope.</p>
+            <p><b>Quoted according to the actual difficulty:</b> software, artificial intelligence, borderline product, complex transition, product range or multiple configurations. <b>Not included:</b> building the technical documentation, clinical evaluation, testing and running the certification.</p>
+          </div></details>
         </article>
-        <article>
-          <h3>Distributor or importer compliance</h3>
-          <div><p class="from">From</p><p class="amount">€2,900 <small>excl. VAT</small></p></div>
-          <p>Your own obligations, according to your actual role in the chain: verifications, registers, supplier clauses, EUDAMED.</p>
-          <ul><li>€2,900 excl. VAT for a single role, with no work on the product</li><li>Up to €4,900 excl. VAT for both roles, or a relabelled or repackaged product</li><li>Two weeks, two video calls</li></ul>
+        <article id="offre-distribution">
+          <h3>Distributor or importer</h3>
+          <div><p class="from">Diagnostic</p><p class="amount"><span data-p="dd">€1,200</span> <small>excl. VAT</small></p><p class="from">Simple compliance package from <span data-p="dm">€2,500</span> excl. VAT in total, diagnostic included</p></div>
+          <p>Know and meet your own obligations, according to the role you actually perform.</p>
+          <ul><li>Documentary diagnostic: your actual role and your main gaps</li><li>Prioritised actions and forty-five-minute debrief</li><li>Compliance package: obligations matrix, register templates, standard supplier clauses</li></ul>
+          <details class="more"><summary>Details</summary><div>
+            <p><b>Diagnostic.</b> For one entity, one role and a homogeneous product family: preliminary questionnaire, review of a limited set of documents, analysis of the role actually performed (Articles 13, 14 and 16 of the Regulation), main documentary gaps and points of attention, prioritised list of actions, debrief. It is a limited documentary diagnostic, neither an exhaustive audit of your practices nor an on-site verification.</p>
+            <p><b>Simple compliance package.</b> In addition, as agreed: a summary obligations matrix, a list of checks before making available, adapted templates of the essential registers (complaints, non-conformities, recalls), standard regulatory clauses for your suppliers and, for an importer, scoping of the EUDAMED steps; two meetings in total and one round of consolidated comments. If the diagnostic has already been paid, only the balance is invoiced, i.e. <span data-p="dmc">€1,300</span> excl. VAT at the starting price.</p>
+            <p>Standard clauses are not a review of your contracts, which falls under Supply chain contracts; EUDAMED scoping is advice, not performing the steps. Drafting a complete quality management system is not included. <b>Quoted:</b> both roles combined, several entities, heterogeneous products, relabelling or repackaging, status to be established.</p>
+          </div></details>
         </article>
       </div>
       <div class="three">
-        <article>
+        <article id="offre-contrats">
           <h3>Supply chain contracts</h3>
-          <div><p class="from">From</p><p class="amount">€6,000 <small>excl. VAT</small></p></div>
-          <p>Distribution, subcontracting, mandate: contracts that reflect the allocation of obligations set by the Regulation.</p>
-          <ul><li>€6,000 excl. VAT for three existing contracts reviewed</li><li>Up to €12,000 excl. VAT for two contracts drafted</li><li>One negotiation round included</li></ul>
+          <div><p class="from">Targeted review of one contract, from</p><p class="amount"><span data-p="cc">€1,200</span> <small>excl. VAT</small></p><p class="from">In-depth review with one negotiation round from <span data-p="ca">€2,000</span> excl. VAT</p></div>
+          <p>Check that a distribution, subcontracting or mandate agreement reflects the allocation of obligations set by the Regulation.</p>
+          <ul><li>A single contract can be reviewed</li><li>Annotations or proposed changes, and a debrief</li><li>Several related contracts or drafting: overall proposal on quote</li></ul>
+          <details class="more"><summary>Details</summary><div>
+            <p><b>Targeted review.</b> For a relatively short existing contract governed by French law, with a scope of analysis set in advance: review of the clauses on regulatory obligations and the agreed priority risks (depending on the contract, responsibilities, quality, vigilance, traceability, recalls), annotations or proposed changes, a thirty-minute debrief and one follow-up clarification. It is not an exhaustive legal review of the contract, and negotiation is not included.</p>
+            <p><b>In-depth review.</b> Overall review of the contract within the agreed field, amended version, debrief, then one negotiation round: review of one consolidated response from the other party, received in one go, and preparation of a revised version. Direct exchanges with the other party, negotiation meetings and further versions are quoted before being undertaken.</p>
+            <p>Length, schedules, complexity and matters requiring a specialist are scoped before work begins. Several related contracts are covered by an overall proposal that takes the common work into account. A contract governed by foreign law requires specific scoping and, where appropriate, local counsel.</p>
+          </div></details>
         </article>
-        <article>
-          <h3>EU market access</h3>
-          <div><p class="from">From</p><p class="amount">€9,000 <small>excl. VAT</small></p></div>
-          <p>For a manufacturer established outside the Union: the allocation of roles, the choice of authorised representative and review of its mandate, the entry strategy.</p>
-          <ul><li>€9,000 excl. VAT for a simple product</li><li>Up to €15,000 excl. VAT for a range, software or an in vitro diagnostic</li><li>Five weeks, deliverables in English</li></ul>
+        <article id="offre-entree">
+          <h3>Entry into the EU market</h3>
+          <div><p class="from">Entry strategy, from</p><p class="amount"><span data-p="es">€3,000</span> <small>excl. VAT</small></p><p class="from">Legal organisation of the entry from <span data-p="eo">€6,000</span> excl. VAT in total, strategy included</p></div>
+          <p>For a manufacturer established outside the Union: how to enter the market, with which operators and in what order.</p>
+          <ul><li>Qualification, operators required and their roles</li><li>Roadmap and indicative timeline, in English</li><li>Organisation: specifications and review of the authorised representative's mandate</li></ul>
+          <details class="more"><summary>Details</summary><div>
+            <p><b>Entry strategy.</b> For a simple product, one configuration and an available file: analysis of qualification and class within the agreed scope, review of the available regulatory material, operators required and their roles, main open questions, roadmap with steps and dependencies, indicative timeline, note in English, one scoping meeting and one debrief.</p>
+            <p><b>Legal organisation of the entry.</b> In addition: specifications for the authorised representative, comparison of two or three offers you have received, review of one mandate with one consolidated round, clarification of the operators' responsibilities in the chosen structure, implementation timeline, three meetings in total, deliverables in English. A strategy or qualification already paid for is carried over: only the balance is invoiced, i.e. <span data-p="eoc">€3,000</span> excl. VAT at the starting price.</p>
+            <p><b>Not included:</b> searching for authorised representatives or other providers, in-depth audit of their capabilities, multiple negotiations, drafting the other contracts, exhaustive review of the technical documentation, certification and operational coordination. I do not act as authorised representative. <b>Quoted:</b> complex products and product ranges.</p>
+          </div></details>
         </article>
-        <article>
-          <h3>Regulatory watch and follow-up</h3>
-          <div><p class="from">From</p><p class="amount">€490 <small>excl. VAT per month</small></p></div>
-          <p>Keeping concordance over time, with lawyer time reserved every month and a watch note on what changes for you.</p>
-          <ul><li>Watch and direct line: two hours a month for €490 excl. VAT, four hours for €990 excl. VAT</li><li>Deadline follow-up: three hours and a quarterly call for €750 excl. VAT, eight hours and a monthly call for €2,000 excl. VAT</li><li>No minimum term, one month's notice</li></ul>
+        <article id="offre-suivi">
+          <h3>Regulatory follow-up</h3>
+          <div><p class="from">Regular advice, three hours a month</p><p class="amount"><span data-p="s1">€490</span> <small>excl. VAT per month</small></p><p class="from">Advice and deadlines: six hours for <span data-p="s2">€990</span> excl. VAT per month</p></div>
+          <p>A lawyer you can reach every month for your day-to-day regulatory questions.</p>
+          <ul><li>Questions in writing or by phone, first response within two working days</li><li>Watch specific to your product, within the time available</li><li>Advice and deadlines: calendar kept, quarterly call, first response within one working day</li></ul>
+          <details class="more"><summary>Details</summary><div>
+            <p><b>Regular advice.</b> Within the time available: day-to-day questions, one-off analyses and guidance, meetings, watch specific to your file and targeted information on developments that concern you.</p>
+            <p><b>Advice and deadlines.</b> In addition: keeping the calendar of known deadlines within the agreed scope, a quarterly call and follow-up of priority actions.</p>
+            <p>The rules common to both are set out below.</p>
+          </div></details>
         </article>
       </div>
-      <div class="comp"><h3>What each service includes</h3><ul class="dates"><li><b>Flash consultation</b><p>A prior reading of your report and of two or three documents you send, a sixty-minute video call within ten days, and a one-page guidance note: points of attention, priorities, next steps. €490 excl. VAT, deductible from the package that follows. It does not include an in-depth review of documents or a written opinion committing to a legal position.</p></li><li><b>Qualification and regulatory strategy</b><p>A review of your documents (intended purpose claimed, instructions for use, labelling, marketing claims, certificates), the qualification of the product, its class under the rules of Annex VIII to the Regulation, the conformity route and, where relevant, the conditions of the transitional period. A signed written document, which you can show an investor or a notified body: a five-to-eight-page note for a simple product (€3,000 excl. VAT), an eight-to-fifteen-page opinion beyond that (€4,500 to €7,500 excl. VAT), with a dated roadmap and one round of comments. It does not include drafting the technical documentation, the clinical evaluation or exchanges with the notified body.</p></li><li><b>Distributor or importer compliance</b><p>Your actual role in the chain, including under Article 16; a note on your own obligations (Articles 13 and 14); a checklist of verifications before making devices available; template registers of complaints, non-conformities and recalls; model clauses for your suppliers; support with EUDAMED registration for importers. €2,900 excl. VAT for a single role with no work on the product, up to €4,900 excl. VAT for both roles or a relabelled or repackaged product. It does not include reviewing your existing contracts or assistance during an inspection.</p></li><li><b>Supply chain contracts</b><p>An analysis of your distribution, subcontracting or mandate contracts against the allocation of obligations set by the Regulation, proposed clauses (liability, quality, vigilance, traceability, recalls) and one negotiation round with the counterparty. €6,000 excl. VAT for reviewing three existing contracts, up to €12,000 excl. VAT for drafting two contracts. Beyond the included round: time spent, agreed in writing. It does not include contracts governed by a foreign law.</p></li><li><b>EU market access</b><p>The allocation of roles (manufacturer, authorised representative, importer, distributors), the qualification and class of the product under EU law, the specifications for the authorised representative and a comparison of the offers received, a review of the written mandate, an entry timetable, three video calls and deliverables in English. €9,000 excl. VAT for a simple product, up to €15,000 excl. VAT for a range, software or artificial intelligence, or an in vitro diagnostic. I do not act as authorised representative; differences with a status obtained outside the Union are presented as a factual comparison of requirements, not as an opinion on foreign law.</p></li><li><b>Watch and direct line</b><p>A monthly watch note on what changes for your product and your role (texts, MDCG guidance, positions of the authorities, progress of the reform), and your questions in writing or by phone, answered within two working days. Two hours a month for €490 excl. VAT, four hours for €990 excl. VAT.</p></li><li><b>Deadline follow-up</b><p>In addition: your regulatory calendar kept up to date (end of transition, certificates, renewals, EUDAMED), an alert before each deadline setting out what must be under way by then, answers within one working day and an annual scope review. Three hours and a quarterly call for €750 excl. VAT, eight hours and a monthly call for €2,000 excl. VAT.</p></li><li><b>Rules common to subscriptions</b><p>The watch note is not counted against the time included; video calls are. The time included covers questions and guidance; deliverables (written opinion, note, contract) fall under a package. Unused hours do not carry over from one month to the next. No minimum term, one month's notice.</p></li></ul></div>
-      <p class="cadre">If we agree, the chosen service is set out in a signed fee agreement before any work begins. It sets the scope and its exclusions, the number of meetings and rounds of comments, and the firm price within the stated range. It is preceded by a conflict-of-interest check. Assignments that cannot be scoped in advance (an inspection by an authority, a position to defend before a notified body, a growth transaction) are quoted separately. Amounts exclude VAT: VAT at 20% is added for clients established in France; for a business client established in another EU Member State, it is self-assessed by the customer under the reverse-charge mechanism.</p>
+
+      <h3 class="rules-h">Rules common to both follow-up subscriptions</h3>
+      <ul class="rules">
+        <li><b>A defined scope</b><span>One entity, agreed products and roles. A paid initial scoping is only provided for where a genuine take-over justifies it; no systematic entry audit.</span></li>
+        <li><b>What uses the hours</b><span>All time specific to your file: preparation, specific research, meetings, personalised watch. A statement of hours comes with each invoice.</span></li>
+        <li><b>Day-to-day questions and substantial work</b><span>Day-to-day questions are handled within the subscription, including brief advice on a clause or a short document. A full opinion, an audit, drafting or an in-depth contract review is the subject of a separate proposal, accepted before work begins.</span></li>
+        <li><b>First response</b><span>It acknowledges, gives direction and states when the answer will follow. A complex question may take longer. No emergency on-call service.</span></li>
+        <li><b>Monthly hours</b><span>Unused hours are not carried over. Any overrun only takes place with your prior agreement, at <span data-p="dep">€180</span> excl. VAT per hour.</span></li>
+        <li><b>Term</b><span>No minimum term, one month's notice.</span></li>
+      </ul>
+      <p class="cadre">All amounts are exclusive of VAT. Each assignment is set out in a fee agreement signed before any work begins, after scoping and a conflict-of-interest check. It sets the scope and its exclusions, the number of meetings and rounds of comments, and the firm price; nothing extra is invoiced without your prior agreement. Work already paid for, a consultation, diagnostic, strategy or qualification, is carried into the next assignment and is not invoiced twice. Complex matters and ongoing situations (an inspection by an authority, reservations from a notified body, an incident, a dispute) are quoted. French VAT at 20% is added for clients established in France; for a business client established in another EU Member State, VAT is reverse-charged to the customer.</p>
     </div>
   </section>
 
@@ -501,7 +573,7 @@ a.ext:hover{opacity:.7}
     <div class="wrap">
       <button class="backlink" type="button" data-view="home">Back to the site</button>
       <h1 style="margin-top:28px">Legal notice and privacy</h1>
-      <p class="label" style="margin-top:12px">Last updated: 23 October 2026</p>
+      <p class="label" style="margin-top:12px">Last updated: 27 October 2026</p>
       <div class="doc">
         <section>
           <p>This English version is provided for convenience. In the event of any discrepancy, the <a href="/#mentions" hreflang="fr" lang="fr">French version</a> prevails.</p>
@@ -588,13 +660,19 @@ a.ext:hover{opacity:.7}
   <input name="bot-field"><input name="email"><input name="opposition"><input name="concordance"><input name="orientation"><input name="priorites"><input name="role"><input name="produit"><input name="classe"><input name="horodatage"><input name="version_information">
 </form>
 
+<script src="/regles.js"></script>
 <script>
 (function(){
 "use strict";
 var MODULE_ASSURANCE = true; /* volet facultatif « couverture financière » : false pour le retirer */
-var VERSION = "concordance-2026-10-23-en";
+var VERSION = "concordance-2026-10-27-en";
 var CONTACT = "francois.cesure@hemistiches.com";
 var LOCALE = "en-GB";
+function eur(n){ return "€" + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+/* Prix : toujours lus dans regles.js (source unique, commune aux deux pages) */
+var V = window.CONCORDANCE_REGLES ? window.CONCORDANCE_REGLES.valeurs() : {};
+function px(s){ return String(s).replace(/\{(\w+)\}/g, function(m, k){ return V[k]!=null ? eur(V[k]) : m; }); }
+document.querySelectorAll("[data-p]").forEach(function(el){ var k = el.getAttribute("data-p"); if(V[k]!=null) el.textContent = eur(V[k]); });
 
 function fr(s){ return String(s).replace(/'/g,"’"); }
 function frDom(root){
@@ -815,18 +893,18 @@ function compute(){
   if(f.classe || f.frontiere || f.prorogKO || f.prorogInc || f.prorogTodo || f.modif || f.divA || f.avant || f.encours) cand.push("qualif");
   if(f.contrats || ak.indexOf("acontrats")>-1) cand.push("contrats");
   cand = cand.filter(function(x,i){ return cand.indexOf(x)===i; });
-  if(!cand.length) cand.push(lvl===0 ? "suivi" : "flash");
+  if(!cand.length) cand.push(lvl===0 ? "suivi" : "consultation");
   var main = cand[0], second = (lvl>=2 && cand[1]) ? cand[1] : null;
 
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
-  var acomplex = v.type==="div" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
-  var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || v.statut==="legacy" || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.prorogTodo || !!f.divA;
+  var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
+  var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
   return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
 }
 
 var P = {
   urgent:["Situation under way","An inspection, reservations from a notified body, an incident or a dispute: the first exchanges set the positions. This is the point to deal with first."],
-  divA:["Class A non-sterile: no transitional period","These devices must have complied with Regulation (EU)&nbsp;2017/746 since 26 May 2022, with no transitional period. The situation needs to be regularised."],
+  divA:["Class A non-sterile: no transitional period","These devices must have complied with Regulation (EU)\u00A02017/746 since 26 May 2022, with no transitional period. The situation needs to be regularised."],
   prorogKO:["Extended transition in doubt","The extension of the transitional period is not automatic. It requires an application lodged with a notified body and a written agreement signed within deadlines that have now passed for your product. If these conditions were not met, the extension does not apply: the basis on which your product is on the market must be checked without delay."],
   prorogInc:["Transition conditions to be checked","You do not know whether the required application and written agreement were completed in time. This is the first thing to check: it determines whether your product can remain on the market."],
   prorogTodo:["Steps to take with a notified body","The transitional period runs until 31 December 2029, provided an application is lodged with a notified body by 26 May 2027 and a written agreement signed by 26 September 2027. Notified bodies have lead times: these dates need preparing now."],
@@ -851,7 +929,7 @@ var P = {
   data:["Health data","Processing of health data linked to the product falls under the GDPR and, where applicable, the French certified health data hosting regime. Handling it together with the conformity assessment avoids doing the work twice."]
 };
 var AP = {
-  rc:["Financial coverage to be put in place","The Regulation requires manufacturers to have measures providing sufficient financial coverage for their liability, proportionate to the risk class, the type of device and the size of the enterprise (Article 10(16) of Regulation (EU)&nbsp;2017/745; Article 10(15) of Regulation (EU)&nbsp;2017/746). Without an identified policy, the obligation is not met."],
+  rc:["Financial coverage to be put in place","The Regulation requires manufacturers to have measures providing sufficient financial coverage for their liability, proportionate to the risk class, the type of device and the size of the enterprise (Article 10(16) of Regulation (EU)\u00A02017/745; Article 10(15) of Regulation (EU)\u00A02017/746). Without an identified policy, the obligation is not met."],
   rcd:["Liability insurance to be checked","The Regulation does not impose this coverage on you as it does on manufacturers. But anyone who imports a product into the Union is treated as the producer for product liability purposes (Article 1245-5 of the French Civil Code): a suitable policy is your natural protection."],
   rcgen:["General liability only","A general liability policy often excludes damage caused by health products, or caps it low. It rarely suffices to show coverage suited to your devices."],
   montant:["Amount of cover to be justified","Whether coverage is sufficient is assessed in light of the risk class, the type of device and the size of the enterprise. An amount never tested against these criteria is hard to justify to a notified body or an authority."],
@@ -955,7 +1033,7 @@ function other(){
   box.innerHTML =
     '<p class="label">Your situation</p>'+
     '<h3 class="qtitle">'+esc("Your situation calls for a direct conversation")+'</h3>'+
-    '<p class="qhint">'+esc("The test is designed for manufacturers, distributors and importers. For an authorised representative, a subcontractor, a service provider or an investor, a one-hour consultation is often enough to frame the question: €490 excl. VAT, deductible from the package that follows.")+'</p>'+
+    '<p class="qhint">'+esc("The test is designed for manufacturers, distributors and importers. For an authorised representative, a subcontractor, a service provider or an investor, a forty-five-minute orientation consultation is often enough to frame the question: "+eur(V.c)+" excl. VAT.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start;gap:24px"><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: conversation")+'">Write to the firm</a><button type="button" class="linkbtn" id="back0">Back to the test</button></div>';
   document.getElementById("back0").onclick = function(){ go(0); };
   toBox();
@@ -1002,19 +1080,19 @@ function gate(){
 }
 
 var OFFERS = {
-  situation:["A situation under way: a first conversation without delay","An inspection, reservations from a notified body, an incident or a dispute: a one-hour conversation to set out the facts, the deadlines and the strategy, then assistance on a quote.","Flash consultation: €490 excl. VAT, then a quote for the assistance."],
-  distrib:["Distributor or importer compliance","Your own obligations under Articles 13, 14 and 16 of the Regulation, according to your actual role in the chain: compliance note, checklist before making devices available, registers, supplier clauses and EUDAMED registration.","€2,900 excl. VAT, over two weeks."],
-  qualif:["Qualification and regulatory strategy","What your product legally is, its class, its conformity route and what your certificates allow: a signed written document, which you can show an investor or a notified body, and a dated roadmap.","€3,000 excl. VAT for a simple product, over two weeks."],
-  contrats:["Supply chain contracts","Your distribution, subcontracting and mandate contracts brought into line with the allocation of obligations set by the Regulation: liability, vigilance, traceability, recalls.","€6,000 excl. VAT for three existing contracts reviewed, up to €12,000 excl. VAT for two contracts drafted, over four weeks."],
-  acces:["EU market access","For a manufacturer established outside the Union: the allocation of roles (authorised representative, importer, distributor), the choice of authorised representative and review of its mandate, the entry strategy. Deliverables in English.","€9,000 excl. VAT for a simple product, over five weeks."],
-  suivi:["Regulatory watch and follow-up","Your concordance holds. To keep it that way: a monthly watch note on what changes for your product, a lawyer you can reach, and lawyer time reserved every month.","€490 excl. VAT per month for two hours, up to €2,000 excl. VAT for eight hours and your deadlines tracked. No minimum term."],
-  flash:["Flash consultation","One hour to check this report against your actual situation and decide what to do next, with a written guidance note.","€490 excl. VAT, deductible from the package that follows."]
+  situation:["A situation under way: a first conversation without delay","An inspection, reservations from a notified body, an incident or a dispute: a forty-five-minute orientation consultation to set out the facts, the deadlines and the strategy, then assistance on a quote.","Orientation consultation: {c} excl. VAT, then a quote for the assistance."],
+  distrib:["Distributor or importer","Your own obligations under Articles 13, 14 and 16 of the Regulation, according to the role you actually perform: a documentary diagnostic of your gaps, then, if you wish, the compliance package (obligations matrix, checks before making available, register templates, standard supplier clauses and, for an importer, scoping of the EUDAMED steps).","Diagnostic: {dd} excl. VAT. Simple compliance package: from {dm} excl. VAT in total, diagnostic included."],
+  qualif:["Qualification and regulatory strategy","The status of your product, its class, the applicable conformity assessment procedure and the steps to take: a reasoned legal note documenting your decisions and your discussions with your partners, and a roadmap.","From {q} excl. VAT for a simple product: a clear intended purpose, one configuration, usable documents."],
+  contrats:["Supply chain contracts","Your distribution, subcontracting or mandate agreements, checked against the allocation of obligations set by the Regulation: responsibilities, quality, vigilance, traceability, recalls. A single contract can be reviewed.","Targeted review of one contract: from {cc} excl. VAT. In-depth review with one negotiation round: from {ca} excl. VAT. Several related contracts: overall proposal on quote."],
+  acces:["Entry into the EU market","For a manufacturer established outside the Union: the qualification of the product, the operators required and their roles, a roadmap and an indicative timeline, in English; then, if you wish, the legal organisation of the entry (specifications and review of the authorised representative's mandate).","Entry strategy: from {es} excl. VAT. Legal organisation of the entry: from {eo} excl. VAT in total, strategy included."],
+  suivi:["Regulatory follow-up","Your concordance holds. To keep it that way: a lawyer you can reach for your day-to-day questions, and a watch specific to your product, within the time reserved each month.","Regular advice: {s1} excl. VAT per month for three hours. Advice and deadlines: {s2} excl. VAT per month for six hours, with your deadline calendar. No minimum term."],
+  consultation:["Orientation consultation","Forty-five minutes to go through this report with you, against your actual situation, and decide on the next step; a summary of priorities by email.","{c} excl. VAT, deducted from a package engaged within thirty days where it directly prepares it."]
 };
 
-var QUALIF_COMPLEX = "€4,500 to €7,500 excl. VAT per product, over three weeks: your situation goes beyond the simple case (product range, software, artificial intelligence, borderline product, class to be established or transition to be checked).";
-var DIST_COMPLEX = "Up to €4,900 excl. VAT, over two weeks: you combine both roles, or work on the product (relabelling, repackaging).";
-var ACCES_COMPLEX = "Up to €15,000 excl. VAT, over five weeks: your situation goes beyond the simple case (range, software, artificial intelligence, in vitro diagnostic, class to be established).";
-function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; return o; }
+var QUALIF_COMPLEX = "Quoted according to the actual difficulty: your situation goes beyond the simple case (product range, software, artificial intelligence, borderline product, class to be established or transition to be checked). The starting price of {q} excl. VAT applies to a simple product.";
+var DIST_COMPLEX = "Quoted: you combine both roles, work on the product (relabelling, repackaging) or your status has to be established. The {dd} diagnostic applies to a single role and a homogeneous product family.";
+var ACCES_COMPLEX = "Quoted according to the actual difficulty: your situation goes beyond the simple case (product range, software, artificial intelligence, borderline product or class to be established). The starting price of the strategy, {es} excl. VAT, applies to a simple product.";
+function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; return o.map(px); }
 
 function gauge(lvl){
   var h = '<div class="gauge" role="img" aria-label="'+esc("Level: "+LEVELS[lvl].short)+'">';
@@ -1023,6 +1101,10 @@ function gauge(lvl){
   LEVELS.forEach(function(L,i){ h += '<span class="'+(i===lvl?'cur':'')+'">'+esc(L.short)+'</span>'; });
   return h+'</div>';
 }
+
+/* Printed report: lawyer's contact details at the top and the end */
+var LOGO = (document.querySelector(".brand img")||{}).src || "";
+function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat, Paris Bar")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris, France")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
 
 function report(r){
   var O = offer(r.main, r), html = "";
@@ -1045,8 +1127,8 @@ function report(r){
   }
   html += '<div class="rsec"><h4>What I recommend</h4><div class="offer-reco"><h5>'+esc(O[0])+'</h5><p>'+esc(O[1])+'</p><p class="p">'+esc(O[2])+'</p></div>';
   if(r.second){ var S = offer(r.second, r); html += '<div class="offer-reco"><h5>'+esc("Then: "+S[0])+'</h5><p>'+esc(S[1])+'</p><p class="p">'+esc(S[2])+'</p></div>'; }
-  html += '<p class="compl">'+esc("If we agree, a signed fee agreement sets the scope and its exclusions, the number of meetings and the firm price within the stated range. It is preceded by a conflict-of-interest check.")+'</p>';
-  if(r.main!=="flash" && r.main!=="situation") html += '<p class="compl">'+esc("To start, the flash consultation (€490 excl. VAT) checks this report against your actual situation; it is deductible from the package that follows.")+'</p>';
+  html += '<p class="compl">'+esc("If we agree, a signed fee agreement sets the scope and its exclusions, the number of meetings and the firm price, confirmed after scoping; nothing extra without your prior agreement. It is preceded by a conflict-of-interest check.")+'</p>';
+  if(r.main!=="consultation" && r.main!=="situation") html += '<p class="compl">'+esc(px("If you would rather check this report against your actual situation first, the orientation consultation ({c} excl. VAT) does that. It is not required, and it is deducted from a package engaged within thirty days where it directly prepares it."))+'</p>';
   if(r.f.data) html += '<p class="compl">'+esc("Your product processes health data: Diapason, Hémistiches' GDPR compliance service, covers this processing and the data protection officer function.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';
   html += '</div>';
 
@@ -1055,14 +1137,14 @@ function report(r){
   html += '<div class="rsec no-print"><h4>Keep this report</h4><div class="keep"><p class="compare">'+esc("Save it as a PDF, or send it to your own mailbox. It is kept neither on this site nor by the firm.")+'</p>'+
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Save as PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("My Concordance report")+'&body='+encodeURIComponent(summary(r))+'">'+esc("Email me the report")+'</a></div></div></div>';
 
-  html += '<div class="rsec"><h4>Discuss your report</h4><p class="compare">'+esc("A first twenty-minute conversation, free and without commitment, to see whether your situation calls for a consultation. Write to me stating your level of concordance:")+'</p>'+
+  html += '<div class="rsec"><h4>Discuss your report</h4><p class="compare">'+esc("For a consultation or an assignment, write to me stating your level of concordance:")+'</p>'+
     '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copy the address")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: "+r.level.short)+'&body='+encodeURIComponent("Hello,\n\nI would like to discuss my Concordance report.\n\n"+summary(r))+'">Write</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("This report is generated automatically from your answers alone, without verification or review of documents, and is valid as at the date it is generated. It is indicative information and is neither legal advice nor an opinion. Amounts exclude VAT; every assignment is subject to a fee agreement and a prior conflict-of-interest check.")+'</p>'+
-    '<p class="sources">'+esc("Sources: Regulation (EU)&nbsp;2017/745, Article 120, as amended by Regulation (EU) 2023/607; Regulation (EU)&nbsp;2017/746, Article 110, as amended by Regulation (EU) 2024/1860; Commission Decision (EU) 2025/2371 (EUDAMED). The proposal for a regulation COM(2025) 1023 of 16 December 2025, which simplifies both Regulations, has not been adopted to date: it is forward-looking, and the deadlines above apply unless and until it changes them.")+'</p>'+
+    '<p class="sources">'+esc("Sources: Regulation (EU)\u00A02017/745, Article 120, as amended by Regulation (EU) 2023/607; Regulation (EU)\u00A02017/746, Article 110, as amended by Regulation (EU) 2024/1860; Commission Decision (EU) 2025/2371 (EUDAMED). The proposal for a regulation COM(2025) 1023 of 16 December 2025, which simplifies both Regulations, has not been adopted to date: it is forward-looking, and the deadlines above apply unless and until it changes them.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Take the test again</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span><b>Concordance</b>, by Hémistiches</span><span>'+esc("Report prepared on "+today)+'</span></div>'+html+
+  html = '<div class="print-only print-head"><span class="ph-logo"><img src="'+LOGO+'" alt="Hémistiches."><i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Report prepared on "+today)+'</span></div>'+carte('', "Your contact")+html+carte(' end', "To discuss this report")+
     '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat at the Paris Bar · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris, France · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Indicative preliminary analysis, subject to a prior conversation and the signature of a fee agreement.")+'</div>';
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };
