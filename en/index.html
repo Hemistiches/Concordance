@@ -350,7 +350,7 @@ details.more b{font-weight:600;color:var(--ink)}
   .print-card .co a{color:#000;text-decoration:none}
   .print-card.end{margin:22px 0 0}
   .ph-logo{display:flex;align-items:center;gap:10px}
-  .ph-logo img{height:20px;width:auto;filter:invert(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ph-logo img{height:20px;width:auto}
   .ph-logo i{width:0;height:18px;border-left:1px solid #000}
   .ph-logo span{font-size:14pt;color:#000}
 }
@@ -1171,7 +1171,12 @@ function gauge(lvl){
 }
 
 /* Printed report: lawyer's contact details at the top and the end */
-var LOGO = (document.querySelector(".brand img")||{}).src || "";
+var LOGO = "";
+(function(){ var img = document.querySelector(".brand img"); if(!img) return;
+  function noir(){ try{ var c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight; var x = c.getContext("2d");
+    x.drawImage(img, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = "#000"; x.fillRect(0, 0, c.width, c.height); LOGO = c.toDataURL("image/png"); }
+    catch(e){ LOGO = ""; } }
+  if(img.complete && img.naturalWidth) noir(); else img.addEventListener("load", noir); })();
 function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat, Paris Bar")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris, France")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
 
 function report(r){
@@ -1206,13 +1211,13 @@ function report(r){
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Save as PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("My Concordance report")+'&body='+encodeURIComponent(summary(r))+'">'+esc("Email me the report")+'</a></div></div></div>';
 
   html += '<div class="rsec"><h4>Discuss your report</h4><p class="compare">'+esc("For a consultation or an assignment, write to me stating your level of concordance:")+'</p>'+
-    '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copy the address")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: "+r.level.short)+'&body='+encodeURIComponent("Hello,\n\nI would like to discuss my Concordance report.\n\n"+summary(r))+'">Write</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
+    '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copy the address")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: "+r.level.short)+'&body='+encodeURIComponent("Hello,\n\nI would like to discuss my Concordance report.\n\n"+summary(r, true))+'">Write</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("This report is generated automatically from your answers alone, without verification or review of documents, and is valid as at the date it is generated. It is indicative information and is neither legal advice nor an opinion. Amounts exclude VAT; every assignment is subject to a fee agreement and a prior conflict-of-interest check.")+'</p>'+
     '<p class="sources">'+esc("Sources: Regulation (EU)\u00A02017/745, Article 120, as amended by Regulation (EU) 2023/607; Regulation (EU)\u00A02017/746, Article 110, as amended by Regulation (EU) 2024/1860; Commission Decision (EU) 2025/2371 (EUDAMED). The proposal for a regulation COM(2025) 1023 of 16 December 2025, which simplifies both Regulations, has not been adopted to date: it is forward-looking, and the deadlines above apply unless and until it changes them.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Take the test again</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span class="ph-logo"><img src="'+LOGO+'" alt="Hémistiches."><i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Report prepared on "+today)+'</span></div>'+carte('', "Your contact")+html+carte(' end', "To discuss this report")+
+  html = '<div class="print-only print-head"><span class="ph-logo">'+(LOGO?'<img src="'+LOGO+'" alt="Hémistiches.">':'<b>Hémistiches.</b>')+'<i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Report prepared on "+today)+'</span></div>'+carte('', "Your contact")+html+carte(' end', "To discuss this report")+
     '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat at the Paris Bar · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris, France · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Indicative preliminary analysis, subject to a prior conversation and the signature of a fee agreement.")+'</div>';
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };
@@ -1223,19 +1228,35 @@ function report(r){
   document.getElementById("restart").onclick = function(){ A = {}; intro(); toBox(); };
   toBox();
 }
-function summary(r){
+function summary(r, pourMoi){
   var O = offer(r.main, r), L = [];
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  L.push("Concordance report of "+today);
-  L.push("Level: "+r.level.label.charAt(0).toLowerCase()+r.level.label.slice(1)+".");
-  if(r.prios.length) L.push("Points of attention: "+r.prios.map(function(k){ return P[k][0]; }).join("; ")+".");
-  if(r.assur.asked) L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join(" ; ") : AP.ok[0])+".");
-  r.dates.forEach(function(d){ L.push("Deadline: "+d[0]+". "+d[1]); });
-  L.push("Recommended service: "+O[0]+". "+O[2]);
-  if(r.second) L.push("Then: "+offer(r.second, r)[0]+". "+offer(r.second, r)[2]);
+  L.push("Concordance, by Hémistiches");
+  L.push("MDR and IVDR compliance for medical devices · concordance.hemistiches.com/en/");
   L.push("");
-  L.push("Indicative preliminary analysis, based solely on my answers, subject to a prior conversation and the signature of a fee agreement. Amounts exclude VAT.");
-  L.push("Hémistiches, Mᵉ François Césure, avocat at the Paris Bar. "+CONTACT+" · +33 6 47 88 80 25");
+  L.push("Report of "+today);
+  L.push("");
+  L.push("Concordance level: "+r.level.label.charAt(0).toLowerCase()+r.level.label.slice(1)+".");
+  if(r.prios.length){ L.push(""); L.push("Points of attention"); r.prios.forEach(function(k){ L.push("– "+P[k][0]); }); }
+  if(r.dates.length){ L.push(""); L.push("Deadlines"); r.dates.forEach(function(d){ L.push("– "+d[0]+": "+d[1]); }); }
+  if(r.assur.asked){ L.push(""); L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join("; ") : AP.ok[0])+"."); }
+  L.push(""); L.push("Recommended service");
+  L.push("1. "+O[0]); L.push("   "+O[2]);
+  if(r.second){ var S2 = offer(r.second, r); L.push("2. Then: "+S2[0]); L.push("   "+S2[2]); }
+  L.push("");
+  L.push("The full report (detailed points of attention, deadlines, content of the service) can be saved as a PDF from the result page, using the \"Save as PDF\" button. It can be attached to this message before sending.");
+  L.push("");
+  L.push("Indicative preliminary analysis, based solely on the answers to the test, subject to a prior conversation and the signature of a fee agreement. Amounts exclude VAT.");
+  if(!pourMoi){
+    L.push(""); L.push("————————————"); L.push("Your contact"); L.push("");
+    L.push("Maître François Césure");
+    L.push("Avocat, Paris Bar");
+    L.push("Hémistiches · 33, avenue Mac-Mahon, 75017 Paris, France");
+    L.push("");
+    L.push(CONTACT);
+    L.push("+33 6 47 88 80 25 · +33 1 45 03 20 20");
+    L.push("www.hemistiches.com");
+  }
   return fr(L.join("\n"));
 }
 function selectMail(){ var r = document.createRange(); r.selectNodeContents(document.getElementById("mail")); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); document.getElementById("copied").textContent = "Address selected"; }

@@ -350,7 +350,7 @@ details.more b{font-weight:600;color:var(--ink)}
   .print-card .co a{color:#000;text-decoration:none}
   .print-card.end{margin:22px 0 0}
   .ph-logo{display:flex;align-items:center;gap:10px}
-  .ph-logo img{height:20px;width:auto;filter:invert(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ph-logo img{height:20px;width:auto}
   .ph-logo i{width:0;height:18px;border-left:1px solid #000}
   .ph-logo span{font-size:14pt;color:#000}
 }
@@ -1171,7 +1171,12 @@ function gauge(lvl){
 }
 
 /* Rapport imprimé : coordonnées de l'avocat en tête et en fin */
-var LOGO = (document.querySelector(".brand img")||{}).src || "";
+var LOGO = "";
+(function(){ var img = document.querySelector(".brand img"); if(!img) return;
+  function noir(){ try{ var c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight; var x = c.getContext("2d");
+    x.drawImage(img, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = "#000"; x.fillRect(0, 0, c.width, c.height); LOGO = c.toDataURL("image/png"); }
+    catch(e){ LOGO = ""; } }
+  if(img.complete && img.naturalWidth) noir(); else img.addEventListener("load", noir); })();
 function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat au barreau de Paris")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
 
 function report(r){
@@ -1206,13 +1211,13 @@ function report(r){
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Enregistrer en PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("Mon rapport Concordance")+'&body='+encodeURIComponent(summary(r))+'">'+esc("M'envoyer le rapport")+'</a></div></div></div>';
 
   html += '<div class="rsec"><h4>Échanger sur votre rapport</h4><p class="compare">'+esc("Pour une consultation ou une mission, écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
-    '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copier l'adresse")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : "+r.level.short)+'&body='+encodeURIComponent("Bonjour,\n\nJe souhaite échanger sur mon rapport Concordance.\n\n"+summary(r))+'">Écrire</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
+    '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copier l'adresse")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : "+r.level.short)+'&body='+encodeURIComponent("Bonjour,\n\nJe souhaite échanger sur mon rapport Concordance.\n\n"+summary(r, true))+'">Écrire</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("Ce rapport est généré automatiquement à partir de vos seules réponses, sans vérification ni examen de pièces, et arrêté à la date de sa génération. Il constitue une information indicative et ne vaut ni consultation juridique ni avis. Les montants s'entendent hors taxes ; toute mission fait l'objet d'une convention d'honoraires et d'une vérification préalable des conflits d'intérêts.")+'</p>'+
     '<p class="sources">'+esc("Sources : règlement (UE)\u00A02017/745, article 120, dans sa rédaction issue du règlement (UE) 2023/607 ; règlement (UE)\u00A02017/746, article 110, dans sa rédaction issue du règlement (UE) 2024/1860 ; décision (UE) 2025/2371 de la Commission (EUDAMED). La proposition de règlement COM(2025) 1023 du 16 décembre 2025, qui simplifie les deux règlements, n'est pas adoptée à ce jour : elle relève de l'anticipation, et les échéances ci-dessus s'appliquent tant qu'elle ne les modifie pas.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Refaire le test</button></div>';
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span class="ph-logo"><img src="'+LOGO+'" alt="Hémistiches."><i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Rapport établi le "+today)+'</span></div>'+carte('', "Votre interlocuteur")+html+carte(' end', "Pour échanger sur ce rapport")+
+  html = '<div class="print-only print-head"><span class="ph-logo">'+(LOGO?'<img src="'+LOGO+'" alt="Hémistiches.">':'<b>Hémistiches.</b>')+'<i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Rapport établi le "+today)+'</span></div>'+carte('', "Votre interlocuteur")+html+carte(' end', "Pour échanger sur ce rapport")+
     '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat au barreau de Paris · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Pré-analyse indicative, sous réserve de l'échange préalable et de la signature d'une convention d'honoraires.")+'</div>';
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };
@@ -1223,19 +1228,35 @@ function report(r){
   document.getElementById("restart").onclick = function(){ A = {}; intro(); toBox(); };
   toBox();
 }
-function summary(r){
+function summary(r, pourMoi){
   var O = offer(r.main, r), L = [];
   var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  L.push("Rapport Concordance du "+today);
-  L.push("Niveau : "+r.level.label.charAt(0).toLowerCase()+r.level.label.slice(1)+".");
-  if(r.prios.length) L.push("Points de vigilance : "+r.prios.map(function(k){ return P[k][0]; }).join(" ; ")+".");
-  if(r.assur.asked) L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join(" ; ") : AP.ok[0])+".");
-  r.dates.forEach(function(d){ L.push("Échéance : "+d[0]+". "+d[1]); });
-  L.push("Formule recommandée : "+O[0]+". "+O[2]);
-  if(r.second) L.push("Ensuite : "+offer(r.second, r)[0]+". "+offer(r.second, r)[2]);
+  L.push("Concordance, par Hémistiches");
+  L.push("Conformité MDR et IVDR des dispositifs médicaux · concordance.hemistiches.com");
   L.push("");
-  L.push("Pré-analyse indicative, établie à partir de mes seules réponses, sous réserve d'un échange préalable et de la signature d'une convention d'honoraires. Montants hors taxes.");
-  L.push("Hémistiches, Mᵉ François Césure, avocat au barreau de Paris. "+CONTACT+" · +33 6 47 88 80 25");
+  L.push("Rapport du "+today);
+  L.push("");
+  L.push("Niveau de concordance : "+r.level.label.charAt(0).toLowerCase()+r.level.label.slice(1)+".");
+  if(r.prios.length){ L.push(""); L.push("Points de vigilance"); r.prios.forEach(function(k){ L.push("– "+P[k][0]); }); }
+  if(r.dates.length){ L.push(""); L.push("Échéances"); r.dates.forEach(function(d){ L.push("– "+d[0]+" : "+d[1]); }); }
+  if(r.assur.asked){ L.push(""); L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join(" ; ") : AP.ok[0])+"."); }
+  L.push(""); L.push("Formule recommandée");
+  L.push("1. "+O[0]); L.push("   "+O[2]);
+  if(r.second){ var S2 = offer(r.second, r); L.push("2. Ensuite : "+S2[0]); L.push("   "+S2[2]); }
+  L.push("");
+  L.push("Le rapport complet (points de vigilance détaillés, échéances, contenu de la formule) s'enregistre en PDF depuis la page du résultat, bouton « Enregistrer en PDF ». Il peut être joint à ce message avant l'envoi.");
+  L.push("");
+  L.push("Pré-analyse indicative, établie à partir des seules réponses au test, sous réserve d'un échange préalable et de la signature d'une convention d'honoraires. Montants hors taxes.");
+  if(!pourMoi){
+    L.push(""); L.push("————————————"); L.push("Votre interlocuteur"); L.push("");
+    L.push("Mᵉ François Césure");
+    L.push("Avocat au barreau de Paris");
+    L.push("Hémistiches · 33, avenue Mac-Mahon, 75017 Paris");
+    L.push("");
+    L.push(CONTACT);
+    L.push("+33 6 47 88 80 25 · +33 1 45 03 20 20");
+    L.push("www.hemistiches.com");
+  }
   return fr(L.join("\n"));
 }
 function selectMail(){ var r = document.createRange(); r.selectNodeContents(document.getElementById("mail")); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); document.getElementById("copied").textContent = "Adresse sélectionnée"; }
