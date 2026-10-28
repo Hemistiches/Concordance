@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://concordance.hemistiches.com/sitemap.xml
