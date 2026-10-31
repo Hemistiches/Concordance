@@ -322,6 +322,7 @@ a.ext{border-bottom:1px solid currentColor}
 a.ext:hover{opacity:.7}
 /* ordre de la page : le test suit « Le nom » ; alternance noir, blanc, gris, blanc, gris */
 .test-s{background:var(--card);padding-top:clamp(56px,7vw,96px)}
+@media print{.test-s,#test,#diagbox{background:#fff!important}} /* rapport imprimé sur fond blanc */
 .fonction-s{background:var(--paper)}
 .cesure-s{padding-bottom:clamp(56px,7vw,96px)}
 /* Grille du 27 octobre 2026 : détail de chaque formule, règles des abonnements (composants repris de Diapason) */
