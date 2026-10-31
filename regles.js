@@ -8,12 +8,13 @@
   /* Tarifs HT, arrêtés par le cabinet le 27 octobre 2026. « aPartirDe » : prix d'entrée d'une situation simple ;
      au-delà des hypothèses décrites dans la page, devis arrêté avant toute intervention. */
   var TARIFS = {
-    version: "2026-10-27",
+    version: "2026-10-31",
     consultation: { prix: 350, minutes: 45, deductionJours: 30 },
     qualification: { aPartirDe: 2000 },
     distribution: { diagnostic: 1200, miseEnRegle: 2500 },          // mise en règle : prix global, diagnostic compris
     contrats: { revueCiblee: 1200, revueApprofondie: 2000 },
     entree: { strategie: 3000, organisation: 6000 },                 // organisation : prix global, stratégie comprise
+    couverture: { etude: 1200 },                                     // étude du schéma de couverture financière (31 octobre 2026)
     suivi: [
       { cle: "regulier",  prix: 490, heures: 3, premierRetourJoursOuvres: 2 },
       { cle: "echeances", prix: 990, heures: 6, premierRetourJoursOuvres: 1 }
@@ -50,6 +51,7 @@
       es: TARIFS.entree.strategie,
       eo: TARIFS.entree.organisation,
       eoc: complementOrganisation(true),
+      cv: TARIFS.couverture.etude,
       s1: palier("regulier").prix,
       s2: palier("echeances").prix,
       dep: TARIFS.tauxDepassement

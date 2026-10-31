@@ -389,6 +389,46 @@ details.more b{font-weight:600;color:var(--ink)}
 /* Pied de page : l'adresse électronique ne déborde pas entre 1 000 et 1 100 px */
 .coords,.coords > div{min-width:0}
 .coords a{overflow-wrap:anywhere}
+/* Rapport : même construction que Diapason (31 octobre 2026) — indicateurs, points qualifiés, missions chiffrées, ordre de grandeur */
+.report-head .meta{font-size:14px;color:var(--on-dark-mute);margin-top:14px}
+.levels{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:720px}
+.lv{min-width:0}
+.lv b{display:block;font-weight:400;font-size:13px;color:var(--on-dark-mute);letter-spacing:.02em}
+.lv span{display:block;font-size:clamp(20px,1.8vw,26px);font-weight:300;color:#fff;margin-top:2px}
+.meter{display:flex;gap:3px;margin-top:10px}
+.meter i{flex:1;height:6px;background:#262626}
+.meter i.on{background:var(--on-dark)}
+.lv p{font-size:12px;line-height:1.5;color:var(--on-dark-mute);margin-top:10px}
+.prio .kind{display:block;font-size:13px;color:var(--mute);letter-spacing:.02em;margin-bottom:2px}
+.prio li.good b,.prio li.info b{font-weight:400}
+.parcours{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--ink)}
+.parcours li{display:grid;grid-template-columns:minmax(0,1fr);gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.parcours b{font-weight:400;font-size:clamp(18px,1.5vw,20px)}
+.parcours .pr{text-align:left;font-size:16px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.parcours p{font-size:15px;color:var(--ink-2)}
+.parcours .hyp{font-size:14px;color:var(--mute);margin-top:-2px}
+.budget{margin-top:20px;border:1px solid var(--rule);padding:18px 20px}
+.budget h5{font-family:var(--font);font-weight:400;font-size:clamp(18px,1.5vw,20px);margin:0}
+.budget dl{margin:10px 0 0;display:grid;gap:6px}
+.budget dl div{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule);padding:6px 0}
+.budget dt{color:var(--ink-2);font-size:15px}
+.budget dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+.budget p{font-size:14px;color:var(--mute);margin-top:10px;max-width:72ch}
+@media (max-width:720px){.levels{grid-template-columns:minmax(0,1fr);gap:18px}}
+@media print{
+  .report-head .meta,.lv b,.lv p{color:#444}
+  .lv span{color:#000}
+  .meter i{background:#e6e6e6;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .meter i.on{background:#000}
+  .budget,.parcours li{break-inside:avoid}
+}
+/* Lisibilité (31 octobre 2026) : sur fond clair, rendu non aminci, gris secondaire plus soutenu, petits textes relevés ; fonds noirs inchangés */
+:root{--mute:#555555}
+body{-webkit-font-smoothing:auto;-moz-osx-font-smoothing:auto}
+.top,.drawer,.hero,.report-head,.cadre-s,.contact,.six article.dpo,.delegue-s{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.notice,.qmeta,.opt small,.qnote,.copied,.three .from,.three .range,.parcours .hyp,.budget p{font-size:15px}
+.small,.sources,.prio .kind{font-size:14px}
+.prio p,.compl,.three li,.dates p,.parcours p,.budget dt,details.more > div p,.rules > li > span,.cadre,.creds,.fonctions span,.check,.qhint{font-size:16px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, par Hémistiches", "url": "https://concordance.hemistiches.com/", "inLanguage": "fr", "description": "Concordance, par Hémistiches : le test de conformité MDR et IVDR des dispositifs médicaux. Une dizaine de questions sur votre produit, vos certificats et vos échéances, et un rapport immédiat.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
@@ -490,7 +530,7 @@ details.more b{font-weight:600;color:var(--ink)}
   <section class="formules-s" id="formules" aria-labelledby="t-form">
     <div class="wrap">
       <h2 class="sec-h2" id="t-form">Formules</h2>
-      <p class="intro">Six formules, chacune à périmètre écrit. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
+      <p class="intro">Sept formules, chacune à périmètre écrit. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
       <div class="three">
         <article id="offre-consultation">
           <h3>Consultation d'orientation</h3>
@@ -537,6 +577,17 @@ details.more b{font-weight:600;color:var(--ink)}
             <p>La longueur, les annexes, la complexité et les matières qui demandent un spécialiste sont cadrées avant l'intervention. Plusieurs contrats liés font l'objet d'une proposition globale, qui tient compte du travail commun. Un contrat soumis à un droit étranger demande un cadrage particulier et, le cas échéant, un conseil local.</p>
           </div></details>
         </article>
+        <article id="offre-couverture">
+          <h3>Couverture financière</h3>
+          <div><p class="from">Étude du schéma, à partir de</p><p class="amount"><span data-p="cv">1 200 €</span> <small>HT</small></p></div>
+          <p>Bâtir le schéma qui couvre votre responsabilité, avant de le confier à un courtier.</p>
+          <ul><li>L'obligation applicable à vos dispositifs</li><li>Les risques à couvrir : marchés, rappels, logiciel</li><li>Une note qui sert de cahier des charges au courtier</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Le prix d'entrée suppose</b> une famille de produits, une police existante ou à créer et les contrats principaux.</p>
+            <p><b>Compris :</b> l'analyse de l'obligation de couverture financière (article 10, paragraphe 16, du règlement (UE) 2017/745 ; article 10, paragraphe 15, du règlement (UE) 2017/746), la cartographie des risques à couvrir, la confrontation avec les engagements de vos contrats, une note qui arrête ce que la couverture doit garantir et un échange de restitution.</p>
+            <p><b>Sur devis :</b> plusieurs gammes, sociétés ou pays, logiciel dispositif médical, analyse clause par clause d'une police existante. Le placement de l'assurance relève du courtier ; la mise en relation se fait à votre demande. Je ne perçois aucune rémunération d'un courtier, et vous restez libre de votre choix.</p>
+          </div></details>
+        </article>
         <article id="offre-entree">
           <h3>Entrée sur le marché de l'Union</h3>
           <div><p class="from">Stratégie d'entrée, à partir de</p><p class="amount"><span data-p="es">3 000 €</span> <small>HT</small></p><p class="from">Organisation juridique de l'entrée à partir de <span data-p="eo">6 000 €</span> HT au total, stratégie comprise</p></div>
@@ -548,6 +599,8 @@ details.more b{font-weight:600;color:var(--ink)}
             <p><b>Non compris :</b> la recherche de mandataires ou d'autres prestataires, l'audit approfondi de leurs capacités, les négociations multiples, la rédaction des autres contrats, la vérification exhaustive du dossier technique, la certification et la coordination opérationnelle. Je n'exerce pas la fonction de mandataire. <b>Sur devis :</b> produits complexes et gammes.</p>
           </div></details>
         </article>
+      </div>
+      <div class="three">
         <article id="offre-suivi">
           <h3>Suivi réglementaire</h3>
           <div><p class="from">Conseil régulier, trois heures par mois</p><p class="amount"><span data-p="s1">490 €</span> <small>HT par mois</small></p><p class="from">Conseil et échéances : six heures pour <span data-p="s2">990 €</span> HT par mois</p></div>
@@ -973,7 +1026,7 @@ function compute(){
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
+  return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
 }
 
 var P = {
@@ -1013,15 +1066,15 @@ var AP = {
   ok:["Couverture déclarée en place","Vos réponses ne font pas ressortir de lacune. Une revue de la police à chaque nouveau produit ou nouveau marché maintient la couverture au niveau de l'obligation."]
 };
 var ASSUR_TITLE = "Votre couverture financière";
-var ASSUR_SPLIT = "Ce qui relève de l'avocat : l'obligation elle-même, la cohérence entre vos contrats et votre police, les effets de la nouvelle directive. Ce qui relève du courtier : les montants, les exclusions, les territoires.";
-var ASSUR_PARTNER = "Pour la vérification de la police elle-même, faites-la relire par un courtier spécialisé dans les dispositifs médicaux ; si vous n'en avez pas, je peux vous orienter. Je ne perçois aucune rémunération d'un courtier, et vous restez libre de votre choix.";
+var ASSUR_SPLIT = "Je peux vous aider à bâtir le schéma qui vous couvrira : une étude conduite avec vous, à partir de l'obligation applicable à vos dispositifs, des risques à couvrir, de vos contrats et de vos marchés, pour arrêter ce que la couverture doit garantir (voir « Ce que je vous propose »).";
+var ASSUR_PARTNER = "Le schéma arrêté, je peux, si vous le souhaitez, vous mettre en relation avec un courtier spécialisé dans les dispositifs médicaux, qui le traduit en police : montants, exclusions, territoires. Je ne perçois aucune rémunération d'un courtier, et vous restez libre de votre choix.";
 var ASSUR_SUM = "Couverture financière : ";
 var ORDER = ["urgent","divA","prorogKO","prorogInc","modif","prorogTodo","art16","mand","classe","frontiere","avant","encours","art16nsp","art16b","verif","vig","srn","udi","noneu","legacy","contrats","portef","ia","data"];
 function prios(f, v){
   var out = ORDER.filter(function(k){ return f[k]; });
   if(f.mand) out = out.filter(function(k){ return k!=="noneu"; });
   if(f.prorogKO || f.prorogInc || f.modif) out = out.filter(function(k){ return k!=="legacy"; });
-  return out.slice(0,5);
+  return out.slice(0,6);
 }
 
 function dates(f, v){
@@ -1160,7 +1213,8 @@ var OFFERS = {
   contrats:["Contrats de la chaîne","Vos contrats de distribution, de sous-traitance ou de mandat, vérifiés au regard de la répartition des obligations prévue par le règlement : responsabilités, qualité, vigilance, traçabilité, rappels. Un seul contrat peut être examiné.","Revue ciblée d'un contrat : à partir de {cc} HT. Revue approfondie avec un retour de négociation : à partir de {ca} HT. Plusieurs contrats liés : proposition globale sur devis."],
   acces:["Entrée sur le marché de l'Union","Pour un fabricant établi hors de l'Union : la qualification du produit, les opérateurs nécessaires et leurs rôles, une feuille de route et un calendrier indicatif, en anglais ; puis, si vous le souhaitez, l'organisation juridique de l'entrée (cahier des charges et revue du mandat du mandataire).","Stratégie d'entrée : à partir de {es} HT. Organisation juridique de l'entrée : à partir de {eo} HT au total, stratégie comprise."],
   suivi:["Suivi réglementaire","Votre concordance tient. Pour la tenir dans la durée : un avocat joignable pour vos questions courantes, et une veille propre à votre produit, dans le temps réservé chaque mois.","Conseil régulier : {s1} HT par mois pour trois heures. Conseil et échéances : {s2} HT par mois pour six heures, avec le calendrier de vos échéances. Sans engagement de durée."],
-  consultation:["Consultation d'orientation","Quarante-cinq minutes pour lire ce rapport avec vous, sur votre situation réelle, et décider de la suite ; une synthèse des priorités par courriel.","{c} HT, déduits du forfait engagé dans les trente jours lorsqu'elle le prépare directement."]
+  couverture:["Couverture financière : étude du schéma","Une étude conduite avec vous : l'obligation applicable à vos dispositifs, les risques à couvrir (marchés, rappels, logiciel), les engagements de vos contrats ; une note qui arrête ce que la couverture doit garantir et sert de cahier des charges au courtier.","À partir de {cv} HT pour une famille de produits et les contrats principaux. Plusieurs gammes, sociétés ou pays, logiciel dispositif médical ou analyse clause par clause d'une police existante : sur devis."],
+  consultation:["Consultation d'orientation","Quarante-cinq minutes pour lire ce résultat avec vous, sur votre situation réelle, et décider de la suite ; une synthèse des priorités par courriel.","{c} HT, déduits du forfait engagé dans les trente jours lorsqu'elle le prépare directement."]
 };
 
 var QUALIF_COMPLEX = "Sur devis, selon la difficulté réelle : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, produit à la frontière, classe à établir ou transition à vérifier). Le prix d'entrée de {q} HT vaut pour un produit simple.";
@@ -1183,17 +1237,91 @@ var LOGO = "";
     x.drawImage(img, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = "#000"; x.fillRect(0, 0, c.width, c.height); LOGO = c.toDataURL("image/png"); }
     catch(e){ LOGO = ""; } }
   if(img.complete && img.naturalWidth) noir(); else img.addEventListener("load", noir); })();
-function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat au barreau de Paris")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris")+'</div></div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
+function carte(cls, titre){ return '<div class="print-only print-card'+cls+'"><div><div class="who">'+esc(titre)+'</div><div class="nm">Mᵉ François Césure</div><div class="rl">'+esc("Avocat au barreau de Paris")+'</div><div class="rl">'+esc("Hémistiches, 33, avenue Mac-Mahon, 75017 Paris")+'</div>'+(cls?'<div class=\"rl\">SIREN 833 468 358</div>':'')+'</div><div class="co">francois.cesure@hemistiches.com<br>+33 6 47 88 80 25<br>+33 1 45 03 20 20<br><a href="https://www.hemistiches.com">www.hemistiches.com</a></div></div>'; }
+
+/* ---------- Rapport : même construction que Diapason, Unisson et Cadence (31 octobre 2026) ---------- */
+var NIV = {eleve:"élevé", modere:"modéré", limite:"limité"};
+function niveau(v){ return v>=70 ? "eleve" : (v>=40 ? "modere" : "limite"); }
+function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+function meter(v){ var n = Math.max(1, Math.round(v/20)), h = '<div class="meter" aria-hidden="true">'; for(var i=0;i<5;i++) h += '<i class="'+(i<n?'on':'')+'"></i>'; return h+'</div>'; }
+/* Trois indicateurs de 0 à 100, à partir des seuls drapeaux du test */
+function indicateurs(r){
+  var f = r.f, v = r.v;
+  function pts(m){ var s = 0; Object.keys(m).forEach(function(k){ if(f[k]) s += m[k]; }); return s; }
+  var base = pts({divA:100, prorogKO:90, prorogInc:70, modif:60, avant:50, classe:45, frontiere:45, prorogTodo:40, encours:30, legacy:25});
+  var expo = pts({urgent:80, mand:60, art16:50, verif:45, vig:45, srn:45, art16nsp:30, udi:25, art16b:20, divA:30, prorogKO:30});
+  if(v.dverif==="non") expo += 20; if(v.dproc==="non") expo += 20;
+  var chaine = pts({contrats:45, mand:40, art16:40, noneu:30, art16nsp:25, art16b:15, portef:15, data:10, ia:10});
+  if(v.contrats==="non" || v.dcontrats==="non") chaine += 20;
+  return {base:Math.min(100, base), expo:Math.min(100, expo), chaine:Math.min(100, chaine)};
+}
+var VERDICT = [
+  "Vos réponses ne font pas ressortir d'écart : l'enjeu est de tenir cette concordance dans la durée.",
+  "L'essentiel est en place ; certains points sont à vérifier avant de devenir des écarts.",
+  "Des éléments structurants manquent ou restent à qualifier : ils commandent la suite.",
+  "Au moins un point met en cause la base de votre mise sur le marché ou votre situation actuelle : il se traite en priorité."
+];
+function profilLabel(v){
+  if(v.role==="fab") return "Fabricant établi dans l'Union";
+  if(v.role==="noneu") return "Fabricant établi hors de l'Union";
+  if(v.role==="dist") return {dist:"Distributeur", imp:"Importateur", deux:"Distributeur et importateur"}[v.drole] || "Distributeur ou importateur";
+  return "";
+}
+/* Qualification de chaque point, comme dans Diapason */
+var KIND_GAP = {divA:1, prorogKO:1, mand:1, verif:1, vig:1, contrats:1, art16:1};
+function kindOf(k, v){
+  if(k==="urgent") return "Priorité";
+  if(KIND_GAP[k]) return "Manque déclaré";
+  if(k==="modif") return v.modif==="oui" ? "Manque déclaré" : "Point de méthode";
+  if(k==="srn") return (v.eudamed==="non" || v.deudamed==="non") ? "Manque déclaré" : "Point de méthode";
+  return "Point de méthode";
+}
+/* Prix court affiché en regard de chaque mission */
+function prixCourt(key, r){
+  return px({
+    situation:"{c} HT, puis devis", consultation:"{c} HT",
+    distrib: r.dcomplex ? "Sur devis" : "À partir de {dd} HT",
+    qualif: r.complex ? "Sur devis" : "À partir de {q} HT",
+    contrats:"À partir de {cc} HT",
+    acces: r.acomplex ? "Sur devis" : "À partir de {es} HT",
+    suivi:"{s1} HT par mois", couverture:"À partir de {cv} HT"
+  }[key]);
+}
+function prixEntree(key, r){
+  if(key==="situation" || key==="consultation") return V.c;
+  if(key==="distrib") return r.dcomplex ? 0 : V.dd;
+  if(key==="qualif") return r.complex ? 0 : V.q;
+  if(key==="contrats") return V.cc;
+  if(key==="acces") return r.acomplex ? 0 : V.es;
+  if(key==="couverture") return V.cv;
+  return 0;
+}
+function missions(r){
+  var m = r.cand.slice(0, 3);
+  if(r.lvl===0 && m.indexOf("suivi")<0) m.push("suivi");
+  if(r.assur.keys.length) m.push("couverture"); /* manque de couverture déclaré : étude du schéma */
+  return m;
+}
 
 function report(r){
-  var O = offer(r.main, r), html = "";
-  html += '<div class="report-head"><p class="label">Votre concordance</p><h3>'+esc(r.level.label)+'</h3>'+
-    '<p class="price">'+esc(O[0])+'<small>'+esc(O[2])+'</small></p>'+gauge(r.lvl)+'</div>';
+  var html = "", ind = indicateurs(r), M = missions(r);
+  var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
+  var prof = profilLabel(r.v);
+  html += '<div class="report-head"><p class="label">Votre résultat</p><h3>'+esc(r.level.label)+'</h3>'+
+    '<p class="price">'+esc(VERDICT[r.lvl])+'</p>'+
+    '<p class="meta" style="margin-top:22px">'+esc("Indicateurs de situation")+'</p>'+
+    '<div class="levels">'+
+      '<div class="lv"><b>'+esc("Base de mise sur le marché")+'</b><span>'+esc(cap(NIV[niveau(ind.base)]))+'</span>'+meter(ind.base)+'<p>'+esc("Certification, période de transition, qualification et classe du produit.")+'</p></div>'+
+      '<div class="lv"><b>'+esc("Exposition")+'</b><span>'+esc(cap(NIV[niveau(ind.expo)]))+'</span>'+meter(ind.expo)+'<p>'+esc("Ce qui se verrait lors d'un contrôle : EUDAMED, vérifications, vigilance.")+'</p></div>'+
+      '<div class="lv"><b>'+esc("Chaîne des opérateurs")+'</b><span>'+esc(cap(NIV[niveau(ind.chaine)]))+'</span>'+meter(ind.chaine)+'<p>'+esc("Rôles, mandataire et contrats entre fabricant, mandataire, importateur et distributeur.")+'</p></div>'+
+    '</div>'+
+    '<p class="meta">'+esc("Arrêté le "+today+(prof?" · "+prof:""))+'</p></div>';
 
-  html += '<div class="rsec"><h4>'+esc(r.prios.length===1?"Votre point de vigilance":"Vos points de vigilance")+'</h4><ul class="prio">';
-  if(!r.prios.length && r.assur.keys.length) html += '<li><b>'+esc("Aucun point critique déclaré sur la conformité du produit")+'</b><p>'+esc("Vos réponses, non vérifiées, ne font pas ressortir de difficulté immédiate sur le produit lui-même. Votre couverture financière appelle en revanche les points ci-dessous.")+'</p></li>';
-  else if(!r.prios.length) html += '<li><b>'+esc("Aucun point critique déclaré")+'</b><p>'+esc("Vos réponses, non vérifiées, ne font pas ressortir de difficulté immédiate. Elles ne permettent pas d'exclure une question de qualification, d'échéance ou de mise à jour documentaire : la réglementation évolue, et la réforme en cours le confirme.")+'</p></li>';
-  r.prios.forEach(function(k){ html += '<li><b>'+esc(P[k][0])+'</b><p>'+esc(P[k][1])+'</p></li>'; });
+  html += '<div class="rsec"><h4>Vos points de vigilance</h4><ul class="prio">';
+  if(!r.prios.length && r.assur.keys.length) html += '<li class="good"><span class="kind">Constat</span><b>'+esc("Aucun point critique déclaré sur la conformité du produit")+'</b><p>'+esc("Vos réponses, non vérifiées, ne font pas ressortir de difficulté immédiate sur le produit lui-même. Votre couverture financière appelle en revanche les points ci-dessous.")+'</p></li>';
+  else if(!r.prios.length) html += '<li class="good"><span class="kind">Constat</span><b>'+esc("Aucun point critique déclaré")+'</b><p>'+esc("Vos réponses, non vérifiées, ne font pas ressortir de difficulté immédiate. Elles ne permettent pas d'exclure une question de qualification, d'échéance ou de mise à jour documentaire : la réglementation évolue, et la réforme en cours le confirme.")+'</p></li>';
+  r.prios.forEach(function(k){ var kd = kindOf(k, r.v); html += '<li class="'+(kd==="Point de méthode"?'info':'gap')+'"><span class="kind">'+esc(kd)+'</span><b>'+esc(P[k][0])+'</b><p>'+esc(P[k][1])+'</p></li>'; });
+  html += '<li class="info"><span class="kind">Point de méthode</span><b>'+esc("Ce que ce résultat ne fait pas")+'</b><p>'+esc("Il n'établit ni la qualification ni la classe de votre produit : elles dépendent de la destination revendiquée, des allégations et des données cliniques, que des réponses fermées ne permettent pas d'apprécier. Il énonce les questions que soulève votre situation, pas leurs réponses.")+'</p></li>';
   html += '</ul></div>';
 
   if(r.dates.length){
@@ -1202,29 +1330,36 @@ function report(r){
 
   if(r.assur.asked){
     var ks = r.assur.keys.length ? r.assur.keys : ["ok"];
-    html += '<div class="rsec"><h4>'+esc(ASSUR_TITLE)+'</h4><ul class="prio">'+ks.map(function(k){ return '<li><b>'+esc(AP[k][0])+'</b><p>'+esc(AP[k][1])+'</p></li>'; }).join("")+'</ul><p class="compl">'+esc(ASSUR_SPLIT)+'</p><p class="compl">'+linkOn(esc(ASSUR_PARTNER))+'</p></div>';
+    html += '<div class="rsec"><h4>'+esc(ASSUR_TITLE)+'</h4><ul class="prio">'+ks.map(function(k){ return '<li class="'+(k==="ok"?'good':'gap')+'"><span class="kind">'+esc(k==="ok"?"Constat":"Point de vigilance")+'</span><b>'+esc(AP[k][0])+'</b><p>'+esc(AP[k][1])+'</p></li>'; }).join("")+'</ul><p class="compl">'+esc(ASSUR_SPLIT)+'</p><p class="compl">'+linkOn(esc(ASSUR_PARTNER))+'</p></div>';
   }
-  html += '<div class="rsec"><h4>Ce que je vous recommande</h4><div class="offer-reco"><h5>'+esc(O[0])+'</h5><p>'+esc(O[1])+'</p><p class="p">'+esc(O[2])+'</p></div>';
-  if(r.second){ var S = offer(r.second, r); html += '<div class="offer-reco"><h5>'+esc("Ensuite : "+S[0])+'</h5><p>'+esc(S[1])+'</p><p class="p">'+esc(S[2])+'</p></div>'; }
+
+  html += '<div class="rsec"><h4>Ce que je vous propose</h4><p class="compl">'+esc(M.length===1 ? "Une mission, à son prix." : "Des missions distinctes, chacune à son prix : vous n'engagez que celles dont vous avez besoin.")+'</p><ol class="parcours">'+
+    M.map(function(k){ var O = offer(k, r); return '<li><b>'+esc(O[0])+'</b><span class="pr">'+esc(prixCourt(k, r))+'</span><p>'+esc(O[1])+'</p><p class="hyp">'+esc(O[2])+'</p></li>'; }).join("")+'</ol>';
   html += '<p class="compl">'+esc("En cas d'accord, une convention d'honoraires signée fixe le périmètre et ses exclusions, le nombre de réunions et le prix ferme, confirmé après cadrage ; aucun supplément sans votre accord préalable. Elle est précédée d'une vérification des conflits d'intérêts.")+'</p>';
-  if(r.main!=="consultation" && r.main!=="situation") html += '<p class="compl">'+esc(px("Si vous préférez d'abord vérifier ce rapport sur votre situation réelle, la consultation d'orientation ({c} HT) le permet. Elle n'est pas obligatoire, et elle est déduite du forfait engagé dans les trente jours lorsqu'elle le prépare directement."))+'</p>';
+  if(M.indexOf("consultation")<0 && M.indexOf("situation")<0) html += '<p class="compl">'+esc(px("Si vous préférez commencer par en parler : consultation d'orientation, {c} HT, déduite d'un forfait engagé dans les trente jours. Elle reste facultative."))+'</p>';
   if(r.f.data) html += '<p class="compl">'+esc("Votre produit traite des données de santé : Diapason, l'offre de conformité RGPD d'Hémistiches, couvre ces traitements et la fonction de délégué à la protection des données.")+' <a class="linkbtn" href="https://diapason.hemistiches.com" target="_blank" rel="noopener">Diapason</a></p>';
-  html += '</div>';
 
-  html += '<div class="rsec"><h4>Ce que ce rapport ne fait pas</h4><p class="compare">'+esc("Il n'établit ni la qualification ni la classe de votre produit : elles dépendent de la destination revendiquée, des allégations et des données cliniques, que des réponses fermées ne permettent pas d'apprécier. Il énonce les questions que soulève votre situation, pas leurs réponses.")+'</p></div>';
+  var init = 0, mens = 0, devis = false;
+  M.forEach(function(k){ if(k==="suivi") mens = V.s1; else { var p = prixEntree(k, r); if(p) init += p; else devis = true; } });
+  html += '<div class="budget"><h5>'+esc("Ordre de grandeur, à confirmer")+'</h5><dl>'+
+    (init ? '<div><dt>'+esc(M.length>1?"Missions ponctuelles, à partir de":"Mission, à partir de")+'</dt><dd>'+esc(eur(init))+' HT</dd></div>' : '')+
+    (devis ? '<div><dt>'+esc("Missions sur devis")+'</dt><dd>'+esc("Sur devis")+'</dd></div>' : '')+
+    (mens ? '<div><dt>'+esc("Suivi réglementaire, par mois, à partir de")+'</dt><dd>'+esc(eur(mens))+' HT</dd></div>' : '')+
+    (mens ? '<div><dt>'+esc("Illustration sur douze mois")+'</dt><dd>'+esc(eur(init+12*mens))+' HT</dd></div>' : '')+
+    '</dl><p>'+esc((mens?"Douze mois complets, prix d'entrée : ce n'est ni une durée d'engagement, ni une somme due à la signature. ":"Prix d'entrée, sur les hypothèses indiquées. ")+
+      "Non compris : éléments sur devis"+(devis?" (signalés ci-dessus)":"")+", frais et honoraires de l'organisme notifié, mobilisation exceptionnelle en cas de contrôle ou d'incident.")+'</p></div>';
+  html += '<p class="compl">'+esc("Cette orientation est une estimation automatique : le périmètre et le prix sont confirmés lors d'un échange, puis dans une convention d'honoraires signée.")+'</p></div>';
 
-  html += '<div class="rsec no-print"><h4>Conserver ce rapport</h4><div class="keep"><p class="compare">'+esc("Enregistrez-le en PDF, ou envoyez-le dans votre propre messagerie. Il n'est conservé ni sur ce site ni par le cabinet.")+'</p>'+
-    '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Enregistrer en PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("Mon rapport Concordance")+'&body='+encodeURIComponent(summary(r))+'">'+esc("M'envoyer le rapport")+'</a></div></div></div>';
+  html += '<div class="rsec no-print"><h4>Conserver ce résultat</h4><div class="keep"><p class="compare">'+esc("Enregistrez-le en PDF, ou envoyez-le dans votre propre messagerie. Il n'est conservé ni sur ce site ni par le cabinet.")+'</p>'+
+    '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Enregistrer en PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("Mon résultat Concordance")+'&body='+encodeURIComponent(summary(r))+'">'+esc("M'envoyer le résultat")+'</a></div></div></div>';
 
-  html += '<div class="rsec"><h4>Échanger sur votre rapport</h4><p class="compare">'+esc("Pour une consultation ou une mission, écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
-    '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copier l'adresse")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : "+r.level.short)+'&body='+encodeURIComponent("Bonjour,\n\nJe souhaite échanger sur mon rapport Concordance.\n\n"+summary(r, true))+'">Écrire</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
+  html += '<div class="rsec no-print"><h4>Échanger sur votre résultat</h4><p class="compare">'+esc("Pour vérifier ce résultat sur votre situation réelle, écrivez-moi en indiquant votre niveau de concordance :")+'</p>'+
+    '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copier l'adresse")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance : "+r.level.short)+'&body='+encodeURIComponent("Bonjour,\n\nJe souhaite échanger sur mon résultat Concordance.\n\n"+summary(r, true))+'">Écrire</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
-  html += '<p class="notice">'+esc("Ce rapport est généré automatiquement à partir de vos seules réponses, sans vérification ni examen de pièces, et arrêté à la date de sa génération. Il constitue une information indicative et ne vaut ni consultation juridique ni avis. Les montants s'entendent hors taxes ; toute mission fait l'objet d'une convention d'honoraires et d'une vérification préalable des conflits d'intérêts.")+'</p>'+
-    '<p class="sources">'+esc("Sources : règlement (UE)\u00A02017/745, article 120, dans sa rédaction issue du règlement (UE) 2023/607 ; règlement (UE)\u00A02017/746, article 110, dans sa rédaction issue du règlement (UE) 2024/1860 ; décision (UE) 2025/2371 de la Commission (EUDAMED). La proposition de règlement COM(2025) 1023 du 16 décembre 2025, qui simplifie les deux règlements, n'est pas adoptée à ce jour : elle relève de l'anticipation, et les échéances ci-dessus s'appliquent tant qu'elle ne les modifie pas.")+'</p>'+
+  html += '<p class="notice">'+esc("Ce résultat est généré automatiquement à partir de vos seules réponses, sans vérification ni examen de pièces, et arrêté à la date de sa génération. Il constitue une information indicative et ne vaut ni consultation juridique ni avis. Les montants sont des prix d'entrée hors taxes, sur les hypothèses indiquées ; toute mission fait l'objet d'une convention d'honoraires précisant le périmètre et les modalités de détermination du prix, et d'une vérification préalable des conflits d'intérêts.")+'</p>'+
+    '<p class="sources">'+esc("Sources des obligations citées : règlement (UE) 2017/745, article 120, dans sa rédaction issue du règlement (UE) 2023/607 ; règlement (UE) 2017/746, article 110, dans sa rédaction issue du règlement (UE) 2024/1860 ; décision (UE) 2025/2371 de la Commission (EUDAMED). La proposition de règlement COM(2025) 1023 du 16 décembre 2025, qui simplifie les deux règlements, n'est pas adoptée à ce jour : elle relève de l'anticipation, et les échéances ci-dessus s'appliquent tant qu'elle ne les modifie pas.")+'</p>'+
     '<div class="dnav" style="justify-content:flex-start"><button type="button" class="linkbtn" id="restart">Refaire le test</button></div>';
-  var today = new Date().toLocaleDateString(LOCALE,{day:"numeric",month:"long",year:"numeric"});
-  html = '<div class="print-only print-head"><span class="ph-logo">'+(LOGO?'<img src="'+LOGO+'" alt="Hémistiches.">':'<b>Hémistiches.</b>')+'<i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Rapport établi le "+today)+'</span></div>'+carte('', "Votre interlocuteur")+html+carte(' end', "Pour échanger sur ce rapport")+
-    '<div class="print-only print-foot">'+esc("Mᵉ François Césure, avocat au barreau de Paris · Hémistiches, 33, avenue Mac-Mahon, 75017 Paris · francois.cesure@hemistiches.com · +33 6 47 88 80 25 · SIREN 833 468 358. Pré-analyse indicative, sous réserve de l'échange préalable et de la signature d'une convention d'honoraires.")+'</div>';
+  html = '<div class="print-only print-head"><span class="ph-logo">'+(LOGO?'<img src="'+LOGO+'" alt="Hémistiches.">':'<b>Hémistiches.</b>')+'<i aria-hidden="true"></i><span>Concordance</span></span><span>'+esc("Résultat établi le "+today)+'</span></div>'+carte('', "Votre interlocuteur")+html+carte(' end', "Pour échanger sur ce résultat");
   box.innerHTML = html;
   document.getElementById("pdf").onclick = function(){ try{ window.print(); }catch(e){} };
   document.getElementById("copy").onclick = function(){
@@ -1240,19 +1375,18 @@ function summary(r, pourMoi){
   L.push("Concordance, par Hémistiches");
   L.push("Conformité MDR et IVDR des dispositifs médicaux · concordance.hemistiches.com");
   L.push("");
-  L.push("Rapport du "+today);
+  L.push("Résultat du "+today);
   L.push("");
   L.push("Niveau de concordance : "+r.level.label.charAt(0).toLowerCase()+r.level.label.slice(1)+".");
   if(r.prios.length){ L.push(""); L.push("Points de vigilance"); r.prios.forEach(function(k){ L.push("– "+P[k][0]); }); }
   if(r.dates.length){ L.push(""); L.push("Échéances"); r.dates.forEach(function(d){ L.push("– "+d[0]+" : "+d[1]); }); }
   if(r.assur.asked){ L.push(""); L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join(" ; ") : AP.ok[0])+"."); }
-  L.push(""); L.push("Formule recommandée");
-  L.push("1. "+O[0]); L.push("   "+O[2]);
-  if(r.second){ var S2 = offer(r.second, r); L.push("2. Ensuite : "+S2[0]); L.push("   "+S2[2]); }
+  L.push(""); L.push("Ce que je vous propose");
+  missions(r).forEach(function(k, i){ var Oi = offer(k, r); L.push((i+1)+". "+Oi[0]+" : "+prixCourt(k, r)); });
   L.push("");
-  L.push("Le rapport complet (points de vigilance détaillés, échéances, contenu de la formule) s'enregistre en PDF depuis la page du résultat, bouton « Enregistrer en PDF ». Il peut être joint à ce message avant l'envoi.");
+  L.push("Le résultat complet (indicateurs, points de vigilance détaillés, échéances, missions proposées et ordre de grandeur) s'enregistre en PDF depuis la page du résultat, bouton « Enregistrer en PDF ». Il peut être joint à ce message avant l'envoi.");
   L.push("");
-  L.push("Pré-analyse indicative, établie à partir des seules réponses au test, sous réserve d'un échange préalable et de la signature d'une convention d'honoraires. Montants hors taxes.");
+  L.push("Orientation indicative, établie à partir des seules réponses au test, sous réserve d'un échange préalable et de la signature d'une convention d'honoraires. Montants hors taxes.");
   if(!pourMoi){
     L.push(""); L.push("————————————"); L.push("Votre interlocuteur"); L.push("");
     L.push("Mᵉ François Césure");
