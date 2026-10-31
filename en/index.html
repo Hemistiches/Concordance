@@ -1046,7 +1046,7 @@ var AP = {
   ok:["Coverage declared in place","Your answers do not reveal any gap. Reviewing the policy for each new product or market keeps coverage at the level of the obligation."]
 };
 var ASSUR_TITLE = "Your financial coverage";
-var ASSUR_SPLIT = "I can help you build the arrangement that will cover you: a study carried out with you, starting from the obligation that applies to your devices, the risks to be covered, your contracts and your markets, to settle what the coverage must guarantee. On quotation.";
+var ASSUR_SPLIT = "I can help you build the arrangement that will cover you: a study carried out with you, starting from the obligation that applies to your devices, the risks to be covered, your contracts and your markets, to settle what the coverage must guarantee (see “What I propose”).";
 var ASSUR_PARTNER = "Once the arrangement is settled, I can, if you wish, put you in touch with a broker specialising in medical devices, who turns it into a policy: amounts, exclusions, territories. I receive no remuneration from any broker, and you remain free to choose.";
 var ASSUR_SUM = "Financial coverage: ";
 var ORDER = ["urgent","divA","prorogKO","prorogInc","modif","prorogTodo","art16","mand","classe","frontiere","avant","encours","art16nsp","art16b","verif","vig","srn","udi","noneu","legacy","contrats","portef","ia","data"];
@@ -1193,6 +1193,7 @@ var OFFERS = {
   contrats:["Supply chain contracts","Your distribution, subcontracting or mandate agreements, checked against the allocation of obligations set by the Regulation: responsibilities, quality, vigilance, traceability, recalls. A single contract can be reviewed.","Targeted review of one contract: from {cc} excl. VAT. In-depth review with one negotiation round: from {ca} excl. VAT. Several related contracts: overall proposal on quote."],
   acces:["Entry into the EU market","For a manufacturer established outside the Union: the qualification of the product, the operators required and their roles, a roadmap and an indicative timeline, in English; then, if you wish, the legal organisation of the entry (specifications and review of the authorised representative's mandate).","Entry strategy: from {es} excl. VAT. Legal organisation of the entry: from {eo} excl. VAT in total, strategy included."],
   suivi:["Regulatory follow-up","Your concordance holds. To keep it that way: a lawyer you can reach for your day-to-day questions, and a watch specific to your product, within the time reserved each month.","Regular advice: {s1} excl. VAT per month for three hours. Advice and deadlines: {s2} excl. VAT per month for six hours, with your deadline calendar. No minimum term."],
+  couverture:["Financial coverage: designing the arrangement","A study carried out with you: the obligation that applies to your devices, the risks to be covered (markets, recalls, software), the commitments in your contracts; a note that settles what the coverage must guarantee and serves as the brief for the broker.","From {cv} excl. VAT for one product family and the main contracts. Several ranges, companies or countries, software as a medical device, or a clause-by-clause review of an existing policy: on quotation."],
   consultation:["Orientation consultation","Forty-five minutes to go through this result with you, against your actual situation, and decide on the next step; a summary of priorities by email.","{c} excl. VAT, deducted from a package engaged within thirty days where it directly prepares it."]
 };
 
@@ -1263,7 +1264,7 @@ function prixCourt(key, r){
     qualif: r.complex ? "On quotation" : "From {q} excl. VAT",
     contrats:"From {cc} excl. VAT",
     acces: r.acomplex ? "On quotation" : "From {es} excl. VAT",
-    suivi:"{s1} excl. VAT per month"
+    suivi:"{s1} excl. VAT per month", couverture:"From {cv} excl. VAT"
   }[key]);
 }
 function prixEntree(key, r){
@@ -1272,11 +1273,13 @@ function prixEntree(key, r){
   if(key==="qualif") return r.complex ? 0 : V.q;
   if(key==="contrats") return V.cc;
   if(key==="acces") return r.acomplex ? 0 : V.es;
+  if(key==="couverture") return V.cv;
   return 0;
 }
 function missions(r){
   var m = r.cand.slice(0, 3);
   if(r.lvl===0 && m.indexOf("suivi")<0) m.push("suivi");
+  if(r.assur.keys.length) m.push("couverture"); /* manque de couverture déclaré : étude du schéma */
   return m;
 }
 

@@ -1046,7 +1046,7 @@ var AP = {
   ok:["Couverture déclarée en place","Vos réponses ne font pas ressortir de lacune. Une revue de la police à chaque nouveau produit ou nouveau marché maintient la couverture au niveau de l'obligation."]
 };
 var ASSUR_TITLE = "Votre couverture financière";
-var ASSUR_SPLIT = "Je peux vous aider à bâtir le schéma qui vous couvrira : une étude conduite avec vous, à partir de l'obligation applicable à vos dispositifs, des risques à couvrir, de vos contrats et de vos marchés, pour arrêter ce que la couverture doit garantir. Sur devis.";
+var ASSUR_SPLIT = "Je peux vous aider à bâtir le schéma qui vous couvrira : une étude conduite avec vous, à partir de l'obligation applicable à vos dispositifs, des risques à couvrir, de vos contrats et de vos marchés, pour arrêter ce que la couverture doit garantir (voir « Ce que je vous propose »).";
 var ASSUR_PARTNER = "Le schéma arrêté, je peux, si vous le souhaitez, vous mettre en relation avec un courtier spécialisé dans les dispositifs médicaux, qui le traduit en police : montants, exclusions, territoires. Je ne perçois aucune rémunération d'un courtier, et vous restez libre de votre choix.";
 var ASSUR_SUM = "Couverture financière : ";
 var ORDER = ["urgent","divA","prorogKO","prorogInc","modif","prorogTodo","art16","mand","classe","frontiere","avant","encours","art16nsp","art16b","verif","vig","srn","udi","noneu","legacy","contrats","portef","ia","data"];
@@ -1193,6 +1193,7 @@ var OFFERS = {
   contrats:["Contrats de la chaîne","Vos contrats de distribution, de sous-traitance ou de mandat, vérifiés au regard de la répartition des obligations prévue par le règlement : responsabilités, qualité, vigilance, traçabilité, rappels. Un seul contrat peut être examiné.","Revue ciblée d'un contrat : à partir de {cc} HT. Revue approfondie avec un retour de négociation : à partir de {ca} HT. Plusieurs contrats liés : proposition globale sur devis."],
   acces:["Entrée sur le marché de l'Union","Pour un fabricant établi hors de l'Union : la qualification du produit, les opérateurs nécessaires et leurs rôles, une feuille de route et un calendrier indicatif, en anglais ; puis, si vous le souhaitez, l'organisation juridique de l'entrée (cahier des charges et revue du mandat du mandataire).","Stratégie d'entrée : à partir de {es} HT. Organisation juridique de l'entrée : à partir de {eo} HT au total, stratégie comprise."],
   suivi:["Suivi réglementaire","Votre concordance tient. Pour la tenir dans la durée : un avocat joignable pour vos questions courantes, et une veille propre à votre produit, dans le temps réservé chaque mois.","Conseil régulier : {s1} HT par mois pour trois heures. Conseil et échéances : {s2} HT par mois pour six heures, avec le calendrier de vos échéances. Sans engagement de durée."],
+  couverture:["Couverture financière : étude du schéma","Une étude conduite avec vous : l'obligation applicable à vos dispositifs, les risques à couvrir (marchés, rappels, logiciel), les engagements de vos contrats ; une note qui arrête ce que la couverture doit garantir et sert de cahier des charges au courtier.","À partir de {cv} HT pour une famille de produits et les contrats principaux. Plusieurs gammes, sociétés ou pays, logiciel dispositif médical ou analyse clause par clause d'une police existante : sur devis."],
   consultation:["Consultation d'orientation","Quarante-cinq minutes pour lire ce résultat avec vous, sur votre situation réelle, et décider de la suite ; une synthèse des priorités par courriel.","{c} HT, déduits du forfait engagé dans les trente jours lorsqu'elle le prépare directement."]
 };
 
@@ -1263,7 +1264,7 @@ function prixCourt(key, r){
     qualif: r.complex ? "Sur devis" : "À partir de {q} HT",
     contrats:"À partir de {cc} HT",
     acces: r.acomplex ? "Sur devis" : "À partir de {es} HT",
-    suivi:"{s1} HT par mois"
+    suivi:"{s1} HT par mois", couverture:"À partir de {cv} HT"
   }[key]);
 }
 function prixEntree(key, r){
@@ -1272,11 +1273,13 @@ function prixEntree(key, r){
   if(key==="qualif") return r.complex ? 0 : V.q;
   if(key==="contrats") return V.cc;
   if(key==="acces") return r.acomplex ? 0 : V.es;
+  if(key==="couverture") return V.cv;
   return 0;
 }
 function missions(r){
   var m = r.cand.slice(0, 3);
   if(r.lvl===0 && m.indexOf("suivi")<0) m.push("suivi");
+  if(r.assur.keys.length) m.push("couverture"); /* manque de couverture déclaré : étude du schéma */
   return m;
 }
 
