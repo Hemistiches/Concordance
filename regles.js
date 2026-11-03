@@ -8,13 +8,19 @@
   /* Tarifs HT, arrêtés par le cabinet le 27 octobre 2026. « aPartirDe » : prix d'entrée d'une situation simple ;
      au-delà des hypothèses décrites dans la page, devis arrêté avant toute intervention. */
   var TARIFS = {
-    version: "2026-11-03",
+    version: "2026-11-03-ai-act",
     consultation: { prix: 350, minutes: 45, deductionJours: 30 },
     qualification: { aPartirDe: 2000 },
     distribution: { diagnostic: 1200, miseEnRegle: 2500 },          // mise en règle : prix global, diagnostic compris
     contrats: { revueCiblee: 1200, revueApprofondie: 2000 },
     entree: { strategie: 3000, organisation: 6000 },                 // organisation : prix global, stratégie comprise
     couverture: { etude: 1200 },                                     // étude du schéma de couverture financière (31 octobre 2026)
+    aiAct: {
+      qualification: 2000,                                           // qualification du rôle et du niveau de risque
+      planConformite: 4500,                                          // diagnostic et plan d'actions AI Act
+      programmeArticule: 6500,                                       // programme juridique MDR/IVDR + AI Act
+      outilAnnuel: 1500                                               // abonnement Provacy, facturé directement par l'éditeur
+    },
     suivi: [
       { cle: "regulier",  prix: 490, heures: 3, premierRetourJoursOuvres: 2 },
       { cle: "echeances", prix: 990, heures: 6, premierRetourJoursOuvres: 1 }
@@ -52,6 +58,10 @@
       eo: TARIFS.entree.organisation,
       eoc: complementOrganisation(true),
       cv: TARIFS.couverture.etude,
+      aiq: TARIFS.aiAct.qualification,
+      aip: TARIFS.aiAct.planConformite,
+      aic: TARIFS.aiAct.programmeArticule,
+      aio: TARIFS.aiAct.outilAnnuel,
       s1: palier("regulier").prix,
       s2: palier("echeances").prix,
       dep: TARIFS.tauxDepassement
