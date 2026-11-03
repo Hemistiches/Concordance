@@ -15,7 +15,7 @@ Le calcul a été complété uniquement pour ces trois réponses nouvelles : les
   - `ai_role` — rôle réel dans la chaîne de l'IA ; articles 3, points 3 et 4, et 25 ;
   - `ai_qualif` — analyse du caractère haut risque ; article 6, paragraphe 1, et annexe I ;
   - `ai_prep` — état de préparation ; articles 4, 9 à 15, 17 et 26.
-- Ajout de points de vigilance et de deux échéances dans le rapport : article 4 applicable depuis le 2 février 2025 ; régime des systèmes à haut risque relevant de l'article 6, paragraphe 1, au plus tard le 2 août 2028.
+- Ajout de points de vigilance et de deux échéances dans le rapport : article 4 applicable depuis le 2 février 2025 ; régime des systèmes à haut risque relevant de l'article 6, paragraphe 1, à compter du 2 août 2028 (règlement (UE) 2026/1744).
 - Ajout de trois formules : « Qualification et rôle AI Act » (à partir de 2 000 € HT), « Plan de conformité AI Act » (à partir de 4 500 € HT), « Programme articulé MDR ou IVDR + AI Act » (à partir de 6 500 € HT).
 - Ajout de Provacy comme outil optionnel de pilotage de la conformité AI Act, au tarif préférentiel de 1 500 € HT par an facturé directement par l'éditeur, avec accompagnement juridique par Hémistiches dans le périmètre convenu.
 - Ajout des prix à la source unique `regles.js` et des orientations automatiques correspondantes dans le rapport.
@@ -41,3 +41,10 @@ Le calcul a été complété uniquement pour ces trois réponses nouvelles : les
 - Le test reste centré sur les fabricants, distributeurs et importateurs de dispositifs ; un déployeur de santé sans produit propre est orienté vers un échange direct. Décider ultérieurement si un parcours déployeur autonome présente un intérêt commercial suffisant.
 - Revoir les textes et les échéances AI Act au minimum tous les six mois et avant toute campagne commerciale importante.
 - Aucun déploiement n'a été effectué.
+
+## 3 novembre 2026 — relecture par Claude avant fusion
+
+- Échéances AI Act vérifiées : article 4 applicable depuis le 2 février 2025 (reformulé par le règlement (UE) 2026/1744) ; obligations des systèmes à haut risque de l'annexe I (article 6, paragraphe 1) applicables à compter du 2 août 2028.
+- Correction : « au plus tard le 2 août 2028 » remplacé par « à compter du 2 août 2028 » (FR et EN), la date étant celle de l'entrée en application et non une date limite.
+- Parité FR/EN des trois questions, du rapport et des formules contrôlée.
+- À confirmer par le cabinet avant fusion : tarif préférentiel Provacy convenu avec l'éditeur, absence de toute rémunération de l'éditeur.
