@@ -8,7 +8,7 @@
   /* Tarifs HT, arrêtés par le cabinet le 27 octobre 2026. « aPartirDe » : prix d'entrée d'une situation simple ;
      au-delà des hypothèses décrites dans la page, devis arrêté avant toute intervention. */
   var TARIFS = {
-    version: "2026-10-31",
+    version: "2026-11-03",
     consultation: { prix: 350, minutes: 45, deductionJours: 30 },
     qualification: { aPartirDe: 2000 },
     distribution: { diagnostic: 1200, miseEnRegle: 2500 },          // mise en règle : prix global, diagnostic compris
