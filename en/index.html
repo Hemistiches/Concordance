@@ -529,7 +529,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
     <div class="wrap">
       <h2 class="sec-h2" id="t-test">Where does your concordance stand?</h2>
       <p class="intro">About ten questions, depending on your role and your product. The path adapts: manufacturer established in or outside the Union, distributor or importer, medical device or in vitro diagnostic device. Three additional questions appear only if your product includes artificial intelligence.</p>
-      <p class="intro" id="assur-intro">At the end, you can choose to answer a few questions about your insurance. This section checks that you have provided for sufficient financial coverage of your liability, as the Regulation requires of manufacturers.</p>
+      <p class="intro" id="assur-intro">At the end, you can choose to answer a few questions about your insurance. This section checks that you have provided for sufficient financial coverage of your liability, as the Regulation requires of manufacturers. It is conducted in collaboration with <a class="ext" href="https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/" target="_blank" rel="noopener">Onlynnov</a>, a broker specialising in medical device insurance.</p>
       <div class="diagbox" id="diagbox" aria-live="polite"><noscript><p class="qhint">The test runs in your browser and requires JavaScript. You can also write directly to francois.cesure@hemistiches.com.</p></noscript></div>
     </div>
   </section>
@@ -615,7 +615,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <details class="more"><summary>The details</summary><div>
             <p><b>The starting price assumes</b> one product family, an existing or new policy and the main contracts.</p>
             <p><b>Included:</b> analysis of the financial coverage obligation (Article 10(16) of Regulation (EU) 2017/745; Article 10(15) of Regulation (EU) 2017/746), mapping of the risks to be covered, comparison with the commitments in your contracts, a note setting what the coverage must guarantee, and a feedback meeting.</p>
-            <p><b>On quotation:</b> several ranges, companies or countries, software as a medical device, a clause-by-clause review of an existing policy. Placing the insurance is the broker's role; an introduction is made at your request. I receive no remuneration from any broker, and you remain free to choose.</p>
+            <p><b>On quotation:</b> several ranges, companies or countries, software as a medical device, a clause-by-clause review of an existing policy. Placing the insurance is the broker's role; an introduction is made at your request, in particular to <a class="ext" href="https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/" target="_blank" rel="noopener">Onlynnov</a>, a broker specialising in medical devices with whom I collaborate. I receive no remuneration from any broker, and you remain free to choose.</p>
           </div></details>
         </article>
         <article id="offre-entree">
@@ -864,6 +864,8 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
 <script>
 (function(){
 "use strict";
+var ONLYNNOV_SITE = "https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/";
+var ONLYNNOV_AGENDA = "https://calendly.com/onlynnov/audit-medtech-biotech-pharma";
 var MODULE_ASSURANCE = true; /* volet facultatif « couverture financière » : false pour le retirer */
 var VERSION = "concordance-2026-11-03-en";
 var CONTACT = "francois.cesure@hemistiches.com";
@@ -879,7 +881,7 @@ function frDom(root){
   var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
   while((n = w.nextNode())){ var p = n.parentNode; if(p && /SCRIPT|STYLE|CODE/.test(p.nodeName)) continue; var t = fr(n.nodeValue); if(t !== n.nodeValue) n.nodeValue = t; }
 }
-function linkOn(h){ return h; }
+function linkOn(h, url){ return url ? h.replace("Onlynnov", '<a class="ext" href="'+url+'" target="_blank" rel="noopener">Onlynnov</a>') : h; }
 function esc(s){ return fr(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 /* ---------- Questions ---------- */
@@ -1130,7 +1132,7 @@ function compute(){
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
+  return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
 }
 
 var P = {
@@ -1174,7 +1176,11 @@ var AP = {
 };
 var ASSUR_TITLE = "Your financial coverage";
 var ASSUR_SPLIT = "I can help you build the arrangement that will cover you: a study carried out with you, starting from the obligation that applies to your devices, the risks to be covered, your contracts and your markets, to settle what the coverage must guarantee (see “What I propose”).";
-var ASSUR_PARTNER = "Once the arrangement is settled, I can, if you wish, put you in touch with a broker specialising in medical devices, who turns it into a policy: amounts, exclusions, territories. I receive no remuneration from any broker, and you remain free to choose.";
+var ASSUR_PARTNER = "Once the arrangement is settled, I can, if you wish, put you in touch with Onlynnov, a broker specialising in medical devices, who turns it into a policy: amounts, exclusions, territories.";
+var ASSUR_AGENDA = "Your policy may need adjusting? You can also speak with an expert from Onlynnov, our partner.";
+var ASSUR_INDEP = "Hémistiches and Onlynnov collaborate without any remuneration linked to introductions. You remain free to choose your insurer or broker.";
+var ASSUR_TXT_SITE = "Partner broker: Onlynnov, ";
+var ASSUR_TXT_AGENDA = "Adjusting your policy: speak with an expert from Onlynnov, our partner, ";
 var ASSUR_SUM = "Financial coverage: ";
 var ORDER = ["urgent","divA","prorogKO","prorogInc","modif","prorogTodo","art16","mand","classe","frontiere","avant","encours","aiQualif","aiRole","aiPrep","art16nsp","art16b","verif","vig","srn","udi","noneu","legacy","contrats","portef","ia","data"];
 function prios(f, v){
@@ -1448,7 +1454,7 @@ function report(r){
 
   if(r.assur.asked){
     var ks = r.assur.keys.length ? r.assur.keys : ["ok"];
-    html += '<div class="rsec"><h4>'+esc(ASSUR_TITLE)+'</h4><ul class="prio">'+ks.map(function(k){ return '<li class="'+(k==="ok"?'good':'gap')+'"><span class="kind">'+esc(k==="ok"?"Finding":"Point of attention")+'</span><b>'+esc(AP[k][0])+'</b><p>'+esc(AP[k][1])+'</p></li>'; }).join("")+'</ul><p class="compl">'+esc(ASSUR_SPLIT)+'</p><p class="compl">'+linkOn(esc(ASSUR_PARTNER))+'</p></div>';
+    html += '<div class="rsec"><h4>'+esc(ASSUR_TITLE)+'</h4><ul class="prio">'+ks.map(function(k){ return '<li class="'+(k==="ok"?'good':'gap')+'"><span class="kind">'+esc(k==="ok"?"Finding":"Point of attention")+'</span><b>'+esc(AP[k][0])+'</b><p>'+esc(AP[k][1])+'</p></li>'; }).join("")+'</ul><p class="compl">'+esc(ASSUR_SPLIT)+'</p><p class="compl">'+(r.assur.agenda ? linkOn(esc(ASSUR_AGENDA), ONLYNNOV_AGENDA) : linkOn(esc(ASSUR_PARTNER), ONLYNNOV_SITE))+'</p><p class="compl">'+esc(ASSUR_INDEP)+'</p></div>';
   }
 
   html += '<div class="rsec"><h4>What I propose</h4><p class="compl">'+esc(M.length===1 ? "One assignment, at its own price." : "Separate assignments, each at its own price: you only engage those you need.")+'</p><ol class="parcours">'+
@@ -1499,7 +1505,7 @@ function summary(r, pourMoi){
   L.push("Concordance level: "+r.level.label.charAt(0).toLowerCase()+r.level.label.slice(1)+".");
   if(r.prios.length){ L.push(""); L.push("Points of attention"); r.prios.forEach(function(k){ L.push("– "+P[k][0]); }); }
   if(r.dates.length){ L.push(""); L.push("Deadlines"); r.dates.forEach(function(d){ L.push("– "+d[0]+": "+d[1]); }); }
-  if(r.assur.asked){ L.push(""); L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join("; ") : AP.ok[0])+"."); }
+  if(r.assur.asked){ L.push(""); L.push(ASSUR_SUM+(r.assur.keys.length ? r.assur.keys.map(function(k){ return AP[k][0]; }).join("; ") : AP.ok[0])+"."); L.push(r.assur.agenda ? ASSUR_TXT_AGENDA+ONLYNNOV_AGENDA : ASSUR_TXT_SITE+ONLYNNOV_SITE); L.push(ASSUR_INDEP); }
   L.push(""); L.push("What I propose");
   missions(r).forEach(function(k, i){ var Oi = offer(k, r); L.push((i+1)+". "+Oi[0]+": "+prixCourt(k, r)); });
   L.push("");
