@@ -53,7 +53,7 @@ Le calcul a été complété uniquement pour ces trois réponses nouvelles : les
 
 Accord de Quentin de Mauroy (Onlynnov) du 5 novembre 2026 sur la présentation proposée le 4 novembre.
 
-- Introduction au test (`#assur-intro`) : le volet est présenté comme conduit en collaboration avec Onlynnov ; le nom renvoie vers la page dispositifs médicaux d'Onlynnov.
+- Introduction au test (`#assur-intro`) : le volet est présenté comme conduit en collaboration avec Onlynnov ; le nom renvoie vers la page dispositifs médicaux d'Onlynnov, suivi de la mention « Je ne perçois aucune rémunération d'Onlynnov ».
 - Carte « Couverture financière » (détail) : Onlynnov nommé comme courtier avec lequel le cabinet collabore, même lien.
 - Résultat, affichage conditionnel : l'étude du schéma reste toujours la première proposition.
   - Police déclarée en place (`a_rc` = `dm` ou `gen`) et montant non mis en cause : le nom Onlynnov renvoie vers leur agenda dédié (« Votre police devra peut-être être ajustée ? »).
