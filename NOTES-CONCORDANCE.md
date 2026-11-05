@@ -48,3 +48,18 @@ Le calcul a été complété uniquement pour ces trois réponses nouvelles : les
 - Correction : « au plus tard le 2 août 2028 » remplacé par « à compter du 2 août 2028 » (FR et EN), la date étant celle de l'entrée en application et non une date limite.
 - Parité FR/EN des trois questions, du rapport et des formules contrôlée.
 - À confirmer par le cabinet avant fusion : tarif préférentiel Provacy convenu avec l'éditeur, absence de toute rémunération de l'éditeur.
+
+## 5 novembre 2026 — partenariat Onlynnov (volet couverture financière)
+
+Accord de Quentin de Mauroy (Onlynnov) du 5 novembre 2026 sur la présentation proposée le 4 novembre.
+
+- Introduction au test (`#assur-intro`) : le volet est présenté comme conduit en collaboration avec Onlynnov ; le nom renvoie vers la page dispositifs médicaux d'Onlynnov.
+- Carte « Couverture financière » (détail) : Onlynnov nommé comme courtier avec lequel le cabinet collabore, même lien.
+- Résultat, affichage conditionnel : l'étude du schéma reste toujours la première proposition.
+  - Police déclarée en place (`a_rc` = `dm` ou `gen`) et montant non mis en cause : le nom Onlynnov renvoie vers leur agenda dédié (« Votre police devra peut-être être ajustée ? »).
+  - Pas de police, police inconnue ou montant de garantie à justifier : le nom renvoie vers leur site, dans la phrase de mise en relation après l'étude.
+- Mention d'indépendance sous chaque variante : collaboration sans aucune rémunération liée à la mise en relation, libre choix de l'assureur ou du courtier (article 10 du décret n° 2023-552 du 30 juin 2023 ; article 11.3 du RIN).
+- Résumé texte (message de transmission) : lien correspondant et mention d'indépendance.
+- Les deux adresses sont centralisées dans `ONLYNNOV_SITE` et `ONLYNNOV_AGENDA`, en tête du script de chaque page.
+
+Point ouvert : l'agenda Calendly s'intitule « audit medtech » ; à faire renommer si l'intitulé laisse penser qu'Onlynnov réalise l'évaluation.
