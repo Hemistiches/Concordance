@@ -452,7 +452,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   p,li{overflow-wrap:break-word;hyphens:manual}
 }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, by Hémistiches", "url": "https://concordance.hemistiches.com/en/", "inLanguage": "en", "description": "Concordance, by Hémistiches: the MDR and IVDR compliance test for medical devices. Seven to twelve questions on your product, your certificates and your deadlines, and an instant result.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, by Hémistiches", "url": "https://concordance.hemistiches.com/en/", "inLanguage": "en", "description": "Concordance, by Hémistiches: the MDR and IVDR compliance test for medical devices. Eight to sixteen questions on your product, your certificates and your deadlines, and an instant result.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Skip to content</a>
@@ -869,7 +869,7 @@ var ONLYNNOV_SITE = "https://onlynnov.com/assurance-par-secteur/dispositifs-medi
 var ONLYNNOV_AGENDA = "https://calendly.com/onlynnov/audit-medtech-biotech-pharma";
 var MODULE_ASSURANCE = true; /* volet facultatif « couverture financière » : false pour le retirer */
 var EUDAMED_ECHU = Date.now() >= Date.UTC(2026,10,27,23,0,0); /* registration deadline for devices already on the market (MDR, art. 123, § 3, e, issu du règlement (UE) 2024/1860) : 27 novembre 2026, Paris time */
-var VERSION = "concordance-2026-11-06-en";
+var VERSION = "concordance-2026-11-06b-en";
 var CONTACT = "francois.cesure@hemistiches.com";
 var LOCALE = "en-GB";
 function eur(n){ return "€" + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
@@ -997,6 +997,11 @@ var Q = {
     ["oui","Yes"],["non","No"],["nsp","I do not know"]]; }},
   a_contrats:{kicker:"Financial coverage", title:"Are your contracts (distribution, subcontracting, customers) aligned with your policy: certificates required, liability caps, guarantees requested?", opts:function(){ return [
     ["oui","Yes"],["partiel","In part"],["non","No, or I do not know"]]; }},
+  connecte:{kicker:"Connected devices", title:"Do your devices record data about their use and can they transmit it?", hint:"Measurements, operating logs, alerts: what the device records and can communicate, through a connection or an export.", opts:function(){ return [
+    ["oui_patient","Yes, including data that can be linked to a patient"],
+    ["oui_tech","Yes, technical data only"],
+    ["non","No"],
+    ["nsp","I don't know"]]; }},
   urgence:{kicker:"Current situation", title:"Are you facing a particular situation at the moment?", opts:function(){
     var o = [["non","No, none"],["autorite","An inspection or a request from an authority","ANSM or another competent authority"]];
     if(A.role!=="dist") o.push(["on","A refusal or reservations from a notified body"]);
@@ -1010,7 +1015,7 @@ function steps(){
   if(A.role==="dist"){
     s.push("drole","art16","dverif");
     if(A.drole && A.drole!=="dist") s.push("deudamed");
-    s.push("dcontrats","dproc","urgence");
+    s.push("dcontrats","dproc","connecte","urgence");
     assurSteps(s, true);
     return s;
   }
@@ -1018,7 +1023,7 @@ function steps(){
   if(A.statut==="legacy" && !(isDiv() && A.classe==="A")) s.push("prorog","modif");
   s.push("eudamed");
   if(A.role==="noneu") s.push("mandataire");
-  s.push("data");
+  s.push("data","connecte");
   if(A.data==="ia" || A.data==="deux") s.push("ai_role","ai_qualif","ai_prep");
   s.push("contrats","urgence");
   assurSteps(s, false);
@@ -1465,7 +1470,9 @@ function report(r){
     M.map(function(k){ var O = offer(k, r); return '<li><b>'+esc(O[0])+'</b><span class="pr">'+esc(prixCourt(k, r))+'</span><p>'+esc(O[1])+'</p><p class="hyp">'+esc(O[2])+'</p></li>'; }).join("")+'</ol>';
   html += '<p class="compl">'+esc("If we agree, a signed fee agreement sets the scope and its exclusions, the number of meetings and the firm price, confirmed after scoping; nothing extra without your prior agreement. It is preceded by a conflict-of-interest check.")+'</p>';
   if(M.indexOf("consultation")<0 && M.indexOf("situation")<0) html += '<p class="compl">'+esc(px("If you would rather start by talking it through: orientation consultation, {c} excl. VAT, deducted from a package engaged within thirty days. It remains optional."))+'</p>';
-  if(r.f.data) html += '<p class="compl">'+esc("Your product processes health data: Diapason, Hémistiches' GDPR compliance service, covers this processing and the data protection officer function.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';
+  /* Single cross-reference to Diapason: connected product (Data Act and health data), otherwise health data only. */
+  if(steps().indexOf("connecte")>-1 && A.connecte && A.connecte!=="non") html += '<p class="compl">'+esc("Your product generates data: also check the health data and Data Act side with the Diapason test.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';
+  else if(r.f.data) html += '<p class="compl">'+esc("Your product processes health data: Diapason, Hémistiches' GDPR compliance service, covers this processing and the data protection officer function.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';
   if(r.f.ia) html += '<p class="compl">'+esc(px("Your AI Act documentation and action-plan monitoring can be organised in Provacy, at the preferential rate of {aio} excl. VAT per year, invoiced directly by the provider. I help configure and populate it; you remain free to use another tool."))+' <a class="linkbtn" href="https://www.provacy.com/" target="_blank" rel="noopener">Provacy</a></p>';
 
   var init = 0, mens = 0, devis = false;
