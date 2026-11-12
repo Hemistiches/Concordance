@@ -190,7 +190,7 @@ h1,h2,h3,h4{margin:0;font-weight:300;line-height:1.1;letter-spacing:-0.01em;text
   @page{margin:16mm 14mm}
   :root{background:#fff}
   body{background:#fff;color:#000;font-size:11pt}
-  body::before,.skip,.top,.drawer,.contact,.hero,.cesure-s,.fonction-s,.formules-s,.conviction,.cadre-s,#test > .wrap > h2,#test > .wrap > .intro,.no-print,.dnav,.contactbox button,.contactbox a{display:none!important}
+  body::before,.skip,.top,.drawer,.contact,.hero,.cesure-s,.fonction-s,.formules-s,.conviction,.cadre-s,#test .sec-head,.no-print,.dnav,.contactbox button,.contactbox a{display:none!important}
   .test-s{padding:0}
   .wrap{padding:0!important;max-width:none}
   .diagbox{border:0;margin:0;padding:0;max-width:none}
@@ -469,6 +469,18 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .hero .lede{max-width:44ch}
   .hero .facts{column-gap:18px}
 }
+/* En-têtes de section en deux colonnes sur ordinateur : titre à gauche, texte à droite (12 novembre 2026) ; tablette et mobile inchangés */
+@media (min-width:1025px){
+  .sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);align-items:start}
+  .sec-head > .label{grid-column:1 / -1}
+  .sec-head > .sec-h2,.sec-head > .rules-h,.sec-head > .sub-h3{grid-column:1;margin-bottom:0;text-wrap:balance}
+  .sec-head > .sec-text{grid-column:2;padding-top:.5em}
+  .sec-head > .sec-text > .intro:first-child{margin-top:0}
+  .sec-head > .sec-text > .intro{max-width:62ch}
+  .sec-head.sub{margin-top:clamp(48px,6vw,80px)}
+  .sec-head.sub > .rules-h{margin-top:0}
+  .test-s .diagbox{max-width:none;margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px))}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, par Hémistiches", "url": "https://concordance.hemistiches.com/", "inLanguage": "fr", "description": "Concordance, par Hémistiches : le test de conformité MDR et IVDR des dispositifs médicaux. Huit à seize questions sur votre produit, vos certificats et vos échéances, et un résultat immédiat.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
@@ -547,17 +559,25 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
 
   <section class="test-s" id="test" aria-labelledby="t-test">
     <div class="wrap">
-      <h2 class="sec-h2" id="t-test">Où en est votre concordance ?</h2>
-      <p class="intro">Environ dix questions, selon votre rôle et votre produit. Le parcours s'adapte : fabricant établi dans l'Union ou hors de l'Union, distributeur ou importateur, dispositif médical ou de diagnostic in vitro. Trois questions supplémentaires apparaissent seulement si votre produit intègre une intelligence artificielle.</p>
-      <p class="intro" id="assur-intro">À la fin, vous pourrez répondre, si vous le souhaitez, à quelques questions sur votre assurance. Ce volet vérifie que vous avez prévu une couverture financière suffisante de votre responsabilité, comme le règlement l'exige du fabricant. Il est conduit en collaboration avec <a class="ext" href="https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/" target="_blank" rel="noopener">Onlynnov</a>, courtier spécialisé dans l'assurance des dispositifs médicaux. Je ne perçois aucune rémunération d'Onlynnov.</p>
+      <div class="sec-head">
+        <h2 class="sec-h2" id="t-test">Où en est votre concordance ?</h2>
+        <div class="sec-text">
+          <p class="intro">Environ dix questions, selon votre rôle et votre produit. Le parcours s'adapte : fabricant établi dans l'Union ou hors de l'Union, distributeur ou importateur, dispositif médical ou de diagnostic in vitro. Trois questions supplémentaires apparaissent seulement si votre produit intègre une intelligence artificielle.</p>
+          <p class="intro" id="assur-intro">À la fin, vous pourrez répondre, si vous le souhaitez, à quelques questions sur votre assurance. Ce volet vérifie que vous avez prévu une couverture financière suffisante de votre responsabilité, comme le règlement l'exige du fabricant. Il est conduit en collaboration avec <a class="ext" href="https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/" target="_blank" rel="noopener">Onlynnov</a>, courtier spécialisé dans l'assurance des dispositifs médicaux. Je ne perçois aucune rémunération d'Onlynnov.</p>
+        </div>
+      </div>
       <div class="diagbox" id="diagbox" aria-live="polite"><noscript><p class="qhint">Le test fonctionne dans votre navigateur et nécessite JavaScript. Vous pouvez aussi écrire directement à francois.cesure@hemistiches.com.</p></noscript></div>
     </div>
   </section>
 
   <section class="fonction-s" id="enjeux" aria-labelledby="t-enj">
     <div class="wrap">
-      <h2 class="sec-h2" id="t-enj">Ce qui se joue maintenant</h2>
-      <p class="intro">La conformité d'un dispositif médical se joue dans le dossier technique, mais aussi dans les textes : qualification, statuts, régimes transitoires, répartition des rôles. Le test passe en revue les six points ci-dessous, selon votre rôle.</p>
+      <div class="sec-head">
+        <h2 class="sec-h2" id="t-enj">Ce qui se joue maintenant</h2>
+        <div class="sec-text">
+          <p class="intro">La conformité d'un dispositif médical se joue dans le dossier technique, mais aussi dans les textes : qualification, statuts, régimes transitoires, répartition des rôles. Le test passe en revue les six points ci-dessous, selon votre rôle.</p>
+        </div>
+      </div>
       <ul class="fonctions">
         <li><b>Certificats de l'ancien régime</b><span>Fin de la transition le 31 décembre 2027 pour la classe III et les implantables de classe IIb, sauf exceptions, et le 31 décembre 2028 pour les autres dispositifs, sous conditions.</span></li>
         <li><b>Diagnostic in vitro</b><span>31 décembre 2027 pour la classe D, 2028 pour la classe C, 2029 pour la classe B et la classe A stérile. Pour ces deux dernières, la demande à l'organisme notifié doit être déposée au plus tard le 26 mai 2027.</span></li>
@@ -566,8 +586,12 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         <li><b>Rôles des opérateurs</b><span>Fabricant, mandataire, importateur, distributeur : chacun a ses obligations, et un distributeur peut devenir fabricant sans le savoir.</span></li>
         <li><b>La réforme en cours</b><span>La proposition de simplification du 16 décembre 2025 n'est pas adoptée. Jusqu'à son adoption, les règles et les échéances actuelles s'appliquent.</span></li>
       </ul>
-      <h3 class="rules-h">Intelligence artificielle en santé</h3>
-      <p class="intro">Lorsqu'un dispositif médical ou un dispositif de diagnostic in vitro intègre un système d'intelligence artificielle, le MDR ou l'IVDR et l'AI Act s'articulent. Le test part de votre produit et ajoute seulement trois questions si vous déclarez une IA.</p>
+      <div class="sec-head sub">
+        <h3 class="rules-h">Intelligence artificielle en santé</h3>
+        <div class="sec-text">
+          <p class="intro">Lorsqu'un dispositif médical ou un dispositif de diagnostic in vitro intègre un système d'intelligence artificielle, le MDR ou l'IVDR et l'AI Act s'articulent. Le test part de votre produit et ajoute seulement trois questions si vous déclarez une IA.</p>
+        </div>
+      </div>
       <ul class="fonctions">
         <li><b>Votre rôle</b><span>Fournisseur, déployeur, importateur ou distributeur : les obligations dépendent de ce que vous faites réellement du système, de votre nom sur le produit et des modifications que vous lui apportez.</span></li>
         <li><b>La qualification</b><span>Une IA liée à un produit réglementé n'est pas automatiquement à haut risque. Il faut notamment examiner sa fonction, la législation sectorielle applicable et la procédure d'évaluation de conformité.</span></li>
@@ -579,8 +603,12 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
 
   <section class="formules-s" id="formules" aria-labelledby="t-form">
     <div class="wrap">
-      <h2 class="sec-h2" id="t-form">Formules</h2>
-      <p class="intro">Dix formules, dont trois consacrées à l'AI Act, chacune à périmètre écrit. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
+      <div class="sec-head">
+        <h2 class="sec-h2" id="t-form">Formules</h2>
+        <div class="sec-text">
+          <p class="intro">Dix formules, dont trois consacrées à l'AI Act, chacune à périmètre écrit. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
+        </div>
+      </div>
       <div class="three">
         <article id="offre-consultation">
           <h3>Consultation d'orientation</h3>
@@ -664,8 +692,12 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         </article>
       </div>
 
-      <h3 class="rules-h">Formules AI Act pour les acteurs de santé</h3>
-      <p class="intro">Trois missions ciblées, selon que vous devez d'abord qualifier votre situation, organiser la conformité AI Act ou articuler celle-ci avec le MDR ou l'IVDR. Le travail déjà réglé est repris dans la mission suivante et n'est pas facturé deux fois.</p>
+      <div class="sec-head sub">
+        <h3 class="rules-h">Formules AI Act pour les acteurs de santé</h3>
+        <div class="sec-text">
+          <p class="intro">Trois missions ciblées, selon que vous devez d'abord qualifier votre situation, organiser la conformité AI Act ou articuler celle-ci avec le MDR ou l'IVDR. Le travail déjà réglé est repris dans la mission suivante et n'est pas facturé deux fois.</p>
+        </div>
+      </div>
       <div class="three">
         <article id="offre-ai-qualification">
           <h3>Qualification et rôle AI Act</h3>
