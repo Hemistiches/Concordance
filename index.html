@@ -1298,7 +1298,7 @@ function compute(){
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
+  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
 }
 
 var P = {
@@ -1508,7 +1508,7 @@ var OFFERS = {
 var QUALIF_COMPLEX = "Sur devis, selon la difficulté réelle : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, produit à la frontière, classe à établir ou transition à vérifier). Le prix d'entrée de {q} HT vaut pour un produit simple.";
 var DIST_COMPLEX = "Sur devis : vous cumulez les deux rôles, intervenez sur le produit (réétiquetage, reconditionnement) ou votre statut est à établir. Le diagnostic à {dd} HT vaut pour un seul rôle et une famille homogène de produits.";
 var ACCES_COMPLEX = "Sur devis, selon la difficulté réelle : votre situation sort du cas simple (gamme, logiciel, intelligence artificielle, produit à la frontière ou classe à établir). Le prix d'entrée de la stratégie, {es} HT, vaut pour un produit simple.";
-function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; return o.map(px); }
+function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; if(r.sansBesoinIdentifie) o[0] = "Facultatif : "+o[0]; return o.map(px); }
 
 function gauge(lvl){
   var h = '<div class="gauge" role="img" aria-label="'+esc("Niveau : "+LEVELS[lvl].short)+'">';
@@ -1625,7 +1625,7 @@ function report(r){
     html += '<div class="rsec"><h4>'+esc(ASSUR_TITLE)+'</h4><ul class="prio">'+ks.map(function(k){ return '<li class="'+(k==="ok"?'good':'gap')+'"><span class="kind">'+esc(k==="ok"?"Constat":"Point de vigilance")+'</span><b>'+esc(AP[k][0])+'</b><p>'+esc(AP[k][1])+'</p></li>'; }).join("")+'</ul><p class="compl">'+esc(r.assur.keys.length ? ASSUR_SPLIT : px(ASSUR_SPLIT_OK))+'</p><p class="compl">'+(r.assur.agenda ? linkOn(esc(ASSUR_AGENDA), ONLYNNOV_AGENDA) : linkOn(esc(ASSUR_PARTNER), ONLYNNOV_SITE))+'</p><p class="compl">'+esc(ASSUR_INDEP)+'</p></div>';
   }
 
-  html += '<div class="rsec"><h4>Ce que je vous propose</h4><p class="compl">'+esc(M.length===1 ? "Une mission, à son prix." : "Des missions distinctes, chacune à son prix : vous n'engagez que celles dont vous avez besoin.")+'</p><ol class="parcours">'+
+  html += '<div class="rsec"><h4>Ce que je vous propose</h4><p class="compl">'+esc(r.sansBesoinIdentifie ? "Vos réponses ne font pas ressortir de besoin d’intervention. Les prestations ci-dessous sont facultatives, si vous souhaitez une vérification sur pièces ou un suivi." : (M.length===1 ? "Une mission, à son prix." : "Des missions distinctes, chacune à son prix : vous n'engagez que celles dont vous avez besoin."))+'</p><ol class="parcours">'+
     M.map(function(k){ var O = offer(k, r); return '<li><b>'+esc(O[0])+'</b><span class="pr">'+esc(prixCourt(k, r))+'</span><p>'+esc(O[1])+'</p><p class="hyp">'+esc(O[2])+'</p></li>'; }).join("")+'</ol>';
   html += '<p class="compl">'+esc("En cas d'accord, une convention d'honoraires signée fixe le périmètre et ses exclusions, le nombre de réunions et le prix ferme, confirmé après cadrage ; aucun supplément sans votre accord préalable. Elle est précédée d'une vérification des conflits d'intérêts.")+'</p>';
   if(M.indexOf("consultation")<0 && M.indexOf("situation")<0) html += '<p class="compl">'+esc(px("Si vous préférez commencer par en parler : consultation d'orientation, {c} HT, déduite d'un forfait engagé dans les trente jours. Elle reste facultative."))+'</p>';
@@ -1634,6 +1634,7 @@ function report(r){
   else if(r.f.data) html += '<p class="compl">'+esc("Votre produit traite des données de santé : Diapason, l'offre de conformité RGPD d'Hémistiches, couvre ces traitements et la fonction de délégué à la protection des données.")+' <a class="linkbtn" href="https://diapason.hemistiches.com" target="_blank" rel="noopener">Diapason</a></p>';
   if(r.f.ia) html += '<p class="compl">'+esc(px("La documentation et le suivi du plan AI Act peuvent être organisés dans Provacy, au tarif préférentiel de {aio} HT par an, facturé directement par l'éditeur. Je vous accompagne dans son paramétrage et son renseignement ; vous restez libre d'utiliser un autre outil."))+' <a class="linkbtn" href="https://www.provacy.com/" target="_blank" rel="noopener">Provacy</a></p>';
 
+  if(!r.sansBesoinIdentifie){
   var init = 0, mens = 0, devis = false;
   M.forEach(function(k){ if(k==="suivi") mens = V.s1; else { var p = prixEntree(k, r); if(p) init += p; else devis = true; } });
   html += '<div class="budget"><h5>'+esc("Ordre de grandeur, à confirmer")+'</h5><dl>'+
@@ -1643,6 +1644,7 @@ function report(r){
     (mens ? '<div><dt>'+esc("Illustration sur douze mois")+'</dt><dd>'+esc(eur(init+12*mens))+' HT</dd></div>' : '')+
     '</dl><p>'+esc((mens?"Douze mois complets, prix d'entrée : ce n'est ni une durée d'engagement, ni une somme due à la signature. ":"Prix d'entrée, sur les hypothèses indiquées. ")+
       "Non compris : éléments sur devis"+(devis?" (signalés ci-dessus)":"")+", frais et honoraires de l'organisme notifié, mobilisation exceptionnelle en cas de contrôle ou d'incident.")+'</p></div>';
+  }
   html += '<p class="compl">'+esc("Cette orientation est une estimation automatique : le périmètre et le prix sont confirmés lors d'un échange, puis dans une convention d'honoraires signée.")+'</p></div>';
 
   html += '<div class="rsec no-print"><h4>Conserver ce résultat</h4><div class="keep"><p class="compare">'+esc("Enregistrez-le en PDF, ou envoyez-le dans votre propre messagerie. Il n'est conservé ni sur ce site ni par le cabinet.")+'</p>'+
