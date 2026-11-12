@@ -457,7 +457,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
 /* Accroche en deux hémistiches sur ordinateur, comme l’accueil d’Hémistiches (12 novembre 2026) ; tablette et mobile inchangés */
 .hero h1 .hemi{display:inline}
 .hero-side{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(22px,3vw,40px)}
-@media (min-width:1025px){
+@media (min-width:721px){
   .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);column-gap:clamp(28px,4vw,64px);row-gap:clamp(28px,3.4vw,48px);align-content:end}
   .hero .who{grid-column:1 / -1;margin-bottom:clamp(8px,2vw,32px)}
   .hero h1{grid-column:1 / -1;max-width:none;display:grid;grid-template-columns:subgrid;font-size:clamp(46px,5.2vw,76px);line-height:1.05}
@@ -470,7 +470,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .hero .facts{column-gap:18px}
 }
 /* En-têtes de section en deux colonnes sur ordinateur : titre à gauche, texte à droite (12 novembre 2026) ; tablette et mobile inchangés */
-@media (min-width:1025px){
+@media (min-width:721px){
   .sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);align-items:start}
   .sec-head > .label{grid-column:1 / -1}
   .sec-head > .sec-h2,.sec-head > .rules-h,.sec-head > .sub-h3{grid-column:1;margin-bottom:0;text-wrap:balance}
@@ -482,7 +482,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .test-s .diagbox{max-width:none;margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px))}
 }
 /* Outil de conformité sur ordinateur : titre en tête, présentation à gauche, quatre points sur deux colonnes à droite (12 novembre 2026) ; tablette et mobile inchangés */
-@media (min-width:1025px){
+@media (min-width:721px){
   .rules > li#outil-ai{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3.5fr) minmax(0,3.5fr);column-gap:clamp(24px,3vw,48px);row-gap:clamp(18px,2vw,28px);padding:clamp(24px,2.6vw,36px) 0 clamp(28px,3vw,44px)}
   .rules > li#outil-ai{grid-column:1 / -1}
   .rules > li#outil-ai > b{grid-column:1 / -1;grid-row:1}
@@ -495,7 +495,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .rules > li#outil-ai > span > b,.rules > li#outil-ai > span > .lab{display:block;color:var(--ink);font-style:normal;font-size:inherit;margin-bottom:4px}
 }
 /* Notes et questions fréquentes calées sur la colonne de droite sur ordinateur (12 novembre 2026) ; tablette et mobile inchangés */
-@media (min-width:1025px){
+@media (min-width:721px){
   .wrap > .cadre{margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px))}
   .faq-s .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);align-items:start}
   .faq-s .wrap > .sec-h2{grid-column:1;margin-bottom:0;text-wrap:balance}
@@ -507,7 +507,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .three:not(.duo):not(.one) > article:nth-child(n+4),.three.duo > article:nth-child(n+3){border-top:1px solid var(--rule)}
 }
 /* Grille commune sur ordinateur (12 novembre 2026) : titres et intitulés à gauche, texte courant à droite sur un même axe, grilles et tableaux en pleine largeur ; tablette et mobile inchangés */
-@media (min-width:1025px){
+@media (min-width:721px){
   .sec-head > .sec-text > .cadre:first-child{margin-top:0}
   .sec-head > .sec-text > .cadre{max-width:62ch}
   .wrap > .lab-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);margin-left:0;max-width:none}
@@ -531,19 +531,44 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .rules > li:last-child:nth-child(odd):not(#outil):not(#outil-ai) > b,.rules > li#brique-formation > b{grid-column:1}
   .rules > li:last-child:nth-child(odd):not(#outil):not(#outil-ai) > :not(b),.rules > li#brique-formation > :not(b){grid-column:2;margin-top:0}
 }
-@media (min-width:1025px){.sec-head > .sec-text > .cadre{max-width:none}}
-@media (min-width:1025px){
+@media (min-width:721px){.sec-head > .sec-text > .cadre{max-width:none}}
+@media (min-width:721px){
   .sec-head.sub > .sec-text{padding-top:.15em}
   .wrap > .note > p{font-size:17px;color:var(--mute)}
 }
 /* Intitulés plus marqués et aération des notes (12 novembre 2026) */
 .rules > li > b,.fonctions b,.eng b,.three h3,.two h3,.steps3 h3,.note h4,.creds strong,.lab-row > .lab-l,.rules > li > span > b,.rules > li > span > .lab{font-weight:500}
-@media (min-width:1025px){
+@media (min-width:721px){
   .lab-row .lab-p{display:none}
   .wrap > .cadre,.wrap > .lab-row,.wrap > .note{margin-top:clamp(30px,2.8vw,44px)}
   .wrap > .note > h4,.wrap > .lab-row > .lab-l{font-size:clamp(17px,1.4vw,19px);line-height:1.35}
   .wrap > .lab-row > .lab-t,.wrap > .cadre{line-height:1.7}
   .rules li{padding:24px 0}
+}
+/* Tablette (721 à 1024 px) : même grille que sur ordinateur, proportions resserrées (12 novembre 2026) */
+@media (min-width:721px) and (max-width:1024px){
+  .hero h1{font-size:clamp(30px,4.5vw,46px)}
+  .hero .facts{column-gap:14px}
+  .rules > li#outil,.rules > li#outil-ai{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .rules > li#outil > b,.rules > li#outil-ai > b{grid-row:1 / span 5}
+  .rules > li#outil > span:nth-of-type(n),.rules > li#outil-ai > span:nth-of-type(n){grid-column:2;grid-row:auto}
+}
+.three.one{grid-template-columns:minmax(0,1fr)}
+.three.one p{max-width:70ch}
+.three.one ul,.three.one details.more{max-width:760px}
+/* Offres en pleine largeur sur ordinateur : intitulé et prix à gauche, contenu à droite (12 novembre 2026) ; tablette et mobile inchangés */
+@media (min-width:721px){
+  .three.one > article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto 1fr;column-gap:clamp(28px,4vw,64px);row-gap:14px;padding-right:0}
+  .three.one > article > h3{grid-column:1;grid-row:1}
+  .three.one > article > .amount,.three.one > article > div:not(.one-body){grid-column:1;grid-row:2;align-self:start}
+  .three.one > article > .one-body{grid-column:2;grid-row:1 / span 2;display:flex;flex-direction:column;gap:14px;min-width:0}
+}
+@media (min-width:721px) and (max-width:1024px){
+  .conviction .twelve{align-items:start}
+  .conviction .portrait{grid-column:1 / span 4;max-width:none}
+  .conviction .quote{grid-column:5 / span 8;padding-left:clamp(8px,2vw,24px);gap:20px}
+  .conviction .quote blockquote{font-size:clamp(19px,2.7vw,26px)}
+  .conviction .creds{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, par Hémistiches", "url": "https://concordance.hemistiches.com/", "inLanguage": "fr", "description": "Concordance, par Hémistiches : le test de conformité MDR et IVDR des dispositifs médicaux. Huit à seize questions sur votre produit, vos certificats et vos échéances, et un résultat immédiat.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
@@ -742,17 +767,17 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           </div></details>
         </article>
       </div>
-      <div class="three">
+      <div class="three one">
         <article id="offre-suivi">
           <h3>Suivi réglementaire</h3>
-          <div><p class="from">Conseil régulier, trois heures par mois</p><p class="amount"><span data-p="s1">490 €</span> <small>HT par mois</small></p><p class="from">Conseil et échéances : six heures pour <span data-p="s2">990 €</span> HT par mois</p></div>
+          <div><p class="from">Conseil régulier, trois heures par mois</p><p class="amount"><span data-p="s1">490 €</span> <small>HT par mois</small></p><p class="from">Conseil et échéances : six heures pour <span data-p="s2">990 €</span> HT par mois</p></div><div class="one-body">
           <p>Un avocat joignable chaque mois pour vos questions réglementaires courantes.</p>
           <ul><li>Questions écrites ou téléphoniques, premier retour sous deux jours ouvrés</li><li>Veille propre à votre produit, dans le temps disponible</li><li>Conseil et échéances : calendrier tenu, point trimestriel, premier retour sous un jour ouvré</li></ul>
           <details class="more"><summary>Le détail</summary><div>
             <p><b>Conseil régulier.</b> Dans le temps disponible : questions courantes, analyses et orientations ponctuelles, réunions, veille propre à votre dossier et information ciblée sur les évolutions qui vous concernent.</p>
             <p><b>Conseil et échéances.</b> En plus : la tenue du calendrier des échéances connues sur le périmètre convenu, un point trimestriel et le suivi des actions prioritaires.</p>
             <p>Les règles communes aux deux formules sont détaillées ci-dessous.</p>
-          </div></details>
+          </div></details></div>
         </article>
       </div>
 
