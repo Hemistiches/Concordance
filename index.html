@@ -481,6 +481,31 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .sec-head.sub > .rules-h{margin-top:0}
   .test-s .diagbox{max-width:none;margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px))}
 }
+/* Outil de conformité sur ordinateur : titre en tête, présentation à gauche, quatre points sur deux colonnes à droite (12 novembre 2026) ; tablette et mobile inchangés */
+@media (min-width:1025px){
+  .rules > li#outil-ai{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3.5fr) minmax(0,3.5fr);column-gap:clamp(24px,3vw,48px);row-gap:clamp(18px,2vw,28px);padding:clamp(24px,2.6vw,36px) 0 clamp(28px,3vw,44px)}
+  .rules > li#outil-ai{grid-column:1 / -1}
+  .rules > li#outil-ai > b{grid-column:1 / -1;grid-row:1}
+  .rules > li#outil-ai > span{margin-top:0}
+  .rules > li#outil-ai > span:nth-of-type(1){grid-column:1;grid-row:2 / span 2;padding-right:clamp(0px,2vw,28px)}
+  .rules > li#outil-ai > span:nth-of-type(2){grid-column:2;grid-row:2}
+  .rules > li#outil-ai > span:nth-of-type(3){grid-column:3;grid-row:2}
+  .rules > li#outil-ai > span:nth-of-type(4){grid-column:2;grid-row:3}
+  .rules > li#outil-ai > span:nth-of-type(5){grid-column:3;grid-row:3}
+  .rules > li#outil-ai > span > b,.rules > li#outil-ai > span > .lab{display:block;color:var(--ink);font-style:normal;font-size:inherit;margin-bottom:4px}
+}
+/* Notes et questions fréquentes calées sur la colonne de droite sur ordinateur (12 novembre 2026) ; tablette et mobile inchangés */
+@media (min-width:1025px){
+  .wrap > .cadre{margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px))}
+  .faq-s .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);align-items:start}
+  .faq-s .wrap > .sec-h2{grid-column:1;margin-bottom:0;text-wrap:balance}
+  .faq-s .faq{grid-column:2;margin-top:0;max-width:none}
+}
+/* Grilles d'offres : pas de filet vertical en début de rangée, filet horizontal entre les rangées (12 novembre 2026) */
+@media (min-width:721px){
+  .three:not(.duo):not(.one) > article:nth-child(3n+1),.three.duo > article:nth-child(2n+1){padding-left:0;border-left:0}
+  .three:not(.duo):not(.one) > article:nth-child(n+4),.three.duo > article:nth-child(n+3){border-top:1px solid var(--rule)}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, par Hémistiches", "url": "https://concordance.hemistiches.com/", "inLanguage": "fr", "description": "Concordance, par Hémistiches : le test de conformité MDR et IVDR des dispositifs médicaux. Huit à seize questions sur votre produit, vos certificats et vos échéances, et un résultat immédiat.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
