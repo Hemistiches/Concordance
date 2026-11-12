@@ -536,6 +536,15 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .sec-head.sub > .sec-text{padding-top:.15em}
   .wrap > .note > p{font-size:17px;color:var(--mute)}
 }
+/* Intitulés plus marqués et aération des notes (12 novembre 2026) */
+.rules > li > b,.fonctions b,.eng b,.three h3,.two h3,.steps3 h3,.note h4,.creds strong,.lab-row > .lab-l,.rules > li > span > b,.rules > li > span > .lab{font-weight:500}
+@media (min-width:1025px){
+  .lab-row .lab-p{display:none}
+  .wrap > .cadre,.wrap > .lab-row,.wrap > .note{margin-top:clamp(30px,2.8vw,44px)}
+  .wrap > .note > h4,.wrap > .lab-row > .lab-l{font-size:clamp(17px,1.4vw,19px);line-height:1.35}
+  .wrap > .lab-row > .lab-t,.wrap > .cadre{line-height:1.7}
+  .rules li{padding:24px 0}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, by Hémistiches", "url": "https://concordance.hemistiches.com/en/", "inLanguage": "en", "description": "Concordance, by Hémistiches: the MDR and IVDR compliance test for medical devices. Eight to sixteen questions on your product, your certificates and your deadlines, and an instant result.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
@@ -803,7 +812,10 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         <li><b>Monthly hours</b><span>Unused hours are carried over to the following month, up to half the monthly volume and no more than three hours. Any overrun only takes place with your prior agreement, at <span data-p="dep">€180</span> excl. VAT per hour.</span></li>
         <li><b>Term</b><span>No minimum term, one month's notice.</span></li>
       </ul>
-      <p class="cadre">All amounts are exclusive of VAT. Each assignment is set out in a fee agreement signed before any work begins, after scoping and a conflict-of-interest check. It sets the scope and its exclusions, the number of meetings and rounds of comments, and the firm price; nothing extra is invoiced without your prior agreement. Work already paid for, a consultation, diagnostic, strategy or qualification, is carried into the next assignment and is not invoiced twice. Complex matters and ongoing situations (an inspection by an authority, reservations from a notified body, an incident, a dispute) are quoted. French VAT at 20% is added for clients established in France; for a business client established in another EU Member State, VAT is reverse-charged to the customer.</p>
+      <p class="cadre lab-row"><b class="lab-l">Fees and agreement<span class="lab-p">.</span></b> <span class="lab-t">All amounts are exclusive of VAT. Each assignment is set out in a fee agreement signed before any work begins, after scoping and a conflict-of-interest check. It sets the scope and its exclusions, the number of meetings and rounds of comments, and the firm price; nothing extra is invoiced without your prior agreement.</span></p>
+      <p class="cadre lab-row"><b class="lab-l">Work already paid for<span class="lab-p">.</span></b> <span class="lab-t">Work already paid for, a consultation, diagnostic, strategy or qualification, is carried into the next assignment and is not invoiced twice.</span></p>
+      <p class="cadre lab-row"><b class="lab-l">Complex matters<span class="lab-p">.</span></b> <span class="lab-t">Complex matters and ongoing situations (an inspection by an authority, reservations from a notified body, an incident, a dispute) are quoted.</span></p>
+      <p class="cadre lab-row"><b class="lab-l">VAT<span class="lab-p">.</span></b> <span class="lab-t">French VAT at 20% is added for clients established in France; for a business client established in another EU Member State, VAT is reverse-charged to the customer.</span></p>
     </div>
   </section>
 
