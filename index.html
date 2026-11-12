@@ -536,6 +536,15 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .sec-head.sub > .sec-text{padding-top:.15em}
   .wrap > .note > p{font-size:17px;color:var(--mute)}
 }
+/* Intitulés plus marqués et aération des notes (12 novembre 2026) */
+.rules > li > b,.fonctions b,.eng b,.three h3,.two h3,.steps3 h3,.note h4,.creds strong,.lab-row > .lab-l,.rules > li > span > b,.rules > li > span > .lab{font-weight:500}
+@media (min-width:1025px){
+  .lab-row .lab-p{display:none}
+  .wrap > .cadre,.wrap > .lab-row,.wrap > .note{margin-top:clamp(30px,2.8vw,44px)}
+  .wrap > .note > h4,.wrap > .lab-row > .lab-l{font-size:clamp(17px,1.4vw,19px);line-height:1.35}
+  .wrap > .lab-row > .lab-t,.wrap > .cadre{line-height:1.7}
+  .rules li{padding:24px 0}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, par Hémistiches", "url": "https://concordance.hemistiches.com/", "inLanguage": "fr", "description": "Concordance, par Hémistiches : le test de conformité MDR et IVDR des dispositifs médicaux. Huit à seize questions sur votre produit, vos certificats et vos échéances, et un résultat immédiat.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
@@ -803,7 +812,10 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         <li><b>Heures du mois</b><span>Les heures non utilisées sont reportées sur le mois suivant, dans la limite de la moitié du volume mensuel, sans dépasser trois heures. Un dépassement n'a lieu qu'après votre accord préalable, à <span data-p="dep">180 €</span> HT de l'heure.</span></li>
         <li><b>Durée</b><span>Sans engagement de durée, avec un mois de préavis.</span></li>
       </ul>
-      <p class="cadre">Tous les montants s'entendent hors taxes. Chaque mission fait l'objet d'une convention d'honoraires signée avant toute intervention, après un cadrage et une vérification des conflits d'intérêts. Elle fixe le périmètre et ses exclusions, le nombre de réunions et de tours de commentaires, et le prix ferme ; aucun supplément n'est facturé sans votre accord préalable. Un travail déjà réglé, consultation, diagnostic, stratégie ou qualification, est repris dans la mission suivante et n'est pas facturé deux fois. Les dossiers complexes et les situations en cours (contrôle d'une autorité, réserves d'un organisme notifié, incident, différend) font l'objet d'un devis. La TVA au taux de 20 % s'ajoute pour les clients établis en France ; pour un client professionnel établi dans un autre État membre de l'Union, elle est autoliquidée par le preneur.</p>
+      <p class="cadre lab-row"><b class="lab-l">Prix et convention<span class="lab-p">.</span></b> <span class="lab-t">Tous les montants s'entendent hors taxes. Chaque mission fait l'objet d'une convention d'honoraires signée avant toute intervention, après un cadrage et une vérification des conflits d'intérêts. Elle fixe le périmètre et ses exclusions, le nombre de réunions et de tours de commentaires, et le prix ferme ; aucun supplément n'est facturé sans votre accord préalable.</span></p>
+      <p class="cadre lab-row"><b class="lab-l">Travail déjà réglé<span class="lab-p">.</span></b> <span class="lab-t">Un travail déjà réglé, consultation, diagnostic, stratégie ou qualification, est repris dans la mission suivante et n'est pas facturé deux fois.</span></p>
+      <p class="cadre lab-row"><b class="lab-l">Dossiers complexes<span class="lab-p">.</span></b> <span class="lab-t">Les dossiers complexes et les situations en cours (contrôle d'une autorité, réserves d'un organisme notifié, incident, différend) font l'objet d'un devis.</span></p>
+      <p class="cadre lab-row"><b class="lab-l">TVA<span class="lab-p">.</span></b> <span class="lab-t">La TVA au taux de 20 % s'ajoute pour les clients établis en France ; pour un client professionnel établi dans un autre État membre de l'Union, elle est autoliquidée par le preneur.</span></p>
     </div>
   </section>
 
