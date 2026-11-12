@@ -695,7 +695,6 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <div class="sec-head">
         <h2 class="sec-h2" id="t-form">Services</h2>
         <div class="sec-text">
-          <p class="cadre"><strong>A defined deliverable for your need.</strong> To make a decision: a reasoned qualification or strategy. To organise compliance: the matrices, clauses or documents specified in the service. To monitor actions over time: a separate subscription. I prepare the agreed legal deliverables and explain how to use them. Technical implementation and certification remain outside the scope described here; any additional support is quoted separately.</p>
           <p class="intro">Ten services, including three dedicated to the AI Act, each with a written scope. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
         </div>
       </div>
@@ -1284,7 +1283,7 @@ function compute(){
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
+  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), dates:dates(f, v)};
 }
 
 var P = {
@@ -1494,7 +1493,7 @@ var OFFERS = {
 var QUALIF_COMPLEX = "Quoted according to the actual difficulty: your situation goes beyond the simple case (product range, software, artificial intelligence, borderline product, class to be established or transition to be checked). The starting price of {q} excl. VAT applies to a simple product.";
 var DIST_COMPLEX = "Quoted: you combine both roles, work on the product (relabelling, repackaging) or your status has to be established. The {dd} diagnostic applies to a single role and a homogeneous product family.";
 var ACCES_COMPLEX = "Quoted according to the actual difficulty: your situation goes beyond the simple case (product range, software, artificial intelligence, borderline product or class to be established). The starting price of the strategy, {es} excl. VAT, applies to a simple product.";
-function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; return o.map(px); }
+function offer(key, r){ var o = OFFERS[key].slice(); if(key==="qualif" && r.complex) o[2] = QUALIF_COMPLEX; if(key==="distrib" && r.dcomplex) o[2] = DIST_COMPLEX; if(key==="acces" && r.acomplex) o[2] = ACCES_COMPLEX; if(r.sansBesoinIdentifie) o[0] = "Optional: "+o[0]; return o.map(px); }
 
 function gauge(lvl){
   var h = '<div class="gauge" role="img" aria-label="'+esc("Level: "+LEVELS[lvl].short)+'">';
@@ -1611,7 +1610,7 @@ function report(r){
     html += '<div class="rsec"><h4>'+esc(ASSUR_TITLE)+'</h4><ul class="prio">'+ks.map(function(k){ return '<li class="'+(k==="ok"?'good':'gap')+'"><span class="kind">'+esc(k==="ok"?"Finding":"Point of attention")+'</span><b>'+esc(AP[k][0])+'</b><p>'+esc(AP[k][1])+'</p></li>'; }).join("")+'</ul><p class="compl">'+esc(r.assur.keys.length ? ASSUR_SPLIT : px(ASSUR_SPLIT_OK))+'</p><p class="compl">'+(r.assur.agenda ? linkOn(esc(ASSUR_AGENDA), ONLYNNOV_AGENDA) : linkOn(esc(ASSUR_PARTNER), ONLYNNOV_SITE))+'</p><p class="compl">'+esc(ASSUR_INDEP)+'</p></div>';
   }
 
-  html += '<div class="rsec"><h4>What I propose</h4><p class="compl">'+esc(M.length===1 ? "One assignment, at its own price." : "Separate assignments, each at its own price: you only engage those you need.")+'</p><ol class="parcours">'+
+  html += '<div class="rsec"><h4>What I propose</h4><p class="compl">'+esc(r.sansBesoinIdentifie ? "Your answers do not identify a need for an assignment. The services below are optional, if you would like a document review or ongoing support." : (M.length===1 ? "One assignment, at its own price." : "Separate assignments, each at its own price: you only engage those you need."))+'</p><ol class="parcours">'+
     M.map(function(k){ var O = offer(k, r); return '<li><b>'+esc(O[0])+'</b><span class="pr">'+esc(prixCourt(k, r))+'</span><p>'+esc(O[1])+'</p><p class="hyp">'+esc(O[2])+'</p></li>'; }).join("")+'</ol>';
   html += '<p class="compl">'+esc("If we agree, a signed fee agreement sets the scope and its exclusions, the number of meetings and the firm price, confirmed after scoping; nothing extra without your prior agreement. It is preceded by a conflict-of-interest check.")+'</p>';
   if(M.indexOf("consultation")<0 && M.indexOf("situation")<0) html += '<p class="compl">'+esc(px("If you would rather start by talking it through: orientation consultation, {c} excl. VAT, deducted from a package engaged within thirty days. It remains optional."))+'</p>';
@@ -1620,6 +1619,7 @@ function report(r){
   else if(r.f.data) html += '<p class="compl">'+esc("Your product processes health data: Diapason, Hémistiches' GDPR compliance service, covers this processing and the data protection officer function.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';
   if(r.f.ia) html += '<p class="compl">'+esc(px("Your AI Act documentation and action-plan monitoring can be organised in Provacy, at the preferential rate of {aio} excl. VAT per year, invoiced directly by the provider. I help configure and populate it; you remain free to use another tool."))+' <a class="linkbtn" href="https://www.provacy.com/" target="_blank" rel="noopener">Provacy</a></p>';
 
+  if(!r.sansBesoinIdentifie){
   var init = 0, mens = 0, devis = false;
   M.forEach(function(k){ if(k==="suivi") mens = V.s1; else { var p = prixEntree(k, r); if(p) init += p; else devis = true; } });
   html += '<div class="budget"><h5>'+esc("Order of magnitude, to be confirmed")+'</h5><dl>'+
@@ -1629,6 +1629,7 @@ function report(r){
     (mens ? '<div><dt>'+esc("Illustration over twelve months")+'</dt><dd>'+esc(eur(init+12*mens))+' excl. VAT</dd></div>' : '')+
     '</dl><p>'+esc((mens?"Twelve full months, entry prices: this is neither a commitment period nor an amount due on signature. ":"Entry prices, on the assumptions stated. ")+
       "Not included: items on quotation"+(devis?" (flagged above)":"")+", fees and charges of the notified body, exceptional work in the event of an inspection or incident.")+'</p></div>';
+  }
   html += '<p class="compl">'+esc("This orientation is an automatic estimate: the scope and the price are confirmed in a conversation, then in a signed fee agreement.")+'</p></div>';
 
   html += '<div class="rsec no-print"><h4>Keep this result</h4><div class="keep"><p class="compare">'+esc("Save it as a PDF, or send it to your own mailbox. It is kept neither on this site nor by the firm.")+'</p>'+
