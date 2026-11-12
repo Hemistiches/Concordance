@@ -190,7 +190,7 @@ h1,h2,h3,h4{margin:0;font-weight:300;line-height:1.1;letter-spacing:-0.01em;text
   @page{margin:16mm 14mm}
   :root{background:#fff}
   body{background:#fff;color:#000;font-size:11pt}
-  body::before,.skip,.top,.drawer,.contact,.hero,.cesure-s,.fonction-s,.formules-s,.conviction,.cadre-s,#test > .wrap > h2,#test > .wrap > .intro,.no-print,.dnav,.contactbox button,.contactbox a{display:none!important}
+  body::before,.skip,.top,.drawer,.contact,.hero,.cesure-s,.fonction-s,.formules-s,.conviction,.cadre-s,#test .sec-head,.no-print,.dnav,.contactbox button,.contactbox a{display:none!important}
   .test-s{padding:0}
   .wrap{padding:0!important;max-width:none}
   .diagbox{border:0;margin:0;padding:0;max-width:none}
@@ -469,6 +469,18 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .hero .lede{max-width:44ch}
   .hero .facts{column-gap:18px}
 }
+/* En-têtes de section en deux colonnes sur ordinateur : titre à gauche, texte à droite (12 novembre 2026) ; tablette et mobile inchangés */
+@media (min-width:1025px){
+  .sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);align-items:start}
+  .sec-head > .label{grid-column:1 / -1}
+  .sec-head > .sec-h2,.sec-head > .rules-h,.sec-head > .sub-h3{grid-column:1;margin-bottom:0;text-wrap:balance}
+  .sec-head > .sec-text{grid-column:2;padding-top:.5em}
+  .sec-head > .sec-text > .intro:first-child{margin-top:0}
+  .sec-head > .sec-text > .intro{max-width:62ch}
+  .sec-head.sub{margin-top:clamp(48px,6vw,80px)}
+  .sec-head.sub > .rules-h{margin-top:0}
+  .test-s .diagbox{max-width:none;margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px))}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, by Hémistiches", "url": "https://concordance.hemistiches.com/en/", "inLanguage": "en", "description": "Concordance, by Hémistiches: the MDR and IVDR compliance test for medical devices. Eight to sixteen questions on your product, your certificates and your deadlines, and an instant result.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
@@ -547,17 +559,25 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
 
   <section class="test-s" id="test" aria-labelledby="t-test">
     <div class="wrap">
-      <h2 class="sec-h2" id="t-test">Where does your concordance stand?</h2>
-      <p class="intro">About ten questions, depending on your role and your product. The path adapts: manufacturer established in or outside the Union, distributor or importer, medical device or in vitro diagnostic device. Three additional questions appear only if your product includes artificial intelligence.</p>
-      <p class="intro" id="assur-intro">At the end, you can choose to answer a few questions about your insurance. This section checks that you have provided for sufficient financial coverage of your liability, as the Regulation requires of manufacturers. It is conducted in collaboration with <a class="ext" href="https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/" target="_blank" rel="noopener">Onlynnov</a>, a broker specialising in medical device insurance. I receive no remuneration from Onlynnov.</p>
+      <div class="sec-head">
+        <h2 class="sec-h2" id="t-test">Where does your concordance stand?</h2>
+        <div class="sec-text">
+          <p class="intro">About ten questions, depending on your role and your product. The path adapts: manufacturer established in or outside the Union, distributor or importer, medical device or in vitro diagnostic device. Three additional questions appear only if your product includes artificial intelligence.</p>
+          <p class="intro" id="assur-intro">At the end, you can choose to answer a few questions about your insurance. This section checks that you have provided for sufficient financial coverage of your liability, as the Regulation requires of manufacturers. It is conducted in collaboration with <a class="ext" href="https://onlynnov.com/assurance-par-secteur/dispositifs-medicaux/" target="_blank" rel="noopener">Onlynnov</a>, a broker specialising in medical device insurance. I receive no remuneration from Onlynnov.</p>
+        </div>
+      </div>
       <div class="diagbox" id="diagbox" aria-live="polite"><noscript><p class="qhint">The test runs in your browser and requires JavaScript. You can also write directly to francois.cesure@hemistiches.com.</p></noscript></div>
     </div>
   </section>
 
   <section class="fonction-s" id="enjeux" aria-labelledby="t-enj">
     <div class="wrap">
-      <h2 class="sec-h2" id="t-enj">What is at stake now</h2>
-      <p class="intro">Medical device compliance is won in the technical file, but also in the texts: qualification, status, transitional regimes, allocation of roles. The test reviews the six points below, according to your role.</p>
+      <div class="sec-head">
+        <h2 class="sec-h2" id="t-enj">What is at stake now</h2>
+        <div class="sec-text">
+          <p class="intro">Medical device compliance is won in the technical file, but also in the texts: qualification, status, transitional regimes, allocation of roles. The test reviews the six points below, according to your role.</p>
+        </div>
+      </div>
       <ul class="fonctions">
         <li><b>Legacy certificates</b><span>The transition ends on 31 December 2027 for class III and class IIb implantable devices, with exceptions, and on 31 December 2028 for other devices, subject to conditions.</span></li>
         <li><b>In vitro diagnostics</b><span>31 December 2027 for class D, 2028 for class C, 2029 for class B and class A sterile. For the last two, the application to the notified body must be lodged by 26 May 2027 at the latest.</span></li>
@@ -566,8 +586,12 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         <li><b>Operators' roles</b><span>Manufacturer, authorised representative, importer, distributor: each has its own obligations, and a distributor can become a manufacturer without knowing it.</span></li>
         <li><b>The reform under way</b><span>The simplification proposal of 16 December 2025 has not been adopted. Until it is, the current rules and deadlines apply.</span></li>
       </ul>
-      <h3 class="rules-h">Artificial intelligence in healthcare</h3>
-      <p class="intro">When a medical device or an in vitro diagnostic medical device incorporates an artificial intelligence system, the MDR or IVDR and the AI Act interact. The test starts from your product and adds only three questions if you report AI.</p>
+      <div class="sec-head sub">
+        <h3 class="rules-h">Artificial intelligence in healthcare</h3>
+        <div class="sec-text">
+          <p class="intro">When a medical device or an in vitro diagnostic medical device incorporates an artificial intelligence system, the MDR or IVDR and the AI Act interact. The test starts from your product and adds only three questions if you report AI.</p>
+        </div>
+      </div>
       <ul class="fonctions">
         <li><b>Your role</b><span>Provider, deployer, importer or distributor: obligations depend on what you actually do with the system, whose name appears on the product and any modifications you make.</span></li>
         <li><b>Classification</b><span>AI linked to a regulated product is not automatically high-risk. Its function, the applicable sectoral legislation and the conformity assessment procedure must in particular be examined.</span></li>
@@ -579,8 +603,12 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
 
   <section class="formules-s" id="formules" aria-labelledby="t-form">
     <div class="wrap">
-      <h2 class="sec-h2" id="t-form">Services</h2>
-      <p class="intro">Ten services, including three dedicated to the AI Act, each with a written scope. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
+      <div class="sec-head">
+        <h2 class="sec-h2" id="t-form">Services</h2>
+        <div class="sec-text">
+          <p class="intro">Ten services, including three dedicated to the AI Act, each with a written scope. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
+        </div>
+      </div>
       <div class="three">
         <article id="offre-consultation">
           <h3>Orientation consultation</h3>
@@ -664,8 +692,12 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         </article>
       </div>
 
-      <h3 class="rules-h">AI Act services for healthcare organisations</h3>
-      <p class="intro">Three targeted assignments, depending on whether you first need to classify your situation, organise AI Act compliance or coordinate it with the MDR or IVDR. Work already paid for is carried into the next assignment and is not invoiced twice.</p>
+      <div class="sec-head sub">
+        <h3 class="rules-h">AI Act services for healthcare organisations</h3>
+        <div class="sec-text">
+          <p class="intro">Three targeted assignments, depending on whether you first need to classify your situation, organise AI Act compliance or coordinate it with the MDR or IVDR. Work already paid for is carried into the next assignment and is not invoiced twice.</p>
+        </div>
+      </div>
       <div class="three">
         <article id="offre-ai-qualification">
           <h3>AI Act classification and role</h3>
