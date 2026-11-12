@@ -506,6 +506,36 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
   .three:not(.duo):not(.one) > article:nth-child(3n+1),.three.duo > article:nth-child(2n+1){padding-left:0;border-left:0}
   .three:not(.duo):not(.one) > article:nth-child(n+4),.three.duo > article:nth-child(n+3){border-top:1px solid var(--rule)}
 }
+/* Grille commune sur ordinateur (12 novembre 2026) : titres et intitulés à gauche, texte courant à droite sur un même axe, grilles et tableaux en pleine largeur ; tablette et mobile inchangés */
+@media (min-width:1025px){
+  .sec-head > .sec-text > .cadre:first-child{margin-top:0}
+  .sec-head > .sec-text > .cadre{max-width:62ch}
+  .wrap > .lab-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);margin-left:0;max-width:none}
+  .wrap > .lab-row > .lab-l{grid-column:1;color:var(--ink);font-weight:400;text-wrap:balance}
+  .wrap > .lab-row > .lab-t{grid-column:2;max-width:76ch}
+  .wrap > .note{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,64px);border-left:0;padding:0;max-width:none}
+  .wrap > .note > h4{grid-column:1;margin:0}
+  .wrap > .note > :not(h4){grid-column:2;max-width:76ch}
+  .wrap > .warn{margin-left:calc((100% - clamp(28px,4vw,64px)) * 5 / 12 + clamp(28px,4vw,64px));max-width:none}
+  .rules > li#outil,.rules > li#outil-ai{grid-template-columns:minmax(0,5fr) minmax(0,3.5fr) minmax(0,3.5fr);column-gap:clamp(28px,4vw,64px)}
+  .rules > li#outil > b,.rules > li#outil-ai > b{grid-column:1;grid-row:1 / span 3;text-wrap:balance}
+  .rules > li#outil > span:nth-of-type(1),.rules > li#outil-ai > span:nth-of-type(1){grid-column:2 / span 2;grid-row:1;padding-right:0}
+  .rules > li#outil > span:nth-of-type(2),.rules > li#outil-ai > span:nth-of-type(2){grid-column:2;grid-row:2}
+  .rules > li#outil > span:nth-of-type(3),.rules > li#outil-ai > span:nth-of-type(3){grid-column:3;grid-row:2}
+  .rules > li#outil > span:nth-of-type(4),.rules > li#outil-ai > span:nth-of-type(4){grid-column:2;grid-row:3}
+  .rules > li#outil > span:nth-of-type(5),.rules > li#outil-ai > span:nth-of-type(5){grid-column:3;grid-row:3}
+}
+/* Listes à deux colonnes : un dernier élément isolé occupe la rangée entière, intitulé à gauche, texte à droite */
+@media (min-width:861px){
+  .rules > li:last-child:nth-child(odd):not(#outil):not(#outil-ai),.rules > li#brique-formation{grid-column:1 / -1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(24px,3vw,48px);row-gap:10px}
+  .rules > li:last-child:nth-child(odd):not(#outil):not(#outil-ai) > b,.rules > li#brique-formation > b{grid-column:1}
+  .rules > li:last-child:nth-child(odd):not(#outil):not(#outil-ai) > :not(b),.rules > li#brique-formation > :not(b){grid-column:2;margin-top:0}
+}
+@media (min-width:1025px){.sec-head > .sec-text > .cadre{max-width:none}}
+@media (min-width:1025px){
+  .sec-head.sub > .sec-text{padding-top:.15em}
+  .wrap > .note > p{font-size:17px;color:var(--mute)}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Concordance, par Hémistiches", "url": "https://concordance.hemistiches.com/", "inLanguage": "fr", "description": "Concordance, par Hémistiches : le test de conformité MDR et IVDR des dispositifs médicaux. Huit à seize questions sur votre produit, vos certificats et vos échéances, et un résultat immédiat.", "provider": {"@type": "Attorney", "name": "François Césure", "url": "https://www.hemistiches.com", "address": {"@type": "PostalAddress", "streetAddress": "33, avenue Mac-Mahon", "postalCode": "75017", "addressLocality": "Paris", "addressCountry": "FR"}, "telephone": "+33647888025", "email": "francois.cesure@hemistiches.com"}, "parentOrganization": {"@type": "LegalService", "name": "Hémistiches", "url": "https://www.hemistiches.com/"}, "areaServed": "FR"}</script>
 </head>
