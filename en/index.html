@@ -685,7 +685,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <ul class="fonctions">
         <li><b>Legacy certificates</b><span>The transition ends on 31 December 2027 for class III and class IIb implantable devices, with exceptions, and on 31 December 2028 for other devices, subject to conditions.</span></li>
         <li><b>In vitro diagnostics</b><span>31 December 2027 for class D, 2028 for class C, 2029 for class B and class A sterile. For the last two, the application to the notified body must be lodged by 26 May 2027 at the latest.</span></li>
-        <li><b>EUDAMED</b><span>Four modules have been mandatory since 28 May 2026. Registration deadline for devices already on the market: 27 November 2026.</span></li>
+        <li><b>EUDAMED</b><span id="eudamed-enjeu">Four modules have been mandatory since 28 May 2026. Registration deadline for devices already on the market: 27 November 2026.</span></li>
         <li><b>Qualification and class</b><span>What your product legally is, software included, drives the conformity route, the budget and the timetable.</span></li>
         <li><b>Operators' roles</b><span>Manufacturer, authorised representative, importer, distributor: each has its own obligations, and a distributor can become a manufacturer without knowing it.</span></li>
         <li><b>The reform under way</b><span>The simplification proposal of 16 December 2025 has not been adopted. Until it is, the current rules and deadlines apply.</span></li>
@@ -1028,6 +1028,7 @@ var ONLYNNOV_SITE = "https://onlynnov.com/assurance-par-secteur/dispositifs-medi
 var ONLYNNOV_AGENDA = "https://calendly.com/onlynnov/audit-medtech-biotech-pharma";
 var MODULE_ASSURANCE = true; /* volet facultatif « couverture financière » : false pour le retirer */
 var EUDAMED_ECHU = Date.now() >= Date.UTC(2026,10,27,23,0,0); /* registration deadline for devices already on the market (MDR, art. 123, § 3, e, issu du règlement (UE) 2024/1860) : 27 novembre 2026, Paris time */
+if(EUDAMED_ECHU){ var eudamedEnjeu = document.getElementById("eudamed-enjeu"); if(eudamedEnjeu) eudamedEnjeu.textContent = "Four modules have been mandatory since 28 May 2026. The registration deadline expired on 27 November 2026: every device placed on the market must now be registered, including those placed on the market before 28 May 2026."; }
 var VERSION = "concordance-2026-11-06b-en";
 var CONTACT = "francois.cesure@hemistiches.com";
 var LOCALE = "en-GB";
@@ -1235,7 +1236,7 @@ function compute(){
   if(v.modif==="oui") add(3,2,"modif");
   if(v.modif==="nq") add(2,3,"modif");
   var eu = v.eudamed || v.deudamed;
-  if(eu==="srn") add(1,0,"udi");
+  if(eu==="srn") add(EUDAMED_ECHU && v.eudamed ? 2 : 1, EUDAMED_ECHU && v.eudamed ? 1 : 0, "udi"); /* après le 27 novembre 2026, un dispositif non enregistré est un manque */
   if(eu==="non") add(2,1,"srn");
   if(eu==="nsp") add(1,1,"srn");
   if(v.mandataire==="encours") add(1,1,"mand");
@@ -1279,6 +1280,8 @@ function compute(){
   if(f.prorogInc && tot>=9 && lvl<2) lvl = 2;
   if(ak.indexOf("rc")>-1 && lvl<2) lvl = 2;
   if(ak.length && lvl<1) lvl = 1;
+  if((v.eudamed==="non" || v.deudamed==="non") && lvl<2) lvl = 2; /* sans SRN, pas de mise sur le marché depuis le 28 mai 2026 */
+  if(EUDAMED_ECHU && v.eudamed==="srn" && lvl<1) lvl = 1; /* dispositifs non enregistrés après le 27 novembre 2026 */
 
   var cand = [];
   if(f.urgent) cand.push("situation");
@@ -1561,6 +1564,7 @@ function kindOf(k, v){
   if(k==="urgent") return "Priority";
   if(KIND_GAP[k]) return "Declared gap";
   if(k==="modif") return v.modif==="oui" ? "Declared gap" : "Point of method";
+  if(k==="udi") return (EUDAMED_ECHU && v.eudamed==="srn") ? "Declared gap" : "Point of method";
   if(k==="srn") return (v.eudamed==="non" || v.deudamed==="non") ? "Declared gap" : "Point of method";
   return "Point of method";
 }
