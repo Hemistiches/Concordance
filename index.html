@@ -685,7 +685,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <ul class="fonctions">
         <li><b>Certificats de l'ancien régime</b><span>Fin de la transition le 31 décembre 2027 pour la classe III et les implantables de classe IIb, sauf exceptions, et le 31 décembre 2028 pour les autres dispositifs, sous conditions.</span></li>
         <li><b>Diagnostic in vitro</b><span>31 décembre 2027 pour la classe D, 2028 pour la classe C, 2029 pour la classe B et la classe A stérile. Pour ces deux dernières, la demande à l'organisme notifié doit être déposée au plus tard le 26 mai 2027.</span></li>
-        <li><b>EUDAMED</b><span>Quatre modules sont d'utilisation obligatoire depuis le 28 mai 2026. Délai d'enregistrement des dispositifs déjà sur le marché : 27 novembre 2026.</span></li>
+        <li><b>EUDAMED</b><span id="eudamed-enjeu">Quatre modules sont d'utilisation obligatoire depuis le 28 mai 2026. Délai d'enregistrement des dispositifs déjà sur le marché : 27 novembre 2026.</span></li>
         <li><b>Qualification et classe</b><span>Ce qu'est juridiquement votre produit, logiciel compris, commande la voie de conformité, le budget et le calendrier.</span></li>
         <li><b>Rôles des opérateurs</b><span>Fabricant, mandataire, importateur, distributeur : chacun a ses obligations, et un distributeur peut devenir fabricant sans le savoir.</span></li>
         <li><b>La réforme en cours</b><span>La proposition de simplification du 16 décembre 2025 n'est pas adoptée. Jusqu'à son adoption, les règles et les échéances actuelles s'appliquent.</span></li>
@@ -1025,6 +1025,7 @@ var ONLYNNOV_SITE = "https://onlynnov.com/assurance-par-secteur/dispositifs-medi
 var ONLYNNOV_AGENDA = "https://calendly.com/onlynnov/audit-medtech-biotech-pharma";
 var MODULE_ASSURANCE = true; /* volet facultatif « couverture financière » : false pour le retirer */
 var EUDAMED_ECHU = Date.now() >= Date.UTC(2026,10,27,23,0,0); /* délai d'enregistrement des dispositifs déjà sur le marché (MDR, art. 123, § 3, e, issu du règlement (UE) 2024/1860) : 27 novembre 2026, heure de Paris */
+if(EUDAMED_ECHU){ var eudamedEnjeu = document.getElementById("eudamed-enjeu"); if(eudamedEnjeu) eudamedEnjeu.textContent = "Quatre modules sont d'utilisation obligatoire depuis le 28 mai 2026. Le délai d'enregistrement a expiré le 27 novembre 2026 : tous les dispositifs mis sur le marché doivent désormais y être enregistrés, y compris ceux mis sur le marché avant le 28 mai 2026."; }
 var VERSION = "concordance-2026-11-06b";
 var CONTACT = "francois.cesure@hemistiches.com";
 var LOCALE = "fr-FR";
@@ -1234,7 +1235,7 @@ function compute(){
   if(v.modif==="oui") add(3,2,"modif");
   if(v.modif==="nq") add(2,3,"modif");
   var eu = v.eudamed || v.deudamed;
-  if(eu==="srn") add(1,0,"udi");
+  if(eu==="srn") add(EUDAMED_ECHU && v.eudamed ? 2 : 1, EUDAMED_ECHU && v.eudamed ? 1 : 0, "udi"); /* après le 27 novembre 2026, un dispositif non enregistré est un manque */
   if(eu==="non") add(2,1,"srn");
   if(eu==="nsp") add(1,1,"srn");
   if(v.mandataire==="encours") add(1,1,"mand");
@@ -1278,6 +1279,8 @@ function compute(){
   if(f.prorogInc && tot>=9 && lvl<2) lvl = 2;
   if(ak.indexOf("rc")>-1 && lvl<2) lvl = 2;
   if(ak.length && lvl<1) lvl = 1;
+  if((v.eudamed==="non" || v.deudamed==="non") && lvl<2) lvl = 2; /* sans SRN, pas de mise sur le marché depuis le 28 mai 2026 */
+  if(EUDAMED_ECHU && v.eudamed==="srn" && lvl<1) lvl = 1; /* dispositifs non enregistrés après le 27 novembre 2026 */
 
   /* Orientation : la première formule qui répond au point le plus lourd */
   var cand = [];
@@ -1561,6 +1564,7 @@ function kindOf(k, v){
   if(k==="urgent") return "Priorité";
   if(KIND_GAP[k]) return "Manque déclaré";
   if(k==="modif") return v.modif==="oui" ? "Manque déclaré" : "Point de méthode";
+  if(k==="udi") return (EUDAMED_ECHU && v.eudamed==="srn") ? "Manque déclaré" : "Point de méthode";
   if(k==="srn") return (v.eudamed==="non" || v.deudamed==="non") ? "Manque déclaré" : "Point de méthode";
   return "Point de méthode";
 }
