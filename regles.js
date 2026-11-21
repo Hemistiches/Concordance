@@ -8,13 +8,20 @@
   /* Tarifs HT, arrêtés par le cabinet le 27 octobre 2026. « aPartirDe » : prix d'entrée d'une situation simple ;
      au-delà des hypothèses décrites dans la page, devis arrêté avant toute intervention. */
   var TARIFS = {
-    version: "2026-11-03-ai-act",
+    version: "2026-11-21-dossiers",
     consultation: { prix: 350, minutes: 45, deductionJours: 30 },
     qualification: { aPartirDe: 2000 },
     distribution: { diagnostic: 1200, miseEnRegle: 2500 },          // mise en règle : prix global, diagnostic compris
     contrats: { revueCiblee: 1200, revueApprofondie: 2000 },
     entree: { strategie: 3000, organisation: 6000 },                 // organisation : prix global, stratégie comprise
     couverture: { etude: 1200 },                                     // étude du schéma de couverture financière (31 octobre 2026)
+    dossiers: {                                                      // dossiers juridiques autour du produit (21 novembre 2026)
+      prrc: 950,                                                     // contrat de la personne chargée du respect de la réglementation
+      communicationSupport: 1200,                                    // revue d'un support
+      communicationLancement: 2000,                                  // revue des supports d'un lancement
+      auditOperation: 3000,                                          // audit réglementaire et contractuel avant opération
+      reponseAutorite: 2000                                          // réponse à l'autorité, phase contradictoire
+    },
     aiAct: {
       qualification: 2000,                                           // qualification du rôle et du niveau de risque
       planConformite: 4500,                                          // diagnostic et plan d'actions AI Act
@@ -58,6 +65,11 @@
       eo: TARIFS.entree.organisation,
       eoc: complementOrganisation(true),
       cv: TARIFS.couverture.etude,
+      pr: TARIFS.dossiers.prrc,
+      cm1: TARIFS.dossiers.communicationSupport,
+      cm2: TARIFS.dossiers.communicationLancement,
+      ao: TARIFS.dossiers.auditOperation,
+      ra: TARIFS.dossiers.reponseAutorite,
       aiq: TARIFS.aiAct.qualification,
       aip: TARIFS.aiAct.planConformite,
       aic: TARIFS.aiAct.programmeArticule,
