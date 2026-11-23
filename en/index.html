@@ -774,7 +774,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <details class="more"><summary>Details</summary><div>
             <p><b>Targeted review.</b> For a relatively short existing contract governed by French law, with a scope of analysis set in advance: review of the clauses on regulatory obligations and the agreed priority risks (depending on the contract, responsibilities, quality, vigilance, traceability, recalls), annotations or proposed changes, a thirty-minute debrief and one follow-up clarification. It is not an exhaustive legal review of the contract, and negotiation is not included.</p>
             <p><b>In-depth review.</b> Overall review of the contract within the agreed field, amended version, debrief, then one negotiation round: review of one consolidated response from the other party, received in one go, and preparation of a revised version. Direct exchanges with the other party, negotiation meetings and further versions are quoted before being undertaken.</p>
-            <p>Length, schedules, complexity and matters requiring a specialist are scoped before work begins. Several related contracts are covered by an overall proposal that takes the common work into account. A contract governed by foreign law requires specific scoping and, where appropriate, local counsel.</p>
+            <p>Length, schedules, complexity and matters requiring a specialist are scoped before work begins. Several related contracts are covered by an overall proposal that takes the common work into account. A contract governed by foreign law requires specific scoping and, where appropriate, local counsel. Your other contracts fall under <a href="https://cadence.hemistiches.com/en/" target="_blank" rel="noopener"><b>Cadence</b></a> or a separate advisory assignment.</p>
           </div></details>
         </article>
         <article id="offre-couverture">
@@ -838,7 +838,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <ul><li>Website, brochure, campaign or stand reviewed</li><li>Passages to correct, with replacement wording</li><li>Thirty-minute call</li></ul>
           <details class="more"><summary>Details</summary><div>
             <p><b>Included:</b> review against the device's intended purpose, its demonstrated performance and the advertising rules: target audience, reimbursement by the national health insurance, mandatory statements, prior authorisation where the device requires it (Articles L. 5213-1 to L. 5213-4 of the French Public Health Code); for a food supplement, Regulation (EC) No 1924/2006 on claims; for a cosmetic, Article 20 of Regulation (EC) No 1223/2009.</p>
-            <p><b>Not included:</b> creating the materials, and filing an application for prior authorisation, on quotation.</p>
+            <p><b>Not included:</b> creating the materials, and filing an application for prior authorisation, on quotation. Benefits, invitations and agreements with healthcare professionals fall under <a href="https://unisson.hemistiches.com/en/" target="_blank" rel="noopener"><b>Unisson</b></a>.</p>
           </div></details>
         </article>
         <article id="offre-audit">
@@ -986,6 +986,14 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         <details>
           <summary>Does the reform of the Regulations change anything today?</summary>
           <div><p>Not yet. The simplification proposal of 16 December 2025 has not been adopted. Until it is, the current rules and deadlines apply, and they are the ones the test and the result use.</p></div>
+        </details>
+        <details>
+          <summary>And for the rest?</summary>
+          <div><p>Concordance covers the device and borderline products; <a href="https://unisson.hemistiches.com/en/" target="_blank" rel="noopener"><b>Unisson</b></a> interactions with healthcare professionals; <a href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener"><b>Diapason</b></a> health data protection; <a href="https://cadence.hemistiches.com/en/" target="_blank" rel="noopener"><b>Cadence</b></a> the outsourced legal department. It is the same lawyer: work already done for you in one is reused, never invoiced twice.</p></div>
+        </details>
+        <details>
+          <summary>I need several services: how does it work?</summary>
+          <div><p>Each assignment stays within its own service, with its scope and its price; the hours of a monthly plan are counted in the service concerned. If several plans add up, we adjust their volume together when the fee agreement is signed. Work already paid for in one service is never invoiced twice.</p></div>
         </details>
       </div>
     </div>
@@ -1874,6 +1882,8 @@ function report(r){
     M.map(function(k){ var O = offer(k, r); return '<li><b>'+esc(O[0])+'</b><span class="pr">'+esc(prixCourt(k, r))+'</span><p>'+esc(O[1])+'</p><p class="hyp">'+esc(O[2])+'</p></li>'; }).join("")+'</ol>';
   html += '<p class="compl">'+esc("If we agree, a signed fee agreement sets the scope and its exclusions, the number of meetings and the firm price, confirmed after scoping; nothing extra without your prior agreement. It is preceded by a conflict-of-interest check.")+'</p>';
   if(M.indexOf("consultation")<0 && M.indexOf("autorite")<0) html += '<p class="compl">'+esc(px("If you would rather start by talking it through: orientation consultation, {c} excl. VAT, deducted from a package engaged within thirty days. It remains optional."))+'</p>';
+  if(A.p_cible==="pro" || A.p_cible==="deux") html += '<p class="compl">'+esc("You communicate with healthcare professionals: invitations, agreements and benefits fall under Unisson.")+' <a class="linkbtn" href="https://unisson.hemistiches.com/en/" target="_blank" rel="noopener">Unisson</a></p>';
+  if(A.motif==="ensemble" || A.motif==="operation") html += '<p class="compl">'+esc("Without an in-house lawyer, Cadence handles all your legal matters over time.")+' <a class="linkbtn" href="https://cadence.hemistiches.com/en/" target="_blank" rel="noopener">Cadence</a></p>';
   /* Single cross-reference to Diapason: connected product (Data Act and health data), otherwise health data only. */
   if(steps().indexOf("connecte")>-1 && A.connecte && A.connecte!=="non") html += '<p class="compl">'+esc("Your product generates data: also check the health data and Data Act side with the Diapason test.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';
   else if(r.f.data) html += '<p class="compl">'+esc("Your product processes health data: Diapason, Hémistiches' GDPR compliance service, covers this processing and the data protection officer function.")+' <a class="linkbtn" href="https://diapason.hemistiches.com/en/" target="_blank" rel="noopener">Diapason</a></p>';

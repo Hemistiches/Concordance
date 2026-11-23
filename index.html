@@ -774,7 +774,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <details class="more"><summary>Le détail</summary><div>
             <p><b>Revue ciblée.</b> Pour un contrat existant relativement court, soumis au droit français, avec un périmètre d'analyse défini à l'avance : examen des clauses relatives aux obligations réglementaires et aux risques prioritaires convenus (selon le contrat, responsabilités, qualité, vigilance, traçabilité, rappels), annotations ou propositions de modifications, restitution de trente minutes et une clarification ponctuelle ensuite. Ce n'est pas une revue juridique exhaustive du contrat, et la négociation n'est pas comprise.</p>
             <p><b>Revue approfondie.</b> Examen d'ensemble du contrat dans le champ convenu, version amendée, restitution, puis un retour de négociation : l'examen d'un retour consolidé de la contrepartie, reçu en une fois, et la préparation d'une version révisée. Les échanges directs avec la contrepartie, les réunions de négociation et les versions suivantes sont chiffrés avant d'être engagés.</p>
-            <p>La longueur, les annexes, la complexité et les matières qui demandent un spécialiste sont cadrées avant l'intervention. Plusieurs contrats liés font l'objet d'une proposition globale, qui tient compte du travail commun. Un contrat soumis à un droit étranger demande un cadrage particulier et, le cas échéant, un conseil local.</p>
+            <p>La longueur, les annexes, la complexité et les matières qui demandent un spécialiste sont cadrées avant l'intervention. Plusieurs contrats liés font l'objet d'une proposition globale, qui tient compte du travail commun. Un contrat soumis à un droit étranger demande un cadrage particulier et, le cas échéant, un conseil local. Vos autres contrats relèvent de <a href="https://cadence.hemistiches.com" target="_blank" rel="noopener"><b>Cadence</b></a> ou d'une mission de conseil.</p>
           </div></details>
         </article>
         <article id="offre-couverture">
@@ -838,7 +838,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <ul><li>Site, brochure, campagne ou stand relus</li><li>Passages à corriger, avec une rédaction de remplacement</li><li>Échange de trente minutes</li></ul>
           <details class="more"><summary>Le détail</summary><div>
             <p><b>Compris :</b> la relecture au regard de la destination du dispositif, des performances attestées et des règles de publicité : public visé, prise en charge par l'assurance maladie, mentions obligatoires, autorisation préalable si le dispositif y est soumis (articles L. 5213-1 à L. 5213-4 du code de la santé publique) ; pour un complément alimentaire, le règlement (CE) n° 1924/2006 sur les allégations ; pour un cosmétique, l'article 20 du règlement (CE) n° 1223/2009.</p>
-            <p><b>Non compris :</b> la création des supports et le dépôt d'une demande d'autorisation préalable, sur devis.</p>
+            <p><b>Non compris :</b> la création des supports et le dépôt d'une demande d'autorisation préalable, sur devis. Les avantages, invitations et conventions avec les professionnels de santé relèvent d'<a href="https://unisson.hemistiches.com" target="_blank" rel="noopener"><b>Unisson</b></a>.</p>
           </div></details>
         </article>
         <article id="offre-audit">
@@ -986,6 +986,14 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
         <details>
           <summary>La réforme des règlements change-t-elle quelque chose aujourd'hui ?</summary>
           <div><p>Pas encore. La proposition de simplification du 16 décembre 2025 n'est pas adoptée. Tant qu'elle ne l'est pas, les règles et les échéances actuelles s'appliquent, et ce sont elles que le test et le résultat retiennent.</p></div>
+        </details>
+        <details>
+          <summary>Et pour le reste ?</summary>
+          <div><p>Concordance couvre le dispositif et les produits frontières ; <a href="https://unisson.hemistiches.com" target="_blank" rel="noopener"><b>Unisson</b></a> les relations avec les professionnels de santé ; <a href="https://diapason.hemistiches.com" target="_blank" rel="noopener"><b>Diapason</b></a> la protection des données de santé ; <a href="https://cadence.hemistiches.com" target="_blank" rel="noopener"><b>Cadence</b></a> la direction juridique externalisée. C'est le même avocat : un travail déjà accompli pour vous dans l'une est réutilisé, jamais facturé deux fois.</p></div>
+        </details>
+        <details>
+          <summary>J'ai besoin de plusieurs offres : comment cela se passe-t-il ?</summary>
+          <div><p>Chaque mission reste rattachée à son offre, avec son périmètre et son prix ; les heures d'un suivi sont décomptées dans l'offre qu'il concerne. Si plusieurs suivis se cumulent, nous en ajustons ensemble le volume au moment de la convention. Un travail déjà réglé dans une offre n'est jamais facturé deux fois.</p></div>
         </details>
       </div>
     </div>
@@ -1874,6 +1882,8 @@ function report(r){
     M.map(function(k){ var O = offer(k, r); return '<li><b>'+esc(O[0])+'</b><span class="pr">'+esc(prixCourt(k, r))+'</span><p>'+esc(O[1])+'</p><p class="hyp">'+esc(O[2])+'</p></li>'; }).join("")+'</ol>';
   html += '<p class="compl">'+esc("En cas d'accord, une convention d'honoraires signée fixe le périmètre et ses exclusions, le nombre de réunions et le prix ferme, confirmé après cadrage ; aucun supplément sans votre accord préalable. Elle est précédée d'une vérification des conflits d'intérêts.")+'</p>';
   if(M.indexOf("consultation")<0 && M.indexOf("autorite")<0) html += '<p class="compl">'+esc(px("Si vous préférez commencer par en parler : consultation d'orientation, {c} HT, déduite d'un forfait engagé dans les trente jours. Elle reste facultative."))+'</p>';
+  if(A.p_cible==="pro" || A.p_cible==="deux") html += '<p class="compl">'+esc("Vous communiquez auprès des professionnels de santé : invitations, conventions et avantages relèvent d'Unisson.")+' <a class="linkbtn" href="https://unisson.hemistiches.com" target="_blank" rel="noopener">Unisson</a></p>';
+  if(A.motif==="ensemble" || A.motif==="operation") html += '<p class="compl">'+esc("Sans juriste interne, Cadence porte l'ensemble de votre juridique dans la durée.")+' <a class="linkbtn" href="https://cadence.hemistiches.com" target="_blank" rel="noopener">Cadence</a></p>';
   /* Renvoi unique vers Diapason : produit connecté (Data Act et données de santé), sinon données de santé seules. */
   if(steps().indexOf("connecte")>-1 && A.connecte && A.connecte!=="non") html += '<p class="compl">'+esc("Votre produit génère des données : vérifiez aussi le volet données de santé et Data Act avec le test Diapason.")+' <a class="linkbtn" href="https://diapason.hemistiches.com" target="_blank" rel="noopener">Diapason</a></p>';
   else if(r.f.data) html += '<p class="compl">'+esc("Votre produit traite des données de santé : Diapason, l'offre de conformité RGPD d'Hémistiches, couvre ces traitements et la fonction de délégué à la protection des données.")+' <a class="linkbtn" href="https://diapason.hemistiches.com" target="_blank" rel="noopener">Diapason</a></p>';
