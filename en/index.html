@@ -1004,7 +1004,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <p class="label">Our terms</p>
       <h2 class="sec-h2" id="t-cadre">What is settled before any assignment</h2>
       <ul class="eng">
-        <li><b>Responsiveness</b><span>You deal directly with the lawyer handling your matter. Every request is acknowledged within one working day; the delivery date is agreed with you in the engagement letter, according to the size of the matter.</span></li>
+        <li><b>Responsiveness</b><span>You deal directly with the lawyer handling your matter. Every request gets a reply within one working day; the delivery date is agreed with you in the engagement letter, according to the size of the matter.</span></li>
         <li><b>Professional secrecy</b><span>My advice, our exchanges and the documents in the file are covered by the lawyer's professional secrecy (Article 66-5 of French Law No. 71-1130 of 31 December 1971). A review or an analysis prepared with me remains yours.</span></li>
         <li><b>The test is not legal advice</b><span>The result is an indicative preliminary analysis, based solely on your answers. Advice begins with the lawyer, under a fee agreement.</span></li>
         <li><b>No promise of outcome</b><span>Neither CE marking nor a decision by an authority can be guaranteed. The commitment covers the means, the method, the scope and the timetable, in writing.</span></li>
@@ -1906,7 +1906,7 @@ function report(r){
   html += '<div class="rsec no-print"><h4>Keep this result</h4><div class="keep"><p class="compare">'+esc("Save it as a PDF, or send it to your own mailbox. It is kept neither on this site nor by the firm.")+'</p>'+
     '<div class="actions"><button type="button" class="btn btn-ink" id="pdf">Save as PDF</button><a class="btn btn-line" id="selfmail" href="mailto:?subject='+encodeURIComponent("My Concordance result")+'&body='+encodeURIComponent(summary(r))+'">'+esc("Email me the result")+'</a></div></div></div>';
 
-  html += '<div class="rsec no-print"><h4>Discuss your result</h4><p class="compare"><b>Acknowledged within one working day, by the lawyer who will handle your matter.</b></p><p class="compare">'+esc("To check this result against your actual situation, write to me stating your level of concordance:")+'</p>'+
+  html += '<div class="rsec no-print"><h4>Discuss your result</h4><p class="compare"><b>Reply within one working day, by the lawyer who will handle your matter.</b></p><p class="compare">'+esc("To check this result against your actual situation, write to me stating your level of concordance:")+'</p>'+
     '<div class="contactbox"><code id="mail">'+CONTACT+'</code><button type="button" class="btn btn-line" id="copy">'+esc("Copy the address")+'</button><a class="btn btn-ink" href="mailto:'+CONTACT+'?subject='+encodeURIComponent("Concordance: "+r.level.short)+'&body='+encodeURIComponent("Hello,\n\nI would like to discuss my Concordance result.\n\n"+summary(r, true))+'">Write</a><span class="copied" id="copied" aria-live="polite"></span></div></div>';
 
   html += '<p class="notice">'+esc("This result is generated automatically from your answers alone, without verification or review of documents, and is valid as at the date it is generated. It is indicative information and is neither legal advice nor an opinion. Amounts are entry prices excluding VAT, on the assumptions stated; every assignment is subject to a fee agreement setting out the scope and how the price is determined, and to a prior conflict-of-interest check.")+'</p>'+
