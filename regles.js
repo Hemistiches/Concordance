@@ -21,7 +21,7 @@
       communicationLancement: 2000,                                  // revue des supports d'un lancement
       auditOperation: 3000,                                          // audit réglementaire et contractuel avant opération
       reponseAutorite: 2000,                                         // réponse à l'autorité, phase contradictoire
-      responsabilite: 1800                                           // responsabilité du fait des produits, directive 2024/2853 (proposition du 24 novembre 2026, à valider)
+      responsabilite: 1800                                           // responsabilité du fait des produits, directive 2024/2853 (validé le 24 novembre 2026)
     },
     aiAct: {
       qualification: 2000,                                           // qualification du rôle et du niveau de risque
