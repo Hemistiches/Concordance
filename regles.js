@@ -8,7 +8,7 @@
   /* Tarifs HT, arrêtés par le cabinet le 27 octobre 2026. « aPartirDe » : prix d'entrée d'une situation simple ;
      au-delà des hypothèses décrites dans la page, devis arrêté avant toute intervention. */
   var TARIFS = {
-    version: "2026-11-21-dossiers",
+    version: "2026-11-24-innovation",
     consultation: { prix: 350, minutes: 45, deductionJours: 30 },
     qualification: { aPartirDe: 2000 },
     distribution: { diagnostic: 1200, miseEnRegle: 2500 },          // mise en règle : prix global, diagnostic compris
@@ -21,7 +21,8 @@
       communicationLancement: 2000,                                  // revue des supports d'un lancement
       auditOperation: 3000,                                          // audit réglementaire et contractuel avant opération
       reponseAutorite: 2000,                                         // réponse à l'autorité, phase contradictoire
-      responsabilite: 1800                                           // responsabilité du fait des produits, directive 2024/2853 (validé le 24 novembre 2026)
+      responsabilite: 1800,                                          // responsabilité du fait des produits, directive 2024/2853 (validé le 24 novembre 2026)
+      lancement: 4900                                                // forfait lancement : qualification, un contrat, un support, responsabilité (validé le 24 novembre 2026)
     },
     aiAct: {
       qualification: 2000,                                           // qualification du rôle et du niveau de risque
@@ -72,6 +73,8 @@
       ao: TARIFS.dossiers.auditOperation,
       ra: TARIFS.dossiers.reponseAutorite,
       rp: TARIFS.dossiers.responsabilite,
+      fl: TARIFS.dossiers.lancement,
+      fld: TARIFS.qualification.aPartirDe + TARIFS.contrats.revueCiblee + TARIFS.dossiers.communicationSupport + TARIFS.dossiers.responsabilite,
       aiq: TARIFS.aiAct.qualification,
       aip: TARIFS.aiAct.planConformite,
       aic: TARIFS.aiAct.programmeArticule,

@@ -728,7 +728,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <div class="sec-head">
         <h2 class="sec-h2" id="t-form">Services</h2>
         <div class="sec-text">
-          <p class="intro">Sixteen services, each with a written scope: product compliance, six legal matters around the product and three assignments dedicated to the AI Act. Legal qualification of the product and the review of communication also apply to borderline products. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
+          <p class="intro">Seventeen services, each with a written scope: product compliance, six legal matters around the product, a launch package and three assignments dedicated to the AI Act. Legal qualification of the product and the review of communication also apply to borderline products. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
         </div>
       </div>
       <div class="three">
@@ -883,6 +883,18 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
             <p><b>Included:</b> for one product, a map of the operators who may be liable (manufacturer, importer, authorised representative, whoever modifies the product, supplier of a component or software); a review of up to three contracts on warranties, recourse, updates and modifications; a list of the documentation to assemble to answer a disclosure request; the points your insurance policy must follow; a memo and the clauses to include.</p>
             <p><b>Why now:</b> the Directive applies to products placed on the market or put into service from 9 December 2026. Whatever the timetable for its transposition in France, I work as if it were in force: it is the safe way to prepare your products and contracts.</p>
             <p><b>Not included:</b> defence in litigation, negotiation with the insurer and the review of additional contracts, on quotation.</p>
+          </div></details>
+        </article>
+      </div>
+      <div class="three">
+        <article id="offre-lancement">
+          <h3>Launch package</h3>
+          <div><p class="from">Price</p><p class="amount"><span data-p="fl">€4,900</span> <small>excl. VAT</small></p><p class="from">Instead of <span data-p="fld">€6,200</span> excl. VAT separately</p></div>
+          <p>For an innovative product before it is placed on the market: the legal side of the launch, in a single assignment.</p>
+          <ul><li>Legal qualification of the product</li><li>Review of one supply chain contract and one communication material</li><li>Product liability</li></ul>
+          <details class="more"><summary>The detail</summary><div>
+            <p><b>Included:</b> for one product, legal qualification (status, applicable regulation, class, procedure), review of one distribution, subcontracting or authorised representative contract, review of one communication material and the product liability assignment, in a single timetable, with a summary memo.</p>
+            <p><b>Not included:</b> technical work on the file and additional contracts or materials, on quotation.</p>
           </div></details>
         </article>
       </div>
@@ -1167,7 +1179,6 @@ var Q = {
   r_log:{kicker:"Product liability", title:"Who updates the product's software, or keeps it secure, once the product is on the market?", hint:"For products placed on the market from 9 December 2026, Directive (EU) 2024/2853 brings software and its updates within the product liability regime.", opts:function(){ return [
     ["nous","We do"],
     ["tiers","A service provider or the supplier of a component"],
-    ["aucun","The product has no software"],
     ["nsp","I don't know"]]; }},
   r_modif:{kicker:"Product liability", title:"In the supply chain, can a partner modify the product: refurbishing, customising, updating, integrating it into another system?", hint:"Whoever substantially modifies a product outside the manufacturer's control is liable as a manufacturer.", opts:function(){ return [
     ["non","No"],
@@ -1391,7 +1402,7 @@ function axisSteps(s, dist){
   if(ax.indexOf("pub")>-1){ s.push("p_cible"); if(A.p_cible==="public" || A.p_cible==="deux") s.push("p_rembourse"); s.push("p_relecture"); }
   if(ax.indexOf("pub1")>-1) s.push("p_relecture");
   if(ax.indexOf("ops")>-1){ s.push("o_op"); if(A.o_op && A.o_op!=="non") s.push("o_dossier"); }
-  if(!dist && ax.indexOf("resp")>-1) s.push("r_log","r_modif","r_preuve");
+  if(!dist && ax.indexOf("resp")>-1){ if(A.type==="logiciel" || A.data==="ia" || A.data==="deux" || (A.connecte && A.connecte.indexOf("oui")===0)) s.push("r_log"); s.push("r_modif","r_preuve"); }
   s.push("au_evt");
   if(A.au_evt==="encours") s.push("au_mesure");
 }
@@ -1536,13 +1547,16 @@ function compute(){
   /* Ce qui amène l'entreprise passe en tête, sauf procédure en cours */
   var pref = {produit:"communication", partenaire:"contrats", marche:(v.role==="noneu" ? "acces" : "contrats"), operation:"audit", com:"communication"}[v.motif];
   if(pref && cand.indexOf(pref)>0 && cand[0]!=="autorite"){ cand.splice(cand.indexOf(pref),1); cand.unshift(pref); }
+  /* Avant le lancement d'un dispositif : le forfait lancement passe en tête */
+  var avantLancement = (v.statut==="avant" || v.statut==="encours") && (v.motif==="produit" || v.motif==="ensemble") && v.role!=="dist" && (v.nature==="dm" || v.nature==="combine");
+  if(avantLancement && cand[0]!=="autorite"){ cand = cand.filter(function(x){ return x!=="lancement"; }); cand.unshift("lancement"); }
   if(!cand.length) cand.push(lvl===0 ? "suivi" : "consultation");
   var main = cand[0], second = (lvl>=2 && cand[1]) ? cand[1] : null;
 
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
+  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, regimes:regimes(v), prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
 }
 
 var P = {
@@ -1761,7 +1775,25 @@ function gate(){
   });
 }
 
+var REG_T = {"mdr": ["Regulation (EU) 2017/745, medical devices", "Qualification, CE marking, obligations of the manufacturer and the chain: Concordance."], "mdrDist": ["Regulation (EU) 2017/745, medical devices", "Your obligations as distributor or importer: Concordance."], "ivdr": ["Regulation (EU) 2017/746, in vitro diagnostics", "Qualification, CE marking, obligations of the manufacturer and the chain: Concordance."], "combine": ["Medicines regime, French Public Health Code", "Depending on whether the substance is principal or ancillary: legal qualification, Concordance."], "medic": ["Medicines regime, French Public Health Code", "Authorisation, operator, pharmacovigilance: outside the test, to be framed in a consultation."], "complement": ["Food supplements: Decree No 2006-352 and Regulation (EC) No 1924/2006", "Composition, notification, claims: qualification and communication, Concordance."], "cosmetique": ["Regulation (EC) No 1223/2009, cosmetic products", "Responsible person, claims: qualification and communication, Concordance."], "statut": ["Status to be established", "Medical device or not, depending on the intended purpose claimed: legal qualification, Concordance."], "ai": ["Regulation (EU) 2024/1689 on artificial intelligence", "Role, risk level, obligations: AI Act services, Concordance."], "rgpd": ["Regulation (EU) 2016/679, data protection", "Health data processed by the product: Diapason."], "dataact": ["Regulation (EU) 2023/2854, Data Act", "Access to data generated by the connected product: Diapason."], "resp": ["Directive (EU) 2024/2853, product liability", "Products placed on the market from 9 December 2026: Concordance."]};
+/* Carte des régimes : ce qui s'applique au produit, et qui le traite (24 novembre 2026) */
+function regimes(v){
+  var T = REG_T, out = [];
+  var n = v.nature;
+  if(n==="dm" || n==="combine") out.push(v.type==="div" ? T.ivdr : (v.role==="dist" ? T.mdrDist : T.mdr));
+  if(n==="combine") out.push(T.combine);
+  if(n==="medic") out.push(T.medic);
+  if(n==="complement") out.push(T.complement);
+  if(n==="cosmetique") out.push(T.cosmetique);
+  if(n==="app" || n==="nsp") out.push(T.statut);
+  if(v.data==="ia" || v.data==="deux") out.push(T.ai);
+  if(v.data==="donnees" || v.data==="deux" || v.data==="nsp" || v.connecte==="oui_patient") out.push(T.rgpd);
+  if(v.connecte==="oui_patient" || v.connecte==="oui_tech") out.push(T.dataact);
+  out.push(T.resp);
+  return out;
+}
 var OFFERS = {
+  lancement:["Launch package","For an innovative product before it is placed on the market: legal qualification of the product, review of one supply chain contract, review of one communication material and product liability, in a single assignment and a single timetable.","{fl} excl. VAT for one product, instead of {fld} excl. VAT separately."],
   responsabilite:["Product liability","Directive (EU) 2024/2853 applied to your product, as if it were already transposed: who is liable for damage in your chain, what your contracts provide (warranties, recourse, updates, modifications), what your insurance policy must follow and the documentation to assemble for your defence; a memo and the clauses to include.","From {rp} excl. VAT for one product and up to three contracts."],
   mediation:["Mediation of a compliance dispute","Seeking an agreement with your distributor, supplier or customer, conducted as mediator: mediation agreement, meetings and, if the parties agree, a settlement agreement.","On quotation, shared between the parties. The mediator acts as lawyer for neither of them."],
   prrc:["Person responsible for regulatory compliance: the contract","The contract with the external person, or the designation letter for an employee: tasks set by the Regulation, qualifications, permanent availability and deputy, independence, liability, insurance, exit without a gap.","{pr} excl. VAT."],
@@ -1847,7 +1879,7 @@ function kindOf(k, v){
 /* Short price shown next to each assignment */
 function prixCourt(key, r){
   return px({
-    autorite:"From {ra} excl. VAT", responsabilite:"From {rp} excl. VAT",  mediation:"On quotation", prrc:"{pr} excl. VAT", communication:"From {cm1} excl. VAT", audit:"From {ao} excl. VAT", consultation:"{c} excl. VAT",
+    autorite:"From {ra} excl. VAT", lancement:"{fl} excl. VAT",  responsabilite:"From {rp} excl. VAT",  mediation:"On quotation", prrc:"{pr} excl. VAT", communication:"From {cm1} excl. VAT", audit:"From {ao} excl. VAT", consultation:"{c} excl. VAT",
     distrib: r.dcomplex ? "On quotation" : "From {dd} excl. VAT",
     qualif: r.complex ? "On quotation" : "From {q} excl. VAT",
     contrats:"From {cc} excl. VAT",
@@ -1860,6 +1892,7 @@ function prixEntree(key, r){
   if(key==="consultation") return V.c;
   if(key==="autorite") return V.ra;
   if(key==="responsabilite") return V.rp;
+  if(key==="lancement") return V.fl;
   if(key==="prrc") return V.pr;
   if(key==="communication") return V.cm1;
   if(key==="audit") return V.ao;
@@ -1894,6 +1927,7 @@ function report(r){
     '</div>'+
     '<p class="meta">'+esc("As at "+today+(prof?" · "+prof:""))+'</p></div>';
 
+  html += '<div class="rsec"><h4>'+esc("The regimes that apply to your product")+'</h4><ul class="dates">'+r.regimes.map(function(x){ return '<li><b>'+esc(x[0])+'</b><p>'+esc(x[1])+'</p></li>'; }).join("")+'</ul></div>';
   html += '<div class="rsec"><h4>Your points of attention</h4><ul class="prio">';
   if(!r.prios.length && r.assur.keys.length) html += '<li class="good"><span class="kind">Finding</span><b>'+esc("No critical point declared on product compliance")+'</b><p>'+esc("Your answers, which have not been verified, do not reveal any immediate difficulty with the product itself. Your financial coverage, however, raises the points below.")+'</p></li>';
   else if(!r.prios.length) html += '<li class="good"><span class="kind">Finding</span><b>'+esc("No critical point declared")+'</b><p>'+esc("Your answers, which have not been verified, do not reveal any immediate difficulty. They do not rule out a question of qualification, deadlines or documentation updates: the rules keep changing, as the reform under way confirms.")+'</p></li>';

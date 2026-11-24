@@ -728,7 +728,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <div class="sec-head">
         <h2 class="sec-h2" id="t-form">Formules</h2>
         <div class="sec-text">
-          <p class="intro">Seize formules, chacune à périmètre écrit : la conformité du produit, six dossiers juridiques autour du produit et trois missions consacrées à l'AI Act. La qualification juridique du produit et la revue de la communication valent aussi pour les produits à la frontière. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
+          <p class="intro">Dix-sept formules, chacune à périmètre écrit : la conformité du produit, six dossiers juridiques autour du produit, un forfait de lancement et trois missions consacrées à l'AI Act. La qualification juridique du produit et la revue de la communication valent aussi pour les produits à la frontière. Le prix d'entrée vaut pour la situation simple décrite dans chaque formule ; au-delà, un devis est arrêté avant toute intervention. Aucune formule n'est un passage obligé : si vous connaissez votre besoin, demandez directement la mission.</p>
         </div>
       </div>
       <div class="three">
@@ -883,6 +883,18 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
             <p><b>Compris :</b> pour un produit, la cartographie des opérateurs qui peuvent en répondre (fabricant, importateur, mandataire, celui qui modifie le produit, fournisseur d'un composant ou d'un logiciel) ; la revue de trois contrats au plus sur les garanties, les recours, les mises à jour et les modifications ; la liste de la documentation à réunir pour répondre à une demande de production de preuves ; les points que votre police d'assurance doit suivre ; une note et les clauses à reprendre.</p>
             <p><b>Pourquoi maintenant :</b> la directive s'applique aux produits mis sur le marché ou mis en service à compter du 9 décembre 2026. Quel que soit le calendrier de sa transposition en France, je raisonne comme si elle était en vigueur : c'est la manière sûre de préparer vos produits et vos contrats.</p>
             <p><b>Non compris :</b> la défense dans un litige, la négociation avec l'assureur et la revue de contrats supplémentaires, sur devis.</p>
+          </div></details>
+        </article>
+      </div>
+      <div class="three">
+        <article id="offre-lancement">
+          <h3>Forfait lancement</h3>
+          <div><p class="from">Prix</p><p class="amount"><span data-p="fl">4 900 €</span> <small>HT</small></p><p class="from">Au lieu de <span data-p="fld">6 200 €</span> HT au détail</p></div>
+          <p>Pour un produit innovant avant sa mise sur le marché : le juridique du lancement, en une seule mission.</p>
+          <ul><li>Qualification juridique du produit</li><li>Revue d'un contrat de la chaîne et d'un support de communication</li><li>Responsabilité du fait des produits</li></ul>
+          <details class="more"><summary>Le détail</summary><div>
+            <p><b>Compris :</b> pour un produit, la qualification juridique (statut, règlement applicable, classe, procédure), la revue d'un contrat de distribution, de sous-traitance ou de mandat, la revue d'un support de communication et la mission responsabilité du fait des produits, dans un seul calendrier, avec une note de synthèse.</p>
+            <p><b>Non compris :</b> les travaux techniques du dossier et les contrats ou supports supplémentaires, sur devis.</p>
           </div></details>
         </article>
       </div>
@@ -1166,7 +1178,6 @@ var Q = {
   r_log:{kicker:"Responsabilité du fait des produits", title:"Qui met à jour le logiciel du produit, ou en assure la sécurité, une fois le produit sur le marché ?", hint:"Pour les produits mis sur le marché à compter du 9 décembre 2026, la directive (UE) 2024/2853 fait entrer le logiciel et ses mises à jour dans le régime de la responsabilité du fait des produits.", opts:function(){ return [
     ["nous","Nous-mêmes"],
     ["tiers","Un prestataire ou le fournisseur d'un composant"],
-    ["aucun","Le produit ne comporte pas de logiciel"],
     ["nsp","Je ne sais pas"]]; }},
   r_modif:{kicker:"Responsabilité du fait des produits", title:"Dans la chaîne, un partenaire peut-il modifier le produit : reconditionnement, personnalisation, mise à jour, intégration à un autre système ?", hint:"Celui qui modifie substantiellement un produit, hors du contrôle du fabricant, en répond comme fabricant.", opts:function(){ return [
     ["non","Non"],
@@ -1390,7 +1401,7 @@ function axisSteps(s, dist){
   if(ax.indexOf("pub")>-1){ s.push("p_cible"); if(A.p_cible==="public" || A.p_cible==="deux") s.push("p_rembourse"); s.push("p_relecture"); }
   if(ax.indexOf("pub1")>-1) s.push("p_relecture");
   if(ax.indexOf("ops")>-1){ s.push("o_op"); if(A.o_op && A.o_op!=="non") s.push("o_dossier"); }
-  if(!dist && ax.indexOf("resp")>-1) s.push("r_log","r_modif","r_preuve");
+  if(!dist && ax.indexOf("resp")>-1){ if(A.type==="logiciel" || A.data==="ia" || A.data==="deux" || (A.connecte && A.connecte.indexOf("oui")===0)) s.push("r_log"); s.push("r_modif","r_preuve"); }
   s.push("au_evt");
   if(A.au_evt==="encours") s.push("au_mesure");
 }
@@ -1536,13 +1547,16 @@ function compute(){
   /* Ce qui amène l'entreprise passe en tête, sauf procédure en cours */
   var pref = {produit:"communication", partenaire:"contrats", marche:(v.role==="noneu" ? "acces" : "contrats"), operation:"audit", com:"communication"}[v.motif];
   if(pref && cand.indexOf(pref)>0 && cand[0]!=="autorite"){ cand.splice(cand.indexOf(pref),1); cand.unshift(pref); }
+  /* Avant le lancement d'un dispositif : le forfait lancement passe en tête */
+  var avantLancement = (v.statut==="avant" || v.statut==="encours") && (v.motif==="produit" || v.motif==="ensemble") && v.role!=="dist" && (v.nature==="dm" || v.nature==="combine");
+  if(avantLancement && cand[0]!=="autorite"){ cand = cand.filter(function(x){ return x!=="lancement"; }); cand.unshift("lancement"); }
   if(!cand.length) cand.push(lvl===0 ? "suivi" : "consultation");
   var main = cand[0], second = (lvl>=2 && cand[1]) ? cand[1] : null;
 
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
+  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, regimes:regimes(v), prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
 }
 
 var P = {
@@ -1761,7 +1775,25 @@ function gate(){
   });
 }
 
+var REG_T = {"mdr": ["Règlement (UE) 2017/745, dispositifs médicaux", "Qualification, marquage CE, obligations du fabricant et de la chaîne : Concordance."], "mdrDist": ["Règlement (UE) 2017/745, dispositifs médicaux", "Vos obligations de distributeur ou d'importateur : Concordance."], "ivdr": ["Règlement (UE) 2017/746, diagnostic in vitro", "Qualification, marquage CE, obligations du fabricant et de la chaîne : Concordance."], "combine": ["Régime du médicament, code de la santé publique", "Selon que la substance est principale ou accessoire : qualification juridique, Concordance."], "medic": ["Régime du médicament, code de la santé publique", "Autorisation, exploitant, pharmacovigilance : hors du test, à cadrer en consultation."], "complement": ["Compléments alimentaires : décret n° 2006-352 et règlement (CE) n° 1924/2006", "Composition, déclaration, allégations : qualification et communication, Concordance."], "cosmetique": ["Règlement (CE) n° 1223/2009, produits cosmétiques", "Personne responsable, revendications : qualification et communication, Concordance."], "statut": ["Statut à établir", "Dispositif médical ou non, selon la destination revendiquée : qualification juridique, Concordance."], "ai": ["Règlement (UE) 2024/1689 sur l'intelligence artificielle", "Rôle, niveau de risque, obligations : formules AI Act, Concordance."], "rgpd": ["Règlement (UE) 2016/679, protection des données", "Données de santé traitées par le produit : Diapason."], "dataact": ["Règlement (UE) 2023/2854, Data Act", "Accès aux données générées par le produit connecté : Diapason."], "resp": ["Directive (UE) 2024/2853, responsabilité du fait des produits", "Produits mis sur le marché à compter du 9 décembre 2026 : Concordance."]};
+/* Carte des régimes : ce qui s'applique au produit, et qui le traite (24 novembre 2026) */
+function regimes(v){
+  var T = REG_T, out = [];
+  var n = v.nature;
+  if(n==="dm" || n==="combine") out.push(v.type==="div" ? T.ivdr : (v.role==="dist" ? T.mdrDist : T.mdr));
+  if(n==="combine") out.push(T.combine);
+  if(n==="medic") out.push(T.medic);
+  if(n==="complement") out.push(T.complement);
+  if(n==="cosmetique") out.push(T.cosmetique);
+  if(n==="app" || n==="nsp") out.push(T.statut);
+  if(v.data==="ia" || v.data==="deux") out.push(T.ai);
+  if(v.data==="donnees" || v.data==="deux" || v.data==="nsp" || v.connecte==="oui_patient") out.push(T.rgpd);
+  if(v.connecte==="oui_patient" || v.connecte==="oui_tech") out.push(T.dataact);
+  out.push(T.resp);
+  return out;
+}
 var OFFERS = {
+  lancement:["Forfait lancement","Pour un produit innovant avant sa mise sur le marché : la qualification juridique du produit, la revue d'un contrat de la chaîne, la revue d'un support de communication et la responsabilité du fait des produits, en une seule mission et un seul calendrier.","{fl} HT pour un produit, au lieu de {fld} HT au détail."],
   responsabilite:["Responsabilité du fait des produits","La directive (UE) 2024/2853 appliquée à votre produit, comme si elle était déjà transposée : qui répond du dommage dans votre chaîne, ce que prévoient vos contrats (garanties, recours, mises à jour, modifications), ce que votre police doit suivre et la documentation à réunir pour vous défendre ; une note et les clauses à reprendre.","À partir de {rp} HT pour un produit et trois contrats au plus."],
   mediation:["Médiation d'un différend de conformité","La recherche d'un accord avec votre distributeur, votre fournisseur ou votre client, conduite en médiateur : convention de médiation, réunions et, si les parties s'accordent, protocole d'accord.","Sur devis, partagé entre les parties. Le médiateur n'est l'avocat d'aucune d'elles."],
   prrc:["Personne chargée du respect de la réglementation : le contrat","Le contrat qui vous lie à la personne extérieure, ou la lettre de désignation de la personne salariée : missions prévues par le règlement, qualifications, disponibilité permanente et remplaçant, indépendance, responsabilité, assurance, sortie sans période de vide.","{pr} HT."],
@@ -1847,7 +1879,7 @@ function kindOf(k, v){
 /* Prix court affiché en regard de chaque mission */
 function prixCourt(key, r){
   return px({
-    autorite:"À partir de {ra} HT", responsabilite:"À partir de {rp} HT",  mediation:"Sur devis", prrc:"{pr} HT", communication:"À partir de {cm1} HT", audit:"À partir de {ao} HT", consultation:"{c} HT",
+    autorite:"À partir de {ra} HT", lancement:"{fl} HT",  responsabilite:"À partir de {rp} HT",  mediation:"Sur devis", prrc:"{pr} HT", communication:"À partir de {cm1} HT", audit:"À partir de {ao} HT", consultation:"{c} HT",
     distrib: r.dcomplex ? "Sur devis" : "À partir de {dd} HT",
     qualif: r.complex ? "Sur devis" : "À partir de {q} HT",
     contrats:"À partir de {cc} HT",
@@ -1860,6 +1892,7 @@ function prixEntree(key, r){
   if(key==="consultation") return V.c;
   if(key==="autorite") return V.ra;
   if(key==="responsabilite") return V.rp;
+  if(key==="lancement") return V.fl;
   if(key==="prrc") return V.pr;
   if(key==="communication") return V.cm1;
   if(key==="audit") return V.ao;
@@ -1894,6 +1927,7 @@ function report(r){
     '</div>'+
     '<p class="meta">'+esc("Arrêté le "+today+(prof?" · "+prof:""))+'</p></div>';
 
+  html += '<div class="rsec"><h4>'+esc("Les régimes qui s'appliquent à votre produit")+'</h4><ul class="dates">'+r.regimes.map(function(x){ return '<li><b>'+esc(x[0])+'</b><p>'+esc(x[1])+'</p></li>'; }).join("")+'</ul></div>';
   html += '<div class="rsec"><h4>Vos points de vigilance</h4><ul class="prio">';
   if(!r.prios.length && r.assur.keys.length) html += '<li class="good"><span class="kind">Constat</span><b>'+esc("Aucun point critique déclaré sur la conformité du produit")+'</b><p>'+esc("Vos réponses, non vérifiées, ne font pas ressortir de difficulté immédiate sur le produit lui-même. Votre couverture financière appelle en revanche les points ci-dessous.")+'</p></li>';
   else if(!r.prios.length) html += '<li class="good"><span class="kind">Constat</span><b>'+esc("Aucun point critique déclaré")+'</b><p>'+esc("Vos réponses, non vérifiées, ne font pas ressortir de difficulté immédiate. Elles ne permettent pas d'exclure une question de qualification, d'échéance ou de mise à jour documentaire : la réglementation évolue, et la réforme en cours le confirme.")+'</p></li>';
