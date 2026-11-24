@@ -20,7 +20,8 @@
       communicationSupport: 1200,                                    // revue d'un support
       communicationLancement: 2000,                                  // revue des supports d'un lancement
       auditOperation: 3000,                                          // audit réglementaire et contractuel avant opération
-      reponseAutorite: 2000                                          // réponse à l'autorité, phase contradictoire
+      reponseAutorite: 2000,                                         // réponse à l'autorité, phase contradictoire
+      responsabilite: 1800                                           // responsabilité du fait des produits, directive 2024/2853 (proposition du 24 novembre 2026, à valider)
     },
     aiAct: {
       qualification: 2000,                                           // qualification du rôle et du niveau de risque
@@ -70,6 +71,7 @@
       cm2: TARIFS.dossiers.communicationLancement,
       ao: TARIFS.dossiers.auditOperation,
       ra: TARIFS.dossiers.reponseAutorite,
+      rp: TARIFS.dossiers.responsabilite,
       aiq: TARIFS.aiAct.qualification,
       aip: TARIFS.aiAct.planConformite,
       aic: TARIFS.aiAct.programmeArticule,

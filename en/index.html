@@ -728,7 +728,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <div class="sec-head">
         <h2 class="sec-h2" id="t-form">Services</h2>
         <div class="sec-text">
-          <p class="intro">Fifteen services, each with a written scope: product compliance, five legal matters around the product and three assignments dedicated to the AI Act. Legal qualification of the product and the review of communication also apply to borderline products. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
+          <p class="intro">Sixteen services, each with a written scope: product compliance, six legal matters around the product and three assignments dedicated to the AI Act. Legal qualification of the product and the review of communication also apply to borderline products. The starting price applies to the simple situation described in each service; beyond that, a quote is agreed before any work begins. None of them is a required first step: if you know what you need, ask for that assignment directly.</p>
         </div>
       </div>
       <div class="three">
@@ -817,7 +817,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
       <div class="sec-head sub">
         <h3 class="rules-h">Legal matters around the product</h3>
         <div class="sec-text">
-          <p class="intro">What is at stake around the device: the person responsible for regulatory compliance, communication, corporate transactions, exchanges with the authority and disputes with a partner. Your regulatory consultant builds the file; I deal with its legal consequences: who is responsible for what, what you may say, what you sign, what you answer to the authority. The two roles complement each other, and I am glad to work alongside your consultant.</p>
+          <p class="intro">What is at stake around the device: the person responsible for regulatory compliance, communication, corporate transactions, product liability, exchanges with the authority and disputes with a partner. Your regulatory consultant builds the file; I deal with its legal consequences: who is responsible for what, what you may say, what you sign, what you answer to the authority. The two roles complement each other, and I am glad to work alongside your consultant.</p>
         </div>
       </div>
       <div class="three">
@@ -872,6 +872,17 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <ul><li>Mediation agreement</li><li>Meetings with the parties</li><li>Settlement agreement if the parties agree</li></ul>
           <details class="more"><summary>Details</summary><div>
             <p>I conduct the mediation as mediator: I then act as lawyer for neither party. The cost depends on the number of meetings; it is shared between the parties, as set in the mediation agreement.</p>
+          </div></details>
+        </article>
+        <article id="offre-responsabilite">
+          <h3>Product liability</h3>
+          <div><p class="from">From</p><p class="amount"><span data-p="rp">€1,800</span> <small>excl. VAT</small></p></div>
+          <p>Prepare your product for Directive (EU) 2024/2853, as if it were already transposed.</p>
+          <ul><li>Who is liable for damage in your chain</li><li>Warranties, recourse, updates and modifications in your contracts</li><li>Documentation to assemble and alignment with your policy</li></ul>
+          <details class="more"><summary>The detail</summary><div>
+            <p><b>Included:</b> for one product, a map of the operators who may be liable (manufacturer, importer, authorised representative, whoever modifies the product, supplier of a component or software); a review of up to three contracts on warranties, recourse, updates and modifications; a list of the documentation to assemble to answer a disclosure request; the points your insurance policy must follow; a memo and the clauses to include.</p>
+            <p><b>Why now:</b> the Directive applies to products placed on the market or put into service from 9 December 2026. Whatever the timetable for its transposition in France, I work as if it were in force: it is the safe way to prepare your products and contracts.</p>
+            <p><b>Not included:</b> defence in litigation, negotiation with the insurer and the review of additional contracts, on quotation.</p>
           </div></details>
         </article>
       </div>
@@ -1153,6 +1164,20 @@ function prorogHint(){
 }
 
 var Q = {
+  r_log:{kicker:"Product liability", title:"Who updates the product's software, or keeps it secure, once the product is on the market?", hint:"For products placed on the market from 9 December 2026, Directive (EU) 2024/2853 brings software and its updates within the product liability regime.", opts:function(){ return [
+    ["nous","We do"],
+    ["tiers","A service provider or the supplier of a component"],
+    ["aucun","The product has no software"],
+    ["nsp","I don't know"]]; }},
+  r_modif:{kicker:"Product liability", title:"In the supply chain, can a partner modify the product: refurbishing, customising, updating, integrating it into another system?", hint:"Whoever substantially modifies a product outside the manufacturer's control is liable as a manufacturer.", opts:function(){ return [
+    ["non","No"],
+    ["cadre","Yes, and the contract governs it"],
+    ["libre","Yes, with no contractual framework"],
+    ["nsp","I don't know"]]; }},
+  r_preuve:{kicker:"Product liability", title:"If a claim were made, could you quickly produce the documentation showing the product's conformity and its version history?", hint:"The injured person may ask the court to order disclosure of evidence; a failure to disclose leads to a presumption of defectiveness.", opts:function(){ return [
+    ["oui","Yes"],
+    ["partiel","Partly"],
+    ["non","No, or I don't know"]]; }},
   nature:{kicker:"Your product", title:"What is your product?", hint:"The same product may fall under several regimes: if in doubt, choose the last answer.", opts:function(){ return [
     ["dm","A medical device or an in vitro diagnostic device","Software included"],
     ["combine","A product combining a medicine and a device"],
@@ -1358,7 +1383,7 @@ function steps(){
   return s;
 }
 /* Axes juridiques ouverts selon ce qui amène l'entreprise (21 novembre 2026) */
-function axes(){ return {produit:["chaine","pub"], partenaire:["chaine"], marche:["chaine"], operation:["ops","chaine1"], autorite:[], com:["pub"], ensemble:["chaine1","pub1","ops"]}[A.motif] || []; }
+function axes(){ return {produit:["chaine","pub","resp"], partenaire:["chaine","resp"], marche:["chaine","resp"], operation:["ops","chaine1"], autorite:[], com:["pub"], ensemble:["chaine1","pub1","ops","resp"]}[A.motif] || []; }
 function axisSteps(s, dist){
   var ax = axes();
   if(!dist && ax.indexOf("chaine")>-1) s.push("contrats","prrc");
@@ -1366,6 +1391,7 @@ function axisSteps(s, dist){
   if(ax.indexOf("pub")>-1){ s.push("p_cible"); if(A.p_cible==="public" || A.p_cible==="deux") s.push("p_rembourse"); s.push("p_relecture"); }
   if(ax.indexOf("pub1")>-1) s.push("p_relecture");
   if(ax.indexOf("ops")>-1){ s.push("o_op"); if(A.o_op && A.o_op!=="non") s.push("o_dossier"); }
+  if(!dist && ax.indexOf("resp")>-1) s.push("r_log","r_modif","r_preuve");
   s.push("au_evt");
   if(A.au_evt==="encours") s.push("au_mesure");
 }
@@ -1400,6 +1426,9 @@ function compute(){
   var f = {}, r = 0, l = 0;
   function add(rr, ll, flag){ r += rr; l += ll; if(flag) f[flag] = true; }
   var div = v.type==="div";
+  if(v.r_modif==="libre" || v.r_modif==="nsp") add(1,2,"respModif");
+  if(v.r_log==="tiers" || v.r_log==="nsp") add(1,1,"respLog");
+  if(v.r_preuve==="partiel" || v.r_preuve==="non") add(1,2,"respPreuve");
   if(v.nature==="combine") add(1,2,"combine");
   if(v.nature==="medic") add(0,0,"medicInfo");
   if(v.nature==="cosmetique") add(0,1,"cosmRP");
@@ -1502,6 +1531,7 @@ function compute(){
   if(f.operation) cand.push("audit");
   if(f.pubRemb || f.pubRelecture || f.allegSante || f.allegNsp) cand.push("communication");
   if(f.prrc || f.prrcNon) cand.push("prrc");
+  if(f.respModif || f.respLog || f.respPreuve) cand.push("responsabilite");
   cand = cand.filter(function(x,i){ return cand.indexOf(x)===i; });
   /* Ce qui amène l'entreprise passe en tête, sauf procédure en cours */
   var pref = {produit:"communication", partenaire:"contrats", marche:(v.role==="noneu" ? "acces" : "contrats"), operation:"audit", com:"communication"}[v.motif];
@@ -1516,6 +1546,9 @@ function compute(){
 }
 
 var P = {
+  respModif:["Modification of the product in the chain","For products placed on the market from 9 December 2026, whoever substantially modifies a product outside the manufacturer's control is liable as a manufacturer (Directive (EU) 2024/2853). The contract must say who may modify what, and who is liable for it."],
+  respLog:["Software and updates entrusted to a third party","Software and its updates fall within the product liability regime (Directive (EU) 2024/2853). If a third party provides them, your contracts must set out timelines, security fixes and recourse."],
+  respPreuve:["Defence documentation","Directive (EU) 2024/2853 allows the court to order disclosure of evidence, and presumes the product defective if the defendant fails to disclose it. Conformity documentation and version history must be quick to assemble."],
   statutNon:["Product status to be established","The applicable regime follows from the product's status, and market practice does not settle it. Where a product may fall both within the definition of a medicine and of another category, it is, in case of doubt, regarded as a medicine (Article L. 5111-1, III, of the French Public Health Code)."],
   allegTherap:["Therapeutic claim on a product that is not a medicine","A product presented as having properties for treating or preventing human disease is a medicine by presentation (Article L. 5111-1, I, of the French Public Health Code). This is the point to deal with first."],
   allegSante:["Health claims to be checked","For a food supplement, a health claim is permitted only if it is authorised and included in the EU list (Regulation (EC) No 1924/2006, Article 10). Anything else is prohibited, however cautiously worded."],
@@ -1580,7 +1613,7 @@ var ASSUR_INDEP = "I receive no remuneration from Onlynnov. You remain free to c
 var ASSUR_TXT_SITE = "Broker I work with: Onlynnov, ";
 var ASSUR_TXT_AGENDA = "Adjusting your policy: speak with an expert from Onlynnov, a broker I work with, ";
 var ASSUR_SUM = "Financial coverage: ";
-var ORDER = ["urgent","mesurePrise","mesureEnv","allegTherap","statutNon","combine","divA","prorogKO","prorogInc","modif","art16","mand","prrcNon","pubRemb","classe","frontiere","opDossier","opTransfert","aiQualif","aiRole","aiPrep","art16nsp","art16b","verif","vig","srn","udi","litige","pubRelecture","allegSante","allegNsp","cosmRP","prrc","operation","noneu","contrats","portef","ia","data","medicInfo"];
+var ORDER = ["urgent","mesurePrise","mesureEnv","allegTherap","statutNon","combine","divA","prorogKO","prorogInc","modif","art16","mand","prrcNon","pubRemb","classe","frontiere","opDossier","opTransfert","aiQualif","aiRole","aiPrep","art16nsp","art16b","verif","vig","srn","udi","litige","pubRelecture","allegSante","allegNsp","cosmRP","prrc","operation","noneu","respModif","respPreuve","respLog","contrats","portef","ia","data","medicInfo"];
 /* Points techniques : signalés à part, à confier au responsable réglementaire ou à l'organisme notifié */
 var TECH = ["prorogTodo","avant","encours","legacy"];
 function prios(f, v){
@@ -1729,6 +1762,7 @@ function gate(){
 }
 
 var OFFERS = {
+  responsabilite:["Product liability","Directive (EU) 2024/2853 applied to your product, as if it were already transposed: who is liable for damage in your chain, what your contracts provide (warranties, recourse, updates, modifications), what your insurance policy must follow and the documentation to assemble for your defence; a memo and the clauses to include.","From {rp} excl. VAT for one product and up to three contracts."],
   mediation:["Mediation of a compliance dispute","Seeking an agreement with your distributor, supplier or customer, conducted as mediator: mediation agreement, meetings and, if the parties agree, a settlement agreement.","On quotation, shared between the parties. The mediator acts as lawyer for neither of them."],
   prrc:["Person responsible for regulatory compliance: the contract","The contract with the external person, or the designation letter for an employee: tasks set by the Regulation, qualifications, permanent availability and deputy, independence, liability, insurance, exit without a gap.","{pr} excl. VAT."],
   communication:["Review of commercial communication","Your website, brochure or campaign reviewed against the product's intended purpose, its demonstrated performance and the advertising rules: target audience, reimbursement, mandatory statements, prior authorisation, health claims for a food supplement or claims for a cosmetic; the passages to correct, with replacement wording.","{cm1} excl. VAT for one item; {cm2} excl. VAT for the materials of a launch."],
@@ -1777,9 +1811,9 @@ function meter(v){ var n = Math.max(1, Math.round(v/20)), h = '<div class="meter
 function indicateurs(r){
   var f = r.f, v = r.v;
   function pts(m){ var s = 0; Object.keys(m).forEach(function(k){ if(f[k]) s += m[k]; }); return s; }
-  var chaine = pts({combine:20, cosmRP:15, contrats:45, mand:40, art16:40, prrcNon:45, prrc:20, noneu:30, art16nsp:25, art16b:15, opTransfert:20, data:10, ia:10});
+  var chaine = pts({respModif:30, respLog:20, combine:20, cosmRP:15, contrats:45, mand:40, art16:40, prrcNon:45, prrc:20, noneu:30, art16nsp:25, art16b:15, opTransfert:20, data:10, ia:10});
   if(v.contrats==="non" || v.dcontrats==="non") chaine += 20;
-  var expo = pts({allegTherap:60, statutNon:40, allegSante:35, allegNsp:20, urgent:60, mesurePrise:60, mesureEnv:45, pubRemb:50, pubRelecture:30, verif:45, vig:45, srn:45, udi:25, litige:35, art16:30, mand:30});
+  var expo = pts({respPreuve:25, allegTherap:60, statutNon:40, allegSante:35, allegNsp:20, urgent:60, mesurePrise:60, mesureEnv:45, pubRemb:50, pubRelecture:30, verif:45, vig:45, srn:45, udi:25, litige:35, art16:30, mand:30});
   if(v.dverif==="non") expo += 20; if(v.dproc==="non") expo += 20;
   var urg = pts({urgent:80, mesurePrise:90, mesureEnv:70, divA:90, prorogKO:80, prorogInc:55, modif:40, opDossier:40, litige:30, operation:20});
   if(EUDAMED_ECHU && f.udi) urg += 30;
@@ -1798,7 +1832,7 @@ function profilLabel(v){
   return "";
 }
 /* Each point is qualified, as in Diapason */
-var KIND_GAP = {divA:1, prorogKO:1, mand:1, verif:1, vig:1, contrats:1, art16:1, prrcNon:1, statutNon:1};
+var KIND_GAP = {divA:1, prorogKO:1, mand:1, verif:1, vig:1, contrats:1, art16:1, prrcNon:1, statutNon:1, respModif:1, respPreuve:1};
 function kindOf(k, v){
   if(k==="urgent" || k==="mesureEnv" || k==="mesurePrise" || k==="allegTherap") return "Priority";
   if(k==="statutNon") return v.f_statut==="usage" ? "Declared gap" : "Point of method";
@@ -1813,7 +1847,7 @@ function kindOf(k, v){
 /* Short price shown next to each assignment */
 function prixCourt(key, r){
   return px({
-    autorite:"From {ra} excl. VAT", mediation:"On quotation", prrc:"{pr} excl. VAT", communication:"From {cm1} excl. VAT", audit:"From {ao} excl. VAT", consultation:"{c} excl. VAT",
+    autorite:"From {ra} excl. VAT", responsabilite:"From {rp} excl. VAT",  mediation:"On quotation", prrc:"{pr} excl. VAT", communication:"From {cm1} excl. VAT", audit:"From {ao} excl. VAT", consultation:"{c} excl. VAT",
     distrib: r.dcomplex ? "On quotation" : "From {dd} excl. VAT",
     qualif: r.complex ? "On quotation" : "From {q} excl. VAT",
     contrats:"From {cc} excl. VAT",
@@ -1825,6 +1859,7 @@ function prixCourt(key, r){
 function prixEntree(key, r){
   if(key==="consultation") return V.c;
   if(key==="autorite") return V.ra;
+  if(key==="responsabilite") return V.rp;
   if(key==="prrc") return V.pr;
   if(key==="communication") return V.cm1;
   if(key==="audit") return V.ao;
