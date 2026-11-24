@@ -894,6 +894,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <ul><li>Legal qualification of the product</li><li>Review of one supply chain contract and one communication material</li><li>Product liability</li></ul>
           <details class="more"><summary>The detail</summary><div>
             <p><b>Included:</b> for one product, legal qualification (status, applicable regulation, class, procedure), review of one distribution, subcontracting or authorised representative contract, review of one communication material and the product liability assignment, in a single timetable, with a summary memo.</p>
+            <p><b>Complex product:</b> for a class III or D device, a combined product, software or AI, or a range of variants, the package is set on quotation, from this price.</p>
             <p><b>Not included:</b> technical work on the file and additional contracts or materials, on quotation.</p>
           </div></details>
         </article>
@@ -1556,7 +1557,8 @@ function compute(){
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, regimes:regimes(v), prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
+  var lcomplex = complex || v.classe==="III" || v.classe==="D" || v.nature==="combine";
+  return {lcomplex:lcomplex, v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, regimes:regimes(v), prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
 }
 
 var P = {
@@ -1793,7 +1795,7 @@ function regimes(v){
   return out;
 }
 var OFFERS = {
-  lancement:["Launch package","For an innovative product before it is placed on the market: legal qualification of the product, review of one supply chain contract, review of one communication material and product liability, in a single assignment and a single timetable.","{fl} excl. VAT for one product, instead of {fld} excl. VAT separately."],
+  lancement:["Launch package","For an innovative product before it is placed on the market: legal qualification of the product, review of one supply chain contract, review of one communication material and product liability, in a single assignment and a single timetable.","{fl} excl. VAT for a simple product, instead of {fld} excl. VAT separately. Complex product (class III or D, combined product, software or AI, range of variants): on quotation, from {fl} excl. VAT."],
   responsabilite:["Product liability","Directive (EU) 2024/2853 applied to your product, as if it were already transposed: who is liable for damage in your chain, what your contracts provide (warranties, recourse, updates, modifications), what your insurance policy must follow and the documentation to assemble for your defence; a memo and the clauses to include.","From {rp} excl. VAT for one product and up to three contracts."],
   mediation:["Mediation of a compliance dispute","Seeking an agreement with your distributor, supplier or customer, conducted as mediator: mediation agreement, meetings and, if the parties agree, a settlement agreement.","On quotation, shared between the parties. The mediator acts as lawyer for neither of them."],
   prrc:["Person responsible for regulatory compliance: the contract","The contract with the external person, or the designation letter for an employee: tasks set by the Regulation, qualifications, permanent availability and deputy, independence, liability, insurance, exit without a gap.","{pr} excl. VAT."],
@@ -1879,7 +1881,7 @@ function kindOf(k, v){
 /* Short price shown next to each assignment */
 function prixCourt(key, r){
   return px({
-    autorite:"From {ra} excl. VAT", lancement:"{fl} excl. VAT",  responsabilite:"From {rp} excl. VAT",  mediation:"On quotation", prrc:"{pr} excl. VAT", communication:"From {cm1} excl. VAT", audit:"From {ao} excl. VAT", consultation:"{c} excl. VAT",
+    autorite:"From {ra} excl. VAT", lancement: r.lcomplex ? "On quotation, from {fl} excl. VAT" : "{fl} excl. VAT",  responsabilite:"From {rp} excl. VAT",  mediation:"On quotation", prrc:"{pr} excl. VAT", communication:"From {cm1} excl. VAT", audit:"From {ao} excl. VAT", consultation:"{c} excl. VAT",
     distrib: r.dcomplex ? "On quotation" : "From {dd} excl. VAT",
     qualif: r.complex ? "On quotation" : "From {q} excl. VAT",
     contrats:"From {cc} excl. VAT",
@@ -1892,7 +1894,7 @@ function prixEntree(key, r){
   if(key==="consultation") return V.c;
   if(key==="autorite") return V.ra;
   if(key==="responsabilite") return V.rp;
-  if(key==="lancement") return V.fl;
+  if(key==="lancement") return r.lcomplex ? 0 : V.fl;
   if(key==="prrc") return V.pr;
   if(key==="communication") return V.cm1;
   if(key==="audit") return V.ao;

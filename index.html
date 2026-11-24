@@ -894,6 +894,7 @@ h1,h2,.hero .slogan,.drawer nav a,.axes .num{font-weight:200}
           <ul><li>Qualification juridique du produit</li><li>Revue d'un contrat de la chaîne et d'un support de communication</li><li>Responsabilité du fait des produits</li></ul>
           <details class="more"><summary>Le détail</summary><div>
             <p><b>Compris :</b> pour un produit, la qualification juridique (statut, règlement applicable, classe, procédure), la revue d'un contrat de distribution, de sous-traitance ou de mandat, la revue d'un support de communication et la mission responsabilité du fait des produits, dans un seul calendrier, avec une note de synthèse.</p>
+            <p><b>Produit complexe :</b> pour un dispositif de classe III ou D, un produit combiné, un logiciel ou une IA, ou une gamme de variantes, le forfait est établi sur devis, à partir de ce prix.</p>
             <p><b>Non compris :</b> les travaux techniques du dossier et les contrats ou supports supplémentaires, sur devis.</p>
           </div></details>
         </article>
@@ -1556,7 +1557,8 @@ function compute(){
   var dcomplex = v.drole==="deux" || v.art16==="fab" || v.art16==="reet" || v.art16==="nsp";
   var acomplex = v.type==="frontiere" || v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || !!f.ia || !!f.classe;
   var complex = v.gamme==="gamme" || v.gamme==="plusieurs" || v.type==="logiciel" || v.type==="frontiere" || !!f.ia || !!f.classe || !!f.modif || !!f.prorogKO || !!f.prorogInc || !!f.divA;
-  return {v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, regimes:regimes(v), prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
+  var lcomplex = complex || v.classe==="III" || v.classe==="D" || v.nature==="combine";
+  return {lcomplex:lcomplex, v:v, f:f, lvl:lvl, sansBesoinIdentifie:tot===0 && ak.length===0, level:LEVELS[lvl], cand:cand, main:main, second:second, assur:{asked:v.assur_opt==="oui", keys:ak, agenda:v.assur_opt==="oui" && (v.a_rc==="dm" || v.a_rc==="gen") && ak.indexOf("montant")<0}, complex:complex, dcomplex:dcomplex, acomplex:acomplex, regimes:regimes(v), prios:prios(f, v), tech:TECH.filter(function(k){ return f[k]; }), dates:dates(f, v)};
 }
 
 var P = {
@@ -1793,7 +1795,7 @@ function regimes(v){
   return out;
 }
 var OFFERS = {
-  lancement:["Forfait lancement","Pour un produit innovant avant sa mise sur le marché : la qualification juridique du produit, la revue d'un contrat de la chaîne, la revue d'un support de communication et la responsabilité du fait des produits, en une seule mission et un seul calendrier.","{fl} HT pour un produit, au lieu de {fld} HT au détail."],
+  lancement:["Forfait lancement","Pour un produit innovant avant sa mise sur le marché : la qualification juridique du produit, la revue d'un contrat de la chaîne, la revue d'un support de communication et la responsabilité du fait des produits, en une seule mission et un seul calendrier.","{fl} HT pour un produit simple, au lieu de {fld} HT au détail. Produit complexe (classe III ou D, produit combiné, logiciel ou IA, gamme de variantes) : sur devis, à partir de {fl} HT."],
   responsabilite:["Responsabilité du fait des produits","La directive (UE) 2024/2853 appliquée à votre produit, comme si elle était déjà transposée : qui répond du dommage dans votre chaîne, ce que prévoient vos contrats (garanties, recours, mises à jour, modifications), ce que votre police doit suivre et la documentation à réunir pour vous défendre ; une note et les clauses à reprendre.","À partir de {rp} HT pour un produit et trois contrats au plus."],
   mediation:["Médiation d'un différend de conformité","La recherche d'un accord avec votre distributeur, votre fournisseur ou votre client, conduite en médiateur : convention de médiation, réunions et, si les parties s'accordent, protocole d'accord.","Sur devis, partagé entre les parties. Le médiateur n'est l'avocat d'aucune d'elles."],
   prrc:["Personne chargée du respect de la réglementation : le contrat","Le contrat qui vous lie à la personne extérieure, ou la lettre de désignation de la personne salariée : missions prévues par le règlement, qualifications, disponibilité permanente et remplaçant, indépendance, responsabilité, assurance, sortie sans période de vide.","{pr} HT."],
@@ -1879,7 +1881,7 @@ function kindOf(k, v){
 /* Prix court affiché en regard de chaque mission */
 function prixCourt(key, r){
   return px({
-    autorite:"À partir de {ra} HT", lancement:"{fl} HT",  responsabilite:"À partir de {rp} HT",  mediation:"Sur devis", prrc:"{pr} HT", communication:"À partir de {cm1} HT", audit:"À partir de {ao} HT", consultation:"{c} HT",
+    autorite:"À partir de {ra} HT", lancement: r.lcomplex ? "Sur devis, à partir de {fl} HT" : "{fl} HT",  responsabilite:"À partir de {rp} HT",  mediation:"Sur devis", prrc:"{pr} HT", communication:"À partir de {cm1} HT", audit:"À partir de {ao} HT", consultation:"{c} HT",
     distrib: r.dcomplex ? "Sur devis" : "À partir de {dd} HT",
     qualif: r.complex ? "Sur devis" : "À partir de {q} HT",
     contrats:"À partir de {cc} HT",
@@ -1892,7 +1894,7 @@ function prixEntree(key, r){
   if(key==="consultation") return V.c;
   if(key==="autorite") return V.ra;
   if(key==="responsabilite") return V.rp;
-  if(key==="lancement") return V.fl;
+  if(key==="lancement") return r.lcomplex ? 0 : V.fl;
   if(key==="prrc") return V.pr;
   if(key==="communication") return V.cm1;
   if(key==="audit") return V.ao;
